@@ -1,0 +1,74 @@
+# Release vers
+/jaiva-cli
+/src/test/java/com/jaiva/playground.java
+/src/test/resources/dummy.jiv
+changelog.txt
+
+# Compiled class file
+*.class
+*.cmd
+
+# Log fil
+*.log
+
+# BlueJ files
+*.ctxt
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+replay_pid*
+
+target/
+
+# Node.js dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Logs
+logs/
+*.log
+
+# Build outputs
+dist/
+out/
+*.vsix
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# VS Code workspace settings
+.vscode/
+*.code-workspace
+
+# TypeScript
+*.tsbuildinfo
+
+# Environment variables
+.env
+.env.*.local
+
+# Git-specific
+*.orig
+
+# Coverage reports
+coverage/
+*.lcov
+
+# Other
+*.tmp
+*.temp

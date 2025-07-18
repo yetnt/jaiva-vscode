@@ -1,0 +1,181 @@
+{
+    "arrays": {
+        "a_remove": {
+            "name": "a_remove",
+            "type": 0,
+            "signature": "a_remove(arr, n)",
+            "parameters": [
+                {
+                    "name": "arr",
+                    "type": "array",
+                    "description": "The array from which to remove elements.",
+                    "optional": false
+                },
+                {
+                    "name": "n",
+                    "type": "number",
+                    "description": "The number of elements to remove from the end of the array.",
+                    "optional": false
+                }
+            ]
+        },
+        "a_shift": {
+            "name": "a_shift",
+            "type": 0,
+            "signature": "a_shift(arr, n)"
+        },
+        "a_push": {
+            "name": "a_push",
+            "type": 0,
+            "signature": "a_push(arr)"
+        },
+        "a_unshift": {
+            "name": "a_unshift",
+            "type": 0,
+            "signature": "a_unshift(arr)"
+        },
+        "a_pop": {
+            "name": "a_pop",
+            "type": 0,
+            "signature": "a_pop(arr)"
+        },
+        "a_filter": {
+            "name": "a_filter",
+            "type": 0,
+            "signature": "a_filter(arr, F~predicate)"
+        }
+    },
+    "convert": {
+        "c_numToString": {
+            "name": "c_numToString",
+            "type": 0,
+            "signature": "c_numToString(num)"
+        },
+        "c_stringToNum": {
+            "name": "c_stringToNum",
+            "type": 0,
+            "signature": "c_stringToNum(string)"
+        }
+    },
+    "math": {
+        "m_pi": {
+            "type": 1,
+            "signature": "m_pi"
+        },
+        "m_e": {
+            "type": 1,
+            "signature": "m_e"
+        },
+        "m_phi": {
+            "type": 1,
+            "signature": "m_phi"
+        },
+        "m_tau": {
+            "type": 1,
+            "signature": "m_tau"
+        },
+        "m_abs": {
+            "name": "m_abs",
+            "type": 0,
+            "signature": "m_abs(value)"
+        },
+        "m_sqrt": {
+            "name": "m_sqrt",
+            "type": 0,
+            "signature": "m_sqrt(value)"
+        },
+        "m_pow": {
+            "name": "m_pow",
+            "type": 0,
+            "signature": "m_pow(base, exponent)"
+        },
+        "m_sin": {
+            "name": "m_sin",
+            "type": 0,
+            "signature": "m_sin(value)"
+        },
+        "m_cos": {
+            "name": "m_cos",
+            "type": 0,
+            "signature": "m_cos(value)"
+        },
+        "m_tan": {
+            "name": "m_tan",
+            "type": 0,
+            "signature": "m_tan(value)"
+        },
+        "m_asin": {
+            "name": "m_asin",
+            "type": 0,
+            "signature": "m_asin(value)"
+        },
+        "m_acos": {
+            "name": "m_acos",
+            "type": 0,
+            "signature": "m_acos(value)"
+        },
+        "m_atan": {
+            "name": "m_atan",
+            "type": 0,
+            "signature": "m_atan(value)"
+        },
+        "m_toRad": {
+            "name": "m_toRad",
+            "type": 0,
+            "signature": "m_toRad(value)"
+        },
+        "m_toDeg": {
+            "name": "m_toDeg",
+            "type": 0,
+            "signature": "m_toDeg(value)"
+        },
+        "m_round": {
+            "name": "m_round",
+            "type": 0,
+            "signature": "m_round(value)"
+        },
+        "m_floor": {
+            "name": "m_floor",
+            "type": 0,
+            "signature": "m_floor(value)"
+        },
+        "m_ceil": {
+            "name": "m_ceil",
+            "type": 0,
+            "signature": "m_ceil(value)"
+        },
+        "m_random": {
+            "name": "m_random",
+            "type": 0,
+            "signature": "m_random(lower, upper)"
+        }
+    },
+    "file": {
+        "f_this": {
+            "type": 1,
+            "signature": "f_this"
+        },
+        "f_name": {
+            "type": 1,
+            "signature": "f_name"
+        },
+        "f_dir": {
+            "type": 1,
+            "signature": "f_dir"
+        },
+        "f_bin": {
+            "type": 1,
+            "signature": "f_bin"
+        },
+        "f_file": {
+            "name": "f_file",
+            "type": 0,
+            "signature": "f_file(path)"
+        },
+        "f_new": {
+            "name": "f_new",
+            "type": 0,
+            "signature": "f_new(path, content, canRead?, canWrite?, canExecute?)"
+        }
+    }
+}
