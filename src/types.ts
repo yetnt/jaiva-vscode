@@ -1,22 +1,22 @@
-export type lib = {
-    isLib: true;
-    hoverText: string;
-};
+// export type lib = {
+//     isLib: true;
+//     hoverText: string;
+// };
 
-export type funcParameter = {
-    name: string;
-    description: string;
-    type: string;
-    optional: boolean;
-};
+// export type funcParameter = {
+//     name: string;
+//     description: string;
+//     type: string;
+//     optional: boolean;
+// };
 
-export type libFunction = lib & {
-    type: 0;
-    signature: string;
-    name: string;
-    parameters: funcParameter[];
-    returnType: string;
-};
+// export type libFunction = lib & {
+//     type: 0;
+//     signature: string;
+//     name: string;
+//     parameters: funcParameter[];
+//     returnType: string;
+// };
 
 export type TokenType =
     | "TVoidValue"
@@ -40,9 +40,13 @@ export type TokenType =
     | "TStatement"
     | "TImport";
 
-export type Generic = number | string | GenericBool | TVoidValue;
-export type GenericStatements = TStatement | TVarRef | TFuncCall | TVoidValue;
-export type GenericBool = boolean | GenericStatements | TVoidValue;
+export type Primitives = number | string | GenericBool | TVoidValue;
+export type Atomic = TStatement | TVarRef | TFuncCall | TVoidValue;
+export type GenericBool = boolean | Atomic | TVoidValue;
+
+export type Block = TokenDefault & {
+    body: TCodeblock;
+};
 
 export type TokenDefault = {
     type: TokenType;
@@ -62,54 +66,47 @@ export type TCodeblock = TokenDefault & {
     lineEnd: number;
 };
 export type TUnknownVar = TokenDefault & {
-    value: Generic;
+    value: Primitives;
 };
 export type TVarReassign = TokenDefault & {
-    value: Generic;
+    value: Primitives;
 };
-export type TStringVar = TokenDefault & {
-    value: GenericStatements | string;
-};
-export type TNumberVar = TokenDefault & {
-    value: GenericStatements | number;
-};
-export type TBooleanVar = TokenDefault & {
-    value: GenericBool;
-};
+export type TStringVar = TUnknownVar;
+export type TNumberVar = TUnknownVar;
+export type TBooleanVar = TUnknownVar;
 export type TArrayVar = TokenDefault & {
-    value: Generic[];
+    value: Primitives[];
 };
 export type TFuncReturn = TokenDefault & {
-    value: Generic;
+    value: Primitives;
 };
 
-export type TFunction = TokenDefault & {
+export type TFunction = Block & {
     args: string[];
-    body: TCodeblock;
-    isArgOptional: boolean[];
+    isArgOptional: (boolean | string)[];
 };
 
-export type TForLoop = TokenDefault & {
+export type TForLoop = Block & {
     variable: TokenDefault;
     arrayVariable: TVarRef;
     condition: GenericBool;
     increment: "+" | "-" | null;
-    body: TCodeblock;
 };
 
-export type TWhileLoop = TokenDefault & {
+export type TWhileLoop = Block & {
     condition: GenericBool;
-    body: TCodeblock;
 };
 
-export type TIfStatement = TokenDefault & {
+export type TIfStatement = Block & {
     condition: GenericBool;
-    body: TCodeblock;
     elseIfs: TIfStatement[];
     elseBody: TCodeblock;
 };
 
-export type TTryCatchStatement = TokenDefault & {
+/**
+ * TTryCatch does not have a body block. Keep that in mind.
+ */
+export type TTryCatchStatement = Block & {
     try: TCodeblock;
     catch: TCodeblock;
 };
@@ -119,15 +116,15 @@ export type TThrowError = TokenDefault & {
 };
 
 export type TFuncCall = TokenDefault & {
-    functionName: GenericStatements | string;
+    functionName: Atomic | string;
     getLenght: boolean;
-    args: Generic[];
+    args: Primitives[];
 };
 
 export type TVarRef = TokenDefault & {
-    varName: GenericStatements | string;
+    varName: Atomic | string;
     getLength: boolean;
-    index: GenericStatements | number;
+    index: Atomic | number;
     // type: null;
 };
 

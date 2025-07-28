@@ -46,15 +46,45 @@ export class MultiMap<K, V> {
     public set(key: K, ...values: V[]): void {
         this.data.set(key, values);
     }
+
+    /**
+     * Replaces the first value associated with a given key that satisfies a predicate.
+     * The replacement is done in-place within the value array. If no match is found,
+     * the map remains unchanged.
+     *
+     * @param {K} key - The key whose associated values are to be searched.
+     * @param {(value: V, index: number, array: V[]) => boolean} predicate - A function used to find the target value.
+     * @param {V} newValue - The value that will replace the first matched item.
+     *
+     * @example
+     * const mmap = new MultiMap<string, number>();
+     * mmap.add("nums", 10, 20, 30);
+     * mmap.replaceWhere("nums", v => v === 20, 25);
+     * console.log(mmap.get("nums")); // Output: [10, 25, 30]
+     */
+    public replaceWhere(
+        key: K,
+        predicate: (value: V, index: number, array: V[]) => boolean,
+        newValue: V
+    ): void {
+        const values = this.data.get(key) ?? [];
+        const updatedValues = values.map((v, i, arr) =>
+            predicate(v, i, arr) ? newValue : v
+        );
+        this.data.set(key, updatedValues);
+    }
+
     /**
      * Adds all entries from the provided `MultiMap` to the current map.
      *
      * @param map - The `MultiMap` containing the entries to be added. Each key-value pair
      *              in the provided map will be added to the current map.
      */
-    public addAll(map: MultiMap<K, V>) {
-        for (let entry of map.entries()) {
-            this.add(entry[0], ...entry[1]);
+    public addAll(...maps: MultiMap<K, V>[]) {
+        for (const map of maps) {
+            for (const entry of map.entries()) {
+                this.add(entry[0], ...entry[1]);
+            }
         }
     }
 
@@ -141,6 +171,14 @@ export class MultiMap<K, V> {
         }
 
         return "{" + string.join(",") + "}";
+    }
+
+    /**
+     * THe number of elements in this MultiMap
+     * @returns a number.
+     */
+    public size(): number {
+        return this.data.size;
     }
 
     /**

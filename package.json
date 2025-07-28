@@ -43,6 +43,10 @@
             {
                 "command": "jaiva.run",
                 "title": "Run Jaiva File"
+            },
+            {
+                "command": "jaiva.indexProject",
+                "title": "Jaiva: Index Project Files"
             }
         ],
         "configuration": {
