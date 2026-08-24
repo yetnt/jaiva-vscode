@@ -2,7 +2,7 @@
     "name": "jaiva",
     "displayName": "Jaiva! Editor Integration",
     "description": "Provides VSCode with support for Jaiva! files.",
-    "version": "2.0.0",
+    "version": "5.0.2",
     "engines": {
         "vscode": "^1.99.0"
     },
@@ -72,9 +72,9 @@
     },
     "main": "./dist/extension.js",
     "devDependencies": {
-        "@types/node": "^22.14.1",
-        "@types/vscode": "^1.99.1",
-        "typescript": "^5.8.3",
+        "@types/node": "^26.2.0",
+        "@types/vscode": "^1.134.0",
+        "typescript": "^7.0.2",
         "vscode": "^1.1.37"
     }
 }
