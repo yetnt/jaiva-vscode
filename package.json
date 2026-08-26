@@ -2,7 +2,7 @@
     "name": "jaiva",
     "displayName": "Jaiva! Editor Integration",
     "description": "Provides VSCode with support for Jaiva! files.",
-    "version": "5.0.2",
+    "version": "5.0.3",
     "engines": {
         "vscode": "^1.99.0"
     },
@@ -55,24 +55,9 @@
             },
             {
                 "command": "jaiva.runTokens",
-                "title": "Run Jaiva Tokens"
-            },
-            {
-                "command": "jaiva.indexProject",
-                "title": "Jaiva: Index Project Files"
+                "title": "Export Jaiva Tokens"
             }
         ],
-        "configuration": {
-            "type": "object",
-            "title": "Jaiva Configuration",
-            "properties": {
-                "jaiva.runArgs": {
-                    "type": "string",
-                    "default": "",
-                    "description": "Additional arguments to pass when running Jaiva filez"
-                }
-            }
-        },
         "menus": {
             "editor/title": [
                 {

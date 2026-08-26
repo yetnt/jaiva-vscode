@@ -4,7 +4,7 @@ import * as wrapFr from "./vscodeWrapper";
 import { CommandRegistry } from "./commands";
 // import { MultiMap } from "./mmap";
 
-const VERSION = "5.0.2";
+const VERSION = "5.0.3";
 
 export function activate(context: vscode.ExtensionContext) {
     console.log("JAIVA VSCODE IS ACTIVE!!");
