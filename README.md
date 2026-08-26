@@ -68,4 +68,4 @@ This extension contributes the following settings:
 
 ## Known Issues
 
-1.
+1. Nahhhh basically error free fr fr trust.

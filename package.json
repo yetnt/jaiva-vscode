@@ -4,7 +4,7 @@
     "description": "Provides VSCode with support for Jaiva! files.",
     "version": "5.0.3",
     "engines": {
-        "vscode": "^1.99.0"
+        "vscode": "^1.134.0"
     },
     "publisher": "yetnt",
     "icon": "./images/jaiva-full-logo.png",
