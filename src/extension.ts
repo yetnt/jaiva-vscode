@@ -1,4 +1,25 @@
 import * as vscode from "vscode";
+import * as jaiva from "./jaiva/jaiva";
+import * as wrapFr from "./vscodeWrapper";
+import { CommandRegistry } from "./commands";
 // import { MultiMap } from "./mmap";
 
-// vscode.
+const VERSION = "5.0.2";
+
+export function activate(context: vscode.ExtensionContext) {
+    console.log("JAIVA VSCODE IS ACTIVE!!");
+
+    // Register commands
+    const commandRegistry = new CommandRegistry(vscode);
+    commandRegistry.subscribe(vscode, context);
+
+    const values = new jaiva.SharedValues();
+    values.loadLibraries(VERSION, context);
+    const cli = new jaiva.JaivaCLI();
+
+    const diagnostics = vscode.languages.createDiagnosticCollection("jaiva");
+
+    const handler = new wrapFr.AllHandler(VERSION, values, cli, diagnostics);
+
+    handler.begin(vscode, context);
+}

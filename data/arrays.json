@@ -1,0 +1,654 @@
+{
+    "version": "5.0.2",
+    "tokens": [
+        {
+            "type": "TFunction",
+            "name": "F~a_reverse",
+            "exportSymbol": true,
+            "lineNumber": 258,
+            "toolTip": [
+                {
+                    "tagType": "GENERIC",
+                    "description": " Reverses the order of elements in an array and returns a new array"
+                },
+                {
+                    "tagType": "parameter",
+                    "description": "The original array",
+                    "var": "arr",
+                    "type": "[]",
+                    "optional": false
+                },
+                {
+                    "tagType": "returns",
+                    "description": "A new array with the elements in reverse order"
+                },
+                {
+                    "tagType": "devnote",
+                    "description": "This uses a colonize loop to iterate through the array backwards and constructs a new array with the elements in reverse order. Throws if the input is not an array."
+                },
+                { "tagType": "from", "version": "3.0.0" },
+                {
+                    "tagType": "example",
+                    "codeblock": [
+                        "maak arr <-| 1, 2, 3, 4, 5!",
+                        "khuluma(a_reverse(arr))! @ Returns [5, 4, 3, 2, 1]"
+                    ]
+                }
+            ],
+            "args": ["arr"],
+            "isArgOptional": [false],
+            "varArgs": false,
+            "body": null
+        },
+        {
+            "type": "TFunction",
+            "name": "F~a_reduce",
+            "exportSymbol": true,
+            "lineNumber": 286,
+            "toolTip": [
+                {
+                    "tagType": "GENERIC",
+                    "description": " Reduces an array to a single value using a reducer function"
+                },
+                {
+                    "tagType": "parameter",
+                    "description": "The original array",
+                    "var": "arr",
+                    "type": "[]",
+                    "optional": false
+                },
+                {
+                    "tagType": "parameter",
+                    "description": "A function that takes an accumulator and an element and returns a new accumulator",
+                    "var": "reducer",
+                    "type": "F~any",
+                    "optional": false
+                },
+                {
+                    "tagType": "parameter",
+                    "description": "An optional initial value for the accumulator",
+                    "var": "initial",
+                    "type": "any",
+                    "optional": true
+                },
+                {
+                    "tagType": "returns",
+                    "description": "The final value of the accumulator after processing all elements"
+                },
+                {
+                    "tagType": "devnote",
+                    "description": "The reducer function must take in 2 parameters, the accumulator and the current element, and return the new value of the accumulator. If no initial value is provided, the first element of the array is used as the initial value and the reduction starts from the second element Throws if the first argument is not an array or if the second argument is not a function."
+                },
+                { "tagType": "from", "version": "3.0.0" },
+                {
+                    "tagType": "example",
+                    "codeblock": [
+                        "maak arr <-| 1, 2, 3, 4!",
+                        "maak sumReducer <- f~(acc, el) : acc + el! @ A lambda function to sum two numbers",
+                        "khuluma(a_reduce(arr, sumReducer, 0))! @ Returns 10",
+                        "khuluma(a_reduce(arr, sumReducer))! @ Returns 10"
+                    ]
+                }
+            ],
+            "args": ["arr", "F~reducer", "initial"],
+            "isArgOptional": [false, false, true],
+            "varArgs": false,
+            "body": null
+        },
+        {
+            "type": "TFunction",
+            "name": "F~a_push",
+            "exportSymbol": true,
+            "lineNumber": 60,
+            "toolTip": [
+                {
+                    "tagType": "GENERIC",
+                    "description": " Appends an element to the end of an array and returns the new array."
+                },
+                {
+                    "tagType": "parameter",
+                    "description": "The original array",
+                    "var": "arr",
+                    "type": "[]",
+                    "optional": false
+                },
+                {
+                    "tagType": "parameter",
+                    "description": "Element to add",
+                    "var": "element",
+                    "type": "any",
+                    "optional": false
+                },
+                {
+                    "tagType": "returns",
+                    "description": "A new array with the element appended at the end of the array."
+                },
+                { "tagType": "from", "version": "1.0.0-beta.3" },
+                {
+                    "tagType": "devnote",
+                    "description": "Throws if the first argument is not an array."
+                },
+                {
+                    "tagType": "example",
+                    "codeblock": [
+                        "maak arr <-| 1, 2, 3!",
+                        "khuluma(a_push(arr, 4))! @ Returns [1, 2, 3, 4]"
+                    ]
+                }
+            ],
+            "args": ["arr", "element"],
+            "isArgOptional": [false, false],
+            "varArgs": false,
+            "body": null
+        },
+        {
+            "type": "TFunction",
+            "name": "F~a_unshift",
+            "exportSymbol": true,
+            "lineNumber": 98,
+            "toolTip": [
+                {
+                    "tagType": "GENERIC",
+                    "description": " Appends an element to the start of an array and returns the new array."
+                },
+                {
+                    "tagType": "parameter",
+                    "description": "The original array",
+                    "var": "arr",
+                    "type": "[]",
+                    "optional": false
+                },
+                {
+                    "tagType": "parameter",
+                    "description": "Element to add",
+                    "var": "element",
+                    "type": "any",
+                    "optional": false
+                },
+                {
+                    "tagType": "returns",
+                    "description": "A new array with the element appended at the start of the array."
+                },
+                { "tagType": "from", "version": "1.0.0-beta.3" },
+                {
+                    "tagType": "devnote",
+                    "description": "Throws if the first argument is not an array."
+                },
+                {
+                    "tagType": "example",
+                    "codeblock": [
+                        "maak arr <-| 2, 3, 4!",
+                        "khuluma(a_unshift(arr, 1))! @ Returns [1, 2, 3, 4]"
+                    ]
+                }
+            ],
+            "args": ["arr", "element"],
+            "isArgOptional": [false, false],
+            "varArgs": false,
+            "body": null
+        },
+        {
+            "type": "TFunction",
+            "name": "F~a_filter",
+            "exportSymbol": true,
+            "lineNumber": 147,
+            "toolTip": [
+                {
+                    "tagType": "GENERIC",
+                    "description": " Filter an array based on a predicate function"
+                },
+                {
+                    "tagType": "parameter",
+                    "description": "The original array",
+                    "var": "arr",
+                    "type": "[]",
+                    "optional": false
+                },
+                {
+                    "tagType": "parameter",
+                    "description": "A function that takes an element and returns true",
+                    "var": "predicate",
+                    "type": "F~any",
+                    "optional": false
+                },
+                {
+                    "tagType": "returns",
+                    "description": "A new array with elements that satisfy the predicate function."
+                },
+                {
+                    "tagType": "devnote",
+                    "description": "The predicate function must take in 1 parameter, the element and return a boolean. Throws if the first argument is not an array or if the second argument is not a function."
+                },
+                { "tagType": "from", "version": "1.0.0-beta.3" },
+                {
+                    "tagType": "example",
+                    "codeblock": [
+                        "maak arr <-| 1, 2, 3, 4, 5, 6!",
+                        "maak isEven <- f~(num) : num % 2 = 0! @ A lambda function to check if a number is even",
+                        "khuluma(a_filter(arr, isEven))! @ Returns [2, 4, 6]"
+                    ]
+                }
+            ],
+            "args": ["arr", "F~predicate"],
+            "isArgOptional": [false, false],
+            "varArgs": false,
+            "body": null
+        },
+        {
+            "type": "TFunction",
+            "name": "F~a_delete",
+            "exportSymbol": true,
+            "lineNumber": 205,
+            "toolTip": [
+                {
+                    "tagType": "GENERIC",
+                    "description": " Deletes an element at a specific index in an array and shifts the rest of the elements to the left"
+                },
+                {
+                    "tagType": "parameter",
+                    "description": "The original array",
+                    "var": "arr",
+                    "type": "[]",
+                    "optional": false
+                },
+                {
+                    "tagType": "parameter",
+                    "description": "The index to delete",
+                    "var": "i",
+                    "type": "number",
+                    "optional": false
+                },
+                {
+                    "tagType": "returns",
+                    "description": "A new array with the element at index i removed and the rest of the elements shifted to the left"
+                },
+                {
+                    "tagType": "devnote",
+                    "description": "Throws if the first argument is not an array or if the index is out of bounds. Not to be confused with a_remove() which removes elements from the end of an array"
+                },
+                { "tagType": "from", "version": "3.0.0" },
+                {
+                    "tagType": "example",
+                    "codeblock": [
+                        "maak arr <-| 1, 2, 3, 4, 5!",
+                        "khuluma(a_delete(arr, 2))! @ Returns [1, 2, 4, 5]"
+                    ]
+                }
+            ],
+            "args": ["arr", "i"],
+            "isArgOptional": [false, false],
+            "varArgs": false,
+            "body": null
+        },
+        {
+            "type": "TFunction",
+            "name": "F~a_pushAll",
+            "exportSymbol": true,
+            "lineNumber": 77,
+            "toolTip": [
+                {
+                    "tagType": "GENERIC",
+                    "description": " Appends multiple elements to the end of an array and returns the new array."
+                },
+                {
+                    "tagType": "parameter",
+                    "description": "A variable number of arguments where the first argument is the original array and the rest are the elements to add",
+                    "var": "params",
+                    "type": "idk",
+                    "optional": false
+                },
+                {
+                    "tagType": "returns",
+                    "description": "A new array with the elements appended at the end of the array."
+                },
+                { "tagType": "from", "version": "5.0.0" },
+                {
+                    "tagType": "devnote",
+                    "description": "Throws if the first argument is not an array."
+                },
+                {
+                    "tagType": "example",
+                    "codeblock": [
+                        "maak arr <-| 1, 2, 3!",
+                        "khuluma(a_pushAll(arr, 4, 5, 6))! @ Returns [1, 2, 3, 4, 5, 6]"
+                    ]
+                }
+            ],
+            "args": ["params"],
+            "isArgOptional": [true],
+            "varArgs": true,
+            "body": null
+        },
+        {
+            "type": "TFunction",
+            "name": "F~a_replace",
+            "exportSymbol": true,
+            "lineNumber": 173,
+            "toolTip": [
+                {
+                    "tagType": "GENERIC",
+                    "description": " Replace an element at a specific index in an array with a new element"
+                },
+                {
+                    "tagType": "parameter",
+                    "description": "The original array",
+                    "var": "arr",
+                    "type": "[]",
+                    "optional": false
+                },
+                {
+                    "tagType": "parameter",
+                    "description": "The index to replace",
+                    "var": "i",
+                    "type": "number",
+                    "optional": false
+                },
+                {
+                    "tagType": "parameter",
+                    "description": "The new element to insert",
+                    "var": "el",
+                    "type": "any",
+                    "optional": false
+                },
+                {
+                    "tagType": "returns",
+                    "description": "A new array with the element at index i replaced with el"
+                },
+                {
+                    "tagType": "devnote",
+                    "description": "Throws if the first argument is not an array or if the index is out of bounds."
+                },
+                { "tagType": "from", "version": "3.0.0" },
+                {
+                    "tagType": "example",
+                    "codeblock": [
+                        "maak arr <-| 1, 2, 3, 4, 5!",
+                        "khuluma(a_replace(arr, 2, 99))! @ Returns [1, 2, 99, 4, 5]"
+                    ]
+                }
+            ],
+            "args": ["arr", "i", "el"],
+            "isArgOptional": [false, false, false],
+            "varArgs": false,
+            "body": null
+        },
+        {
+            "type": "TFunction",
+            "name": "F~a_remove",
+            "exportSymbol": true,
+            "lineNumber": 19,
+            "toolTip": [
+                {
+                    "tagType": "GENERIC",
+                    "description": " Remove n elements from the end of an array"
+                },
+                {
+                    "tagType": "parameter",
+                    "description": "The original array",
+                    "var": "arr",
+                    "type": "[]",
+                    "optional": false
+                },
+                {
+                    "tagType": "parameter",
+                    "description": "Amount of elements to remove",
+                    "var": "n",
+                    "type": "number",
+                    "optional": false
+                },
+                {
+                    "tagType": "returns",
+                    "description": "An array which contains the original array with n amount of elements removed from the end."
+                },
+                { "tagType": "from", "version": "1.0.0-beta.3" },
+                {
+                    "tagType": "devnote",
+                    "description": "Throws if the first argument is not an array or if the second argument is not a non-negative number. Not to be confused with a_delete() which removes elements from a specific index in an array."
+                },
+                {
+                    "tagType": "example",
+                    "codeblock": [
+                        "maak arr <-| 1, 2, 3, 4, 5!",
+                        "khuluma(a_remove(arr, 2))! @ Returns [1, 2, 3]",
+                        "khuluma(a_remove(arr, 0))! @ Returns [1, 2, 3, 4, 5]",
+                        "khuluma(a_remove(arr, 5))! @ Returns []"
+                    ]
+                }
+            ],
+            "args": ["arr", "n"],
+            "isArgOptional": [false, false],
+            "varArgs": false,
+            "body": null
+        },
+        {
+            "type": "TFunction",
+            "name": "F~a_pop",
+            "exportSymbol": true,
+            "lineNumber": 44,
+            "toolTip": [
+                {
+                    "tagType": "GENERIC",
+                    "description": " Pops the last element off an array and returns a new array without that element."
+                },
+                {
+                    "tagType": "parameter",
+                    "description": "The original array",
+                    "var": "array",
+                    "type": "[]",
+                    "optional": false
+                },
+                {
+                    "tagType": "devnote",
+                    "description": "This is just a wrapper for the _a_remove()_ function, it doesn't matter which one you use Throws if the argument is not an array."
+                },
+                { "tagType": "depends", "symbols": ["a_remove"] },
+                {
+                    "tagType": "returns",
+                    "description": "A new array without the last element of the original array."
+                },
+                { "tagType": "from", "version": "1.0.0-beta.3" },
+                {
+                    "tagType": "example",
+                    "codeblock": [
+                        "maak arr <-| 1, 2, 3, 4, 5!",
+                        "khuluma(a_pop(arr))! @ Returns [1, 2, 3, 4]"
+                    ]
+                }
+            ],
+            "args": ["array"],
+            "isArgOptional": [false],
+            "varArgs": false,
+            "body": null
+        },
+        {
+            "type": "TFunction",
+            "name": "F~a_from",
+            "exportSymbol": true,
+            "lineNumber": 338,
+            "toolTip": [
+                {
+                    "tagType": "GENERIC",
+                    "description": " Creates an array from a string, splitting it by a specified delimiter or index."
+                },
+                {
+                    "tagType": "parameter",
+                    "description": "The input string to convert into an array.",
+                    "var": "input",
+                    "type": "string",
+                    "optional": false
+                },
+                {
+                    "tagType": "parameter",
+                    "description": "An optional delimiter string or index number.",
+                    "var": "split",
+                    "type": "idk",
+                    "optional": true
+                },
+                {
+                    "tagType": "returns",
+                    "description": "An array created from the input string, split by the specified delimiter or index."
+                },
+                { "tagType": "from", "version": "5.0.0" },
+                {
+                    "tagType": "devnote",
+                    "description": "Throws if the input is not a string. Also, this function imports jaiva/types for type conversions. A perfomance hit may be observed the first time this function is called."
+                },
+                {
+                    "tagType": "example",
+                    "codeblock": [
+                        "khuluma(a_from(\"hello\"))! @ Returns [\"h\", \"e\", \"l\", \"l\", \"o\"]",
+                        "khuluma(a_from(\"apple$,banana$,cherry\", \"$,\"))! @ Returns [\"apple\", \"banana\", \"cherry\"]",
+                        "khuluma(a_from(\"abcdef\", 3))! @ Returns [\"abc\", \"def\"]"
+                    ]
+                }
+            ],
+            "args": ["input", "split"],
+            "isArgOptional": [false, true],
+            "varArgs": false,
+            "body": null
+        },
+        {
+            "type": "TFunction",
+            "name": "F~a_shift",
+            "exportSymbol": true,
+            "lineNumber": 119,
+            "toolTip": [
+                {
+                    "tagType": "GENERIC",
+                    "description": " Removes n elements from the start of an array"
+                },
+                {
+                    "tagType": "parameter",
+                    "description": "The original array",
+                    "var": "arr",
+                    "type": "[]",
+                    "optional": false
+                },
+                {
+                    "tagType": "parameter",
+                    "description": "Amount of elements to remove",
+                    "var": "n",
+                    "type": "number",
+                    "optional": false
+                },
+                {
+                    "tagType": "returns",
+                    "description": "An array which contains the original array with n amount of elements removed from the start."
+                },
+                {
+                    "tagType": "devnote",
+                    "description": "This uses a colonize loop to iterate through the array and skip the first n elements. It may not be the most efficient way to do this, but it works. Throws if the first argument is not an array or if the second argument is not a non-negative number."
+                },
+                { "tagType": "from", "version": "1.0.0-beta.3" },
+                {
+                    "tagType": "example",
+                    "codeblock": [
+                        "maak arr <-| 1, 2, 3, 4, 5!",
+                        "khuluma(a_shift(arr, 2))! @ Returns [3, 4, 5]",
+                        "khuluma(a_shift(arr, 0))! @ Returns [1, 2, 3, 4, 5]",
+                        "khuluma(a_shift(arr, 5))! @ Returns []"
+                    ]
+                }
+            ],
+            "args": ["arr", "n"],
+            "isArgOptional": [false, false],
+            "varArgs": false,
+            "body": null
+        },
+        {
+            "type": "TFunction",
+            "name": "F~a_indexOf",
+            "exportSymbol": true,
+            "lineNumber": 237,
+            "toolTip": [
+                {
+                    "tagType": "GENERIC",
+                    "description": " Finds the first occurrence of an element in an array and returns its index"
+                },
+                {
+                    "tagType": "parameter",
+                    "description": "The original array",
+                    "var": "arr",
+                    "type": "[]",
+                    "optional": false
+                },
+                {
+                    "tagType": "parameter",
+                    "description": "The element to find",
+                    "var": "el",
+                    "type": "any",
+                    "optional": false
+                },
+                {
+                    "tagType": "returns",
+                    "description": "The index of the first occurrence of el in arr, or idk if not found"
+                },
+                {
+                    "tagType": "devnote",
+                    "description": "This uses the search first approach, it may not be the most efficient way to do this, but it works. Throws if the input is not an array."
+                },
+                { "tagType": "from", "version": "3.0.0" },
+                {
+                    "tagType": "example",
+                    "codeblock": [
+                        "maak arr <-| \"apple\", \"banana\", \"cherry\", \"date\", \"banana\"!",
+                        "khuluma(a_indexOf(arr, \"banana\"))! @ Returns 1",
+                        "khuluma(a_indexOf(arr, \"date\"))! @ Returns 3",
+                        "khuluma(a_indexOf(arr, \"fig\"))! @ Returns idk"
+                    ]
+                }
+            ],
+            "args": ["arr", "el"],
+            "isArgOptional": [false, false],
+            "varArgs": false,
+            "body": null
+        },
+        {
+            "type": "TFunction",
+            "name": "F~a_map",
+            "exportSymbol": true,
+            "lineNumber": 314,
+            "toolTip": [
+                {
+                    "tagType": "GENERIC",
+                    "description": " Transforms every element in an array using a provided function."
+                },
+                {
+                    "tagType": "parameter",
+                    "description": "The original array to map over.",
+                    "var": "arr",
+                    "type": "[]",
+                    "optional": false
+                },
+                {
+                    "tagType": "parameter",
+                    "description": "A function that takes one element and returns its transformed value.",
+                    "var": "mapperFunction",
+                    "type": "F~any",
+                    "optional": false
+                },
+                {
+                    "tagType": "returns",
+                    "description": "A new array populated with the results of calling the mapperFunction on every element."
+                },
+                { "tagType": "from", "version": "4.1.1" },
+                {
+                    "tagType": "devnote",
+                    "description": "The mapperFunction must take in 1 parameter (the element). Throws if the first argument is not an array or if the second argument is not a function."
+                },
+                {
+                    "tagType": "example",
+                    "codeblock": [
+                        "maak arr <-| 1, 2, 3, 4!",
+                        "maak square <- f~(num) : num * num! @ A lambda function to square a number",
+                        "khuluma(a_map(arr, square))! @ Returns [1, 4, 9, 16]"
+                    ]
+                }
+            ],
+            "args": ["arr", "F~mapperFunction"],
+            "isArgOptional": [false, false],
+            "varArgs": false,
+            "body": null
+        }
+    ]
+}

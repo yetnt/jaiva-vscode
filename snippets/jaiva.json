@@ -1,0 +1,116 @@
+{
+    "If Block": {
+        "prefix": "if",
+        "body": ["if (${1:condition}) ->", "\t$0!", "<~"],
+        "description": "If block"
+    },
+    "If-Mara Block": {
+        "prefix": "if mara",
+        "body": ["if (${1:condition}) ->", "\t$0!", "<~ mara ->", "\t", "<~"],
+        "description": "If and Mara block"
+    },
+    "Mara-If Block": {
+        "prefix": "mara if",
+        "body": ["mara if (${1:condition}) ->", "\t$0!", "<~"],
+        "description": "If block"
+    },
+    "Function Defintion": {
+        "prefix": "kwenza",
+        "body": ["kwenza ${1:functionName}(${2:parameter}) ->", "\t$0!", "<~"],
+        "description": "Function"
+    },
+    "Nikhil Block": {
+        "prefix": "nikhil",
+        "body": ["nikhil (${1:condition}) ->", "\t$0!", "<~"],
+        "description": "Nikhil block"
+    },
+    "Colonize Block": {
+        "prefix": "colonize",
+        "body": [
+            "colonize ${1:i} <- ${2:value} | ${3:condition} | ${4:increment} ->",
+            "\t$0!",
+            "<~"
+        ],
+        "description": "Colonzie block"
+    },
+    "Colonize With Block": {
+        "prefix": "colonziewith",
+        "body": ["colonize ${1:element} with ${2:array} ->", "\t$0!", "<~"],
+        "description": "Colonize With block"
+    },
+    "Lambda": {
+        "prefix": "lambda",
+        "body": ["f~(${1:parameters}) : $0"],
+        "description": "Lambda Definition"
+    },
+    "Lambda 2": {
+        "prefix": "lambdac",
+        "body": ["(f~(${1:parameters}) : $0)(${2:arguments})"],
+        "description": "Immediately Invoked Lambda"
+    },
+    "Import": {
+        "prefix": "tsea",
+        "body": ["tsea \"$0\"!"],
+        "description": "Tsea From"
+    },
+    "Maak": {
+        "prefix": "maak",
+        "body": ["maak ${1:variable} <- $0!"],
+        "description": "Variable Assignment"
+    },
+    "Maak 2": {
+        "prefix": "maakarr",
+        "body": ["maak ${1:variable} <-| $0!"],
+        "description": "(Array) Variable Assignment"
+    },
+    "Length": {
+        "prefix": "arrlength",
+        "body": ["$0~"],
+        "description": "Array Length"
+    },
+    "Spread": {
+        "prefix": "arrspread",
+        "body": ["$0:::"],
+        "description": "Array Spread"
+    },
+    "Block Comment": {
+        "prefix": "comment",
+        "body": ["{", "\t$0", "}"],
+        "description": "Block Comment"
+    },
+    "Doc Comment": {
+        "prefix": "doc",
+        "body": ["@* $0"],
+        "description": "Doc Comment"
+    },
+    "Parameter Doc": {
+        "prefix": "docparam",
+        "body": ["@* p\t$> ${1:variable} <- ${2:type} $0"],
+        "description": "Parameter dcoumentation"
+    },
+    "Return Doc": {
+        "prefix": "docreturn",
+        "body": ["@* returns\t$> $0"],
+        "description": "Return documentation"
+    },
+    "Since Doc": {
+        "prefix": "docsince",
+        "body": ["@* since\t$> $0"],
+        "description": "Version documentation"
+    },
+    "DevNote Doc": {
+        "prefix": "docnote",
+        "body": ["@* devn\t$> $0"],
+        "description": "Little note type shi"
+    },
+    "Example Doc": {
+        "prefix": "docexample",
+        "body": ["@* example\t$> $0", "@*\t$> more example code"],
+        "description": "Example code using this symbol"
+    },
+    "Continue Doc": {
+        "prefix": "docc",
+        "body": ["@*\t$> $0"],
+        "description": "Continue writing a long description for the previous tag."
+    }
+}

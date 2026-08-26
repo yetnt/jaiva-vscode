@@ -15,6 +15,9 @@
         "type": "git",
         "url": "https://github.com/yetnt/jaiva-vscode"
     },
+    "scripts": {
+        "compile": "tsc -p ./"
+    },
     "contributes": {
         "languages": [
             {
@@ -32,6 +35,12 @@
                 "configuration": "./language-configuration.json"
             }
         ],
+        "snippets": [
+            {
+                "language": "jaiva",
+                "path": "./snippets/jaiva.json"
+            }
+        ],
         "grammars": [
             {
                 "language": "jaiva",
@@ -43,6 +52,10 @@
             {
                 "command": "jaiva.run",
                 "title": "Run Jaiva File"
+            },
+            {
+                "command": "jaiva.runTokens",
+                "title": "Run Jaiva Tokens"
             },
             {
                 "command": "jaiva.indexProject",
@@ -66,13 +79,18 @@
                     "command": "jaiva.run",
                     "when": "editorLangId == jaiva",
                     "group": "navigation"
+                },
+                {
+                    "command": "jaiva.runTokens",
+                    "when": "editorLangId == jaiva",
+                    "group": "navigation"
                 }
             ]
         }
     },
     "main": "./dist/extension.js",
     "devDependencies": {
-        "@types/node": "^26.2.0",
+        "@types/node": "^26.3.0",
         "@types/vscode": "^1.134.0",
         "typescript": "^7.0.2",
         "vscode": "^1.1.37"

@@ -1,0 +1,101 @@
+{
+    "version": "5.0.2",
+    "tokens": [
+        {
+            "type": "TFunction",
+            "name": "F~t_num",
+            "exportSymbol": false,
+            "toolTip": [
+                {
+                    "tagType": "GENERIC",
+                    "description": "Converts a given **string** to a number with an optional **radix**."
+                },
+                {
+                    "tagType": "parameter",
+                    "description": "The input to convert to a number",
+                    "var": "string",
+                    "type": "string",
+                    "optional": false
+                },
+                {
+                    "tagType": "parameter",
+                    "description": "An optional radix to convert to",
+                    "var": "radix",
+                    "type": "number",
+                    "optional": true
+                },
+                {
+                    "tagType": "devnote",
+                    "description": "Jaiva integer prefixes [such as _0x_ or _0b_], are checked for first before the radix."
+                },
+                {
+                    "tagType": "returns",
+                    "description": "A number. (Either a double or integer)"
+                },
+                {
+                    "tagType": "example",
+                    "codeblock": [
+                        "khuluma(t_num(\"0b1010\"))! @ prints 10",
+                        "khuluma(t_num(\"FF\", 16))! @ prints 255",
+                        "khuluma(t_num(\"3.14\"))! @ prints 3.14",
+                        "khuluma(t_num(\"0x1A\"))! @ prints 26"
+                    ]
+                },
+                { "tagType": "from", "version": "2.0.0-beta.3" }
+            ],
+            "lineNumber": -1,
+            "args": ["string", "radix"],
+            "isArgOptional": [false, true],
+            "varArgs": false,
+            "body": null
+        },
+        {
+            "type": "TFunction",
+            "name": "F~t_str",
+            "exportSymbol": false,
+            "toolTip": [
+                {
+                    "tagType": "GENERIC",
+                    "description": "Converts any input of any given type to a string."
+                },
+                {
+                    "tagType": "parameter",
+                    "description": "The input to convert",
+                    "var": "input",
+                    "type": "idk",
+                    "optional": true
+                },
+                {
+                    "tagType": "parameter",
+                    "description": "A given radix for integers",
+                    "var": "radix",
+                    "type": "number",
+                    "optional": true
+                },
+                {
+                    "tagType": "returns",
+                    "description": "A string representation of the given input"
+                },
+                {
+                    "tagType": "devnote",
+                    "description": "If given an input of `idk`, it will return `idk`. Not a string."
+                },
+                {
+                    "tagType": "example",
+                    "codeblock": [
+                        "khuluma(t_str(255))! @ prints \"255\"",
+                        "khuluma(t_str(true))! @ prints \"yebo\"",
+                        "khuluma(t_str(yebo))! @ prints \"yebo\"",
+                        "khuluma(t_str(10, 2))! @ prints \"0b1010\""
+                    ]
+                },
+                { "tagType": "from", "version": "2.0.0-beta.3" }
+            ],
+            "lineNumber": -1,
+            "args": ["input", "radix"],
+            "isArgOptional": [true, true],
+            "varArgs": false,
+            "body": null
+        }
+    ]
+}

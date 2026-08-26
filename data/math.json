@@ -1,0 +1,572 @@
+{
+    "version": "5.0.2",
+    "tokens": [
+        {
+            "type": "TFunction",
+            "name": "F~m_toDeg",
+            "exportSymbol": false,
+            "toolTip": [
+                {
+                    "tagType": "GENERIC",
+                    "description": "Converts radians to degrees."
+                },
+                {
+                    "tagType": "parameter",
+                    "description": "The value in radians.",
+                    "var": "radians",
+                    "type": "number",
+                    "optional": false
+                },
+                {
+                    "tagType": "returns",
+                    "description": "The value in degrees."
+                },
+                {
+                    "tagType": "example",
+                    "codeblock": [
+                        "maak rad <- 1.5708!",
+                        "maak deg <- m_toDeg(rad)!",
+                        "khuluma(deg) @ Output: 90.0002104591497"
+                    ]
+                },
+                { "tagType": "from", "version": "1.0.2" }
+            ],
+            "lineNumber": -1,
+            "args": ["radians"],
+            "isArgOptional": [false],
+            "varArgs": false,
+            "body": null
+        },
+        {
+            "type": "TFunction",
+            "name": "F~m_asin",
+            "exportSymbol": false,
+            "toolTip": [
+                {
+                    "tagType": "GENERIC",
+                    "description": "Returns the arcsine of a number in radians."
+                },
+                {
+                    "tagType": "parameter",
+                    "description": "The value in radians.",
+                    "var": "value",
+                    "type": "number",
+                    "optional": false
+                },
+                {
+                    "tagType": "returns",
+                    "description": "The arcsine of the given value in radians."
+                },
+                { "tagType": "from", "version": "1.0.2" }
+            ],
+            "lineNumber": -1,
+            "args": ["value"],
+            "isArgOptional": [false],
+            "varArgs": false,
+            "body": null
+        },
+        {
+            "type": "TFunction",
+            "name": "F~m_round",
+            "exportSymbol": false,
+            "toolTip": [
+                {
+                    "tagType": "GENERIC",
+                    "description": "Rounds the given real number to an integer."
+                },
+                {
+                    "tagType": "parameter",
+                    "description": "The input to round up/down.",
+                    "var": "value",
+                    "type": "number",
+                    "optional": false
+                },
+                { "tagType": "returns", "description": "An integer value" },
+                {
+                    "tagType": "example",
+                    "codeblock": [
+                        "khuluma(\"Rounded value of 4.6 is: \" + m_round(4.6))!"
+                    ]
+                },
+                { "tagType": "from", "version": "1.0.0" }
+            ],
+            "lineNumber": -1,
+            "args": ["value"],
+            "isArgOptional": [false],
+            "varArgs": false,
+            "body": null
+        },
+        {
+            "type": "TFunction",
+            "name": "F~m_sqrt",
+            "exportSymbol": false,
+            "toolTip": [
+                {
+                    "tagType": "GENERIC",
+                    "description": "Calculates the square root of the input value."
+                },
+                {
+                    "tagType": "parameter",
+                    "description": "The number to find the square root of.",
+                    "var": "value",
+                    "type": "number",
+                    "optional": false
+                },
+                {
+                    "tagType": "returns",
+                    "description": "Returns the (positive) square root of the number provided"
+                },
+                {
+                    "tagType": "example",
+                    "codeblock": [
+                        "khuluma(\"The square root of 16 is: \" + m_sqrt(16))!"
+                    ]
+                },
+                { "tagType": "from", "version": "1.0.2" }
+            ],
+            "lineNumber": -1,
+            "args": ["value"],
+            "isArgOptional": [false],
+            "varArgs": false,
+            "body": null
+        },
+        {
+            "type": "TFunction",
+            "name": "F~m_tan",
+            "exportSymbol": false,
+            "toolTip": [
+                {
+                    "tagType": "GENERIC",
+                    "description": "Returns the tangent of a number in radians."
+                },
+                {
+                    "tagType": "parameter",
+                    "description": "The value in radians.",
+                    "var": "value",
+                    "type": "number",
+                    "optional": false
+                },
+                {
+                    "tagType": "returns",
+                    "description": "The tangent of the given value in radians."
+                },
+                { "tagType": "from", "version": "1.0.2" }
+            ],
+            "lineNumber": -1,
+            "args": ["value"],
+            "isArgOptional": [false],
+            "varArgs": false,
+            "body": null
+        },
+        {
+            "type": "TFunction",
+            "name": "F~m_floor",
+            "exportSymbol": false,
+            "toolTip": [
+                {
+                    "tagType": "GENERIC",
+                    "description": "Returns the largest integer less than or equal to the given value."
+                },
+                {
+                    "tagType": "parameter",
+                    "description": "The value to floor.",
+                    "var": "value",
+                    "type": "number",
+                    "optional": false
+                },
+                {
+                    "tagType": "returns",
+                    "description": "The largest integer less than or equal to the given value."
+                },
+                { "tagType": "from", "version": "1.0.2" }
+            ],
+            "lineNumber": -1,
+            "args": ["value"],
+            "isArgOptional": [false],
+            "varArgs": false,
+            "body": null
+        },
+        {
+            "type": "TFunction",
+            "name": "F~m_sin",
+            "exportSymbol": false,
+            "toolTip": [
+                {
+                    "tagType": "GENERIC",
+                    "description": "Returns the sine of a number in radians."
+                },
+                {
+                    "tagType": "parameter",
+                    "description": "The value in radians.",
+                    "var": "value",
+                    "type": "number",
+                    "optional": false
+                },
+                {
+                    "tagType": "returns",
+                    "description": "The sine of the given value in radians."
+                },
+                { "tagType": "from", "version": "1.0.2" }
+            ],
+            "lineNumber": -1,
+            "args": ["value"],
+            "isArgOptional": [false],
+            "varArgs": false,
+            "body": null
+        },
+        {
+            "type": "TFunction",
+            "name": "F~m_abs",
+            "exportSymbol": false,
+            "toolTip": [
+                {
+                    "tagType": "GENERIC",
+                    "description": "Returns the absolute value of a number."
+                },
+                {
+                    "tagType": "parameter",
+                    "description": "The value to return the value of.",
+                    "var": "value",
+                    "type": "number",
+                    "optional": false
+                },
+                { "tagType": "returns", "description": "A positive value." },
+                {
+                    "tagType": "example",
+                    "codeblock": [
+                        "khuluma(\"The absolute value of -5 is: \" + m_abs(-5))!"
+                    ]
+                },
+                { "tagType": "from", "version": "1.0.2" }
+            ],
+            "lineNumber": -1,
+            "args": ["value"],
+            "isArgOptional": [false],
+            "varArgs": false,
+            "body": null
+        },
+        {
+            "type": "TFunction",
+            "name": "F~m_acos",
+            "exportSymbol": false,
+            "toolTip": [
+                {
+                    "tagType": "GENERIC",
+                    "description": "Returns the arccosine of a number in radians."
+                },
+                {
+                    "tagType": "parameter",
+                    "description": "The value in radians.",
+                    "var": "value",
+                    "type": "number",
+                    "optional": false
+                },
+                {
+                    "tagType": "returns",
+                    "description": "The arccosine of the given value in radians."
+                },
+                { "tagType": "from", "version": "1.0.2" }
+            ],
+            "lineNumber": -1,
+            "args": ["value"],
+            "isArgOptional": [false],
+            "varArgs": false,
+            "body": null
+        },
+        {
+            "type": "TFunction",
+            "name": "F~m_toRad",
+            "exportSymbol": false,
+            "toolTip": [
+                {
+                    "tagType": "GENERIC",
+                    "description": "Converts degrees to radians."
+                },
+                {
+                    "tagType": "parameter",
+                    "description": "The value in degrees.",
+                    "var": "degrees",
+                    "type": "number",
+                    "optional": false
+                },
+                {
+                    "tagType": "returns",
+                    "description": "The value in radians."
+                },
+                {
+                    "tagType": "example",
+                    "codeblock": [
+                        "maak deg <- 90!",
+                        "maak rad <- m_toRad(deg)!",
+                        "khuluma(rad) @ Output: 1.5707963267948966"
+                    ]
+                },
+                { "tagType": "from", "version": "1.0.2" }
+            ],
+            "lineNumber": -1,
+            "args": ["degrees"],
+            "isArgOptional": [false],
+            "varArgs": false,
+            "body": null
+        },
+        {
+            "type": "TNumberVar",
+            "name": "m_e",
+            "exportSymbol": false,
+            "toolTip": [
+                {
+                    "tagType": "GENERIC",
+                    "description": "The mathematical constant e (Euler's number)"
+                },
+                {
+                    "tagType": "devnote",
+                    "description": "Just java.lang.Math.E"
+                },
+                {
+                    "tagType": "example",
+                    "codeblock": [
+                        "khuluma(2 ^ m_e)! @ approximately 7.38905609893065"
+                    ]
+                }
+            ],
+            "lineNumber": -1,
+            "value": 2.718281828459045
+        },
+        {
+            "type": "TNumberVar",
+            "name": "m_phi",
+            "exportSymbol": false,
+            "toolTip": [
+                {
+                    "tagType": "GENERIC",
+                    "description": "The golden ratio ? (phi)"
+                },
+                {
+                    "tagType": "example",
+                    "codeblock": [
+                        "@ Calculating the golden rectangle dimensions",
+                        "maak shortSide <- 10!",
+                        "maak longSide <- shortSide * m_phi!",
+                        "khuluma(\"Long side of the golden rectangle: \" + longSide)! @ approximately 16.18033988749895"
+                    ]
+                },
+                { "tagType": "devnote", "description": "No note here." }
+            ],
+            "lineNumber": -1,
+            "value": 1.618033988749895
+        },
+        {
+            "type": "TFunction",
+            "name": "F~m_random",
+            "exportSymbol": false,
+            "toolTip": [
+                {
+                    "tagType": "GENERIC",
+                    "description": "Returns a random number in the range of `a` and `b`, If both are omitted, returns a random (double) between 0 and 1."
+                },
+                {
+                    "tagType": "parameter",
+                    "description": "The highest number possible between `a` and 0, otherwise the lowest between `a` and `b` (inclusive)",
+                    "var": "a",
+                    "type": "number",
+                    "optional": true
+                },
+                {
+                    "tagType": "parameter",
+                    "description": "The highest number possible between a and b (inclusive). ",
+                    "var": "b",
+                    "type": "number",
+                    "optional": true
+                },
+                {
+                    "tagType": "devnote",
+                    "description": "Unlike other functions, if you provide no arguments, this function returns a double between 0 and 1. If you provide only one argument, it is treated as the upper bound, with the lower bound being 0."
+                },
+                { "tagType": "returns", "description": "A random number." },
+                {
+                    "tagType": "example",
+                    "codeblock": [
+                        "khuluma(\"Random number between 1 and 10: \" + m_random(1, 10))!",
+                        "khuluma(\"Random number between 0 and 5: \" + m_random(5))!",
+                        "khuluma(\"Random number between 0 and 1: \" + m_random())!"
+                    ]
+                },
+                { "tagType": "from", "version": "1.0.0" }
+            ],
+            "lineNumber": -1,
+            "args": ["a", "b"],
+            "isArgOptional": [true, true],
+            "varArgs": false,
+            "body": null
+        },
+        {
+            "type": "TNumberVar",
+            "name": "m_pi",
+            "exportSymbol": false,
+            "toolTip": [
+                {
+                    "tagType": "GENERIC",
+                    "description": "The mathematical constant ? (pi)"
+                },
+                {
+                    "tagType": "devnote",
+                    "description": "It's just java.lang.Math.PI"
+                }
+            ],
+            "lineNumber": -1,
+            "value": 3.141592653589793
+        },
+        {
+            "type": "TFunction",
+            "name": "F~m_cos",
+            "exportSymbol": false,
+            "toolTip": [
+                {
+                    "tagType": "GENERIC",
+                    "description": "Returns the cosine of a number in radians."
+                },
+                {
+                    "tagType": "parameter",
+                    "description": "The value in radians.",
+                    "var": "value",
+                    "type": "number",
+                    "optional": false
+                },
+                {
+                    "tagType": "returns",
+                    "description": "The cosine of the given value in radians."
+                },
+                { "tagType": "from", "version": "1.0.2" }
+            ],
+            "lineNumber": -1,
+            "args": ["value"],
+            "isArgOptional": [false],
+            "varArgs": false,
+            "body": null
+        },
+        {
+            "type": "TNumberVar",
+            "name": "m_tau",
+            "exportSymbol": false,
+            "toolTip": [
+                {
+                    "tagType": "GENERIC",
+                    "description": "The mathematical constant ? (tau), which is equal to 2?"
+                },
+                {
+                    "tagType": "devnote",
+                    "description": "Just java.lang.Math.TAU"
+                },
+                {
+                    "tagType": "example",
+                    "codeblock": [
+                        "@ Using tau to calculate the circumference of a circle with radius 5",
+                        "maak radius <- 5!",
+                        "maak circumference <- m_tau * radius!",
+                        "khuluma(circumference)! @ approximately 31.41592653589793"
+                    ]
+                }
+            ],
+            "lineNumber": -1,
+            "value": 6.283185307179586
+        },
+        {
+            "type": "TFunction",
+            "name": "F~m_atan",
+            "exportSymbol": false,
+            "toolTip": [
+                {
+                    "tagType": "GENERIC",
+                    "description": "Returns the arctangent of a number in radians."
+                },
+                {
+                    "tagType": "parameter",
+                    "description": "The value in radians.",
+                    "var": "value",
+                    "type": "number",
+                    "optional": false
+                },
+                {
+                    "tagType": "returns",
+                    "description": "The arctangent of the given value in radians."
+                },
+                { "tagType": "from", "version": "1.0.2" }
+            ],
+            "lineNumber": -1,
+            "args": ["value"],
+            "isArgOptional": [false],
+            "varArgs": false,
+            "body": null
+        },
+        {
+            "type": "TFunction",
+            "name": "F~m_ceil",
+            "exportSymbol": false,
+            "toolTip": [
+                {
+                    "tagType": "GENERIC",
+                    "description": "Returns the smallest integer greater than or equal to the given value."
+                },
+                {
+                    "tagType": "parameter",
+                    "description": "The value to ceil.",
+                    "var": "value",
+                    "type": "number",
+                    "optional": false
+                },
+                {
+                    "tagType": "returns",
+                    "description": "The smallest integer greater than or equal to the given value."
+                },
+                { "tagType": "from", "version": "1.0.2" }
+            ],
+            "lineNumber": -1,
+            "args": ["value"],
+            "isArgOptional": [false],
+            "varArgs": false,
+            "body": null
+        },
+        {
+            "type": "TFunction",
+            "name": "F~m_log",
+            "exportSymbol": false,
+            "toolTip": [
+                {
+                    "tagType": "GENERIC",
+                    "description": "Calculates the logarithm of a value with the specified base."
+                },
+                {
+                    "tagType": "parameter",
+                    "description": "The value to calculate the logarithm for.",
+                    "var": "value",
+                    "type": "number",
+                    "optional": false
+                },
+                {
+                    "tagType": "parameter",
+                    "description": "The base of the logarithm, otherwise 10 is used",
+                    "var": "base",
+                    "type": "number",
+                    "optional": true
+                },
+                {
+                    "tagType": "returns",
+                    "description": "The logarithm of the value with the specified base."
+                },
+                {
+                    "tagType": "example",
+                    "codeblock": [
+                        "khuluma(\"Log base 10 of 1000 is: \" + m_log(1000))!",
+                        "khuluma(\"Log base 2 of 1024 is: \" + m_log(1024, 2))!"
+                    ]
+                },
+                { "tagType": "from", "version": "5.0.0" }
+            ],
+            "lineNumber": -1,
+            "args": ["value", "base"],
+            "isArgOptional": [false, true],
+            "varArgs": false,
+            "body": null
+        }
+    ]
+}

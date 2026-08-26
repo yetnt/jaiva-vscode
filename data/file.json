@@ -1,0 +1,359 @@
+{
+    "version": "5.0.2",
+    "tokens": [
+        {
+            "type": "TFunction",
+            "name": "F~f_permsOf",
+            "exportSymbol": false,
+            "toolTip": [
+                {
+                    "tagType": "GENERIC",
+                    "description": "Gets the permissions of the file from a file."
+                },
+                {
+                    "tagType": "parameter",
+                    "description": "The file array to get the permissions from.",
+                    "var": "file",
+                    "type": "[]",
+                    "optional": false
+                },
+                {
+                    "tagType": "returns",
+                    "description": "A function that allows you to return a specific permission or all permissions as an array."
+                },
+                {
+                    "tagType": "devnote",
+                    "description": "Unlike other functions, this one may require a bit of functional thinking. It returns a function that you can call to get specific permissions or all permissions at once."
+                },
+                { "tagType": "from", "version": "5.0.0" },
+                {
+                    "tagType": "example",
+                    "codeblock": [
+                        "maak permissions <- f_permsOf(f_this)!",
+                        "khuluma(permissions())! @ Prints all permissions as an array [canRead, canWrite, canExecute]",
+                        "khuluma(permissions(\"read\"))! @ Prints whether the file can be read (true/false)",
+                        "khuluma(permissions(\"r\"))! @ Prints whether the file can be read (true/false)",
+                        "khuluma(permissions(0))! @ Prints whether the file can be read (true/false)",
+                        "@ Similarly for \"write\"/\"w\"/1 and \"execute\"/\"x\"/2"
+                    ]
+                }
+            ],
+            "lineNumber": -1,
+            "args": ["file"],
+            "isArgOptional": [false],
+            "varArgs": false,
+            "body": null
+        },
+        {
+            "type": "TFunction",
+            "name": "F~f_dirOf",
+            "exportSymbol": false,
+            "toolTip": [
+                {
+                    "tagType": "GENERIC",
+                    "description": "Gets the directory path of the file from a file."
+                },
+                {
+                    "tagType": "parameter",
+                    "description": "The file array to get the directory path from.",
+                    "var": "file",
+                    "type": "[]",
+                    "optional": false
+                },
+                {
+                    "tagType": "returns",
+                    "description": "The directory path of the file as a string."
+                },
+                { "tagType": "from", "version": "5.0.0" },
+                {
+                    "tagType": "example",
+                    "codeblock": [
+                        "khuluma(f_dirOf(f_this))! @ Prints the directory path of the current file."
+                    ]
+                }
+            ],
+            "lineNumber": -1,
+            "args": ["file"],
+            "isArgOptional": [false],
+            "varArgs": false,
+            "body": null
+        },
+        {
+            "type": "TStringVar",
+            "name": "f_bin",
+            "exportSymbol": false,
+            "toolTip": [
+                {
+                    "tagType": "GENERIC",
+                    "description": "Variable that holds the directory where you can find jaiva.jar"
+                },
+                {
+                    "tagType": "deprecated",
+                    "description": "As of (one of the versions), the jaiva-cli sh and windows command no longer exist. (This was only used to locate where the /lib/ folder was, however now the lib folder lives within jaiva.jar itself, deprecating the need for locating jaiva.jar)"
+                },
+                { "tagType": "from", "version": "1.0.0" },
+                {
+                    "tagType": "example",
+                    "codeblock": [
+                        "@ Now. I would give an example for this.",
+                        "@ However, why should I if it's deprecated?"
+                    ]
+                }
+            ],
+            "lineNumber": 0,
+            "value": "/eish/my/boizin/this/variable/is/deprecated"
+        },
+        {
+            "type": "TStringVar",
+            "name": "f_name",
+            "exportSymbol": false,
+            "toolTip": [
+                {
+                    "tagType": "GENERIC",
+                    "description": "Variable that holds the current file's name"
+                },
+                {
+                    "tagType": "devnote",
+                    "description": "If you call this within the REPL, or somehow the filePath is null, it holds \"REPL\""
+                },
+                { "tagType": "from", "version": "1.0.0" },
+                {
+                    "tagType": "example",
+                    "codeblock": [
+                        "if (f_name != \"myFile.jiv\") ->",
+                        "    khuluma(\"This is not myFile.jiv!\")!",
+                        "<~"
+                    ]
+                }
+            ],
+            "lineNumber": -1,
+            "value": "file"
+        },
+        {
+            "type": "TArrayVar",
+            "name": "f_this",
+            "exportSymbol": false,
+            "toolTip": [
+                {
+                    "tagType": "GENERIC",
+                    "description": "Returns the current file's properties and contents."
+                },
+                {
+                    "tagType": "devnote",
+                    "description": "Returns an array containing the current file's properties \n [fileName, fileDir, [contents], [canRead?, canWrite?, canExecute?]]"
+                },
+                {
+                    "tagType": "devnote",
+                    "description": "Once again, if we are inside the REPL, we just return static content. (Does not represent the REPL)"
+                },
+                { "tagType": "from", "version": "1.0.1" },
+                {
+                    "tagType": "example",
+                    "codeblock": [
+                        "f_this[0]! @ holds the file name",
+                        "f_this[1]! @ holds the file directory",
+                        "khuluma(\"File contents: \" + f_this[2])! @ holds the file contents as an array",
+                        "khuluma(\"Can we write to this file? \" + f_this[3][1])! @ holds the file permissions"
+                    ]
+                }
+            ],
+            "lineNumber": -1,
+            "value": []
+        },
+        {
+            "type": "TFunction",
+            "name": "F~f_contentOf",
+            "exportSymbol": false,
+            "toolTip": [
+                {
+                    "tagType": "GENERIC",
+                    "description": "Gets the content of the file from a file."
+                },
+                {
+                    "tagType": "parameter",
+                    "description": "The file array to get the content from.",
+                    "var": "file",
+                    "type": "[]",
+                    "optional": false
+                },
+                {
+                    "tagType": "returns",
+                    "description": "The content of the file as an array of strings."
+                },
+                { "tagType": "from", "version": "5.0.0" },
+                {
+                    "tagType": "example",
+                    "codeblock": [
+                        "khuluma(f_contentOf(f_this))! @ Prints the content of the current file."
+                    ]
+                }
+            ],
+            "lineNumber": -1,
+            "args": ["file"],
+            "isArgOptional": [false],
+            "varArgs": false,
+            "body": null
+        },
+        {
+            "type": "TFunction",
+            "name": "F~f_file",
+            "exportSymbol": false,
+            "toolTip": [
+                {
+                    "tagType": "GENERIC",
+                    "description": "Finds the specified file and retrieves it's contents."
+                },
+                {
+                    "tagType": "parameter",
+                    "description": "The path to the file you want to fetch.",
+                    "var": "path",
+                    "type": "string",
+                    "optional": false
+                },
+                {
+                    "tagType": "returns",
+                    "description": "Returns an array containing the properties of the file at the given `path` \n [fileName, fileDir, [contents], [canRead?, canWrite?, canExecute?]]"
+                },
+                {
+                    "tagType": "example",
+                    "codeblock": [
+                        "maak file <- f_file(\"data/myFile.txt\")!",
+                        "khuluma(\"File name: \" + file[0])!",
+                        "khuluma(\"File directory: \" + file[1])!"
+                    ]
+                },
+                { "tagType": "from", "version": "1.0.1" }
+            ],
+            "lineNumber": -1,
+            "args": ["path"],
+            "isArgOptional": [false],
+            "varArgs": false,
+            "body": null
+        },
+        {
+            "type": "TFunction",
+            "name": "F~f_new",
+            "exportSymbol": false,
+            "toolTip": [
+                {
+                    "tagType": "GENERIC",
+                    "description": "Creates a new file with the given properties at the given file."
+                },
+                {
+                    "tagType": "parameter",
+                    "description": "The path to the new file to createFunction. Along with the file name and extension",
+                    "var": "path",
+                    "type": "string",
+                    "optional": false
+                },
+                {
+                    "tagType": "parameter",
+                    "description": "The content the file should hold. Either a string or an array of strings.",
+                    "var": "content",
+                    "type": "idk",
+                    "optional": false
+                },
+                {
+                    "tagType": "parameter",
+                    "description": "Whether or not the file can be read. Defaults to true",
+                    "var": "canRead",
+                    "type": "boolean",
+                    "optional": true
+                },
+                {
+                    "tagType": "parameter",
+                    "description": "Whether the file can be written to or not. Defaults to true",
+                    "var": "canWrite",
+                    "type": "boolean",
+                    "optional": true
+                },
+                {
+                    "tagType": "parameter",
+                    "description": "Whether the file can be executed or not. Defaults to true.",
+                    "var": "canExecute",
+                    "type": "boolean",
+                    "optional": true
+                },
+                {
+                    "tagType": "returns",
+                    "description": "A boolean `true` if the file could be created. `false` otherwise."
+                },
+                {
+                    "tagType": "example",
+                    "codeblock": [
+                        "maak success <- f_new(\"data/newFile.txt\", arrLit(\"Hello, World!\", \"This is a new file.\"), true, true, false)!",
+                        "if (success) ->",
+                        "    khuluma(\"File created successfully!\")!",
+                        "<~ else ->",
+                        "    khuluma(\"Failed to createFunction file.\")!",
+                        "<~"
+                    ]
+                },
+                { "tagType": "from", "version": "2.0.1" }
+            ],
+            "lineNumber": -1,
+            "args": ["path", "content", "canRead", "canWrite", "canExecute"],
+            "isArgOptional": [false, false, true, true, true],
+            "varArgs": false,
+            "body": null
+        },
+        {
+            "type": "TFunction",
+            "name": "F~f_nameOf",
+            "exportSymbol": false,
+            "toolTip": [
+                {
+                    "tagType": "GENERIC",
+                    "description": "Gets the name of the file from a file."
+                },
+                {
+                    "tagType": "parameter",
+                    "description": "The file array to get the name from.",
+                    "var": "file",
+                    "type": "[]",
+                    "optional": false
+                },
+                {
+                    "tagType": "returns",
+                    "description": "The name of the file as a string."
+                },
+                { "tagType": "from", "version": "5.0.0" },
+                {
+                    "tagType": "example",
+                    "codeblock": [
+                        "khuluma(f_nameOf(f_this))! @ Prints the name of the current file."
+                    ]
+                }
+            ],
+            "lineNumber": -1,
+            "args": ["file"],
+            "isArgOptional": [false],
+            "varArgs": false,
+            "body": null
+        },
+        {
+            "type": "TStringVar",
+            "name": "f_dir",
+            "exportSymbol": false,
+            "toolTip": [
+                {
+                    "tagType": "GENERIC",
+                    "description": "Variable that holds the current file's directory."
+                },
+                {
+                    "tagType": "devnote",
+                    "description": "If you call this within the REPL, or somehow the filePath is null, it holds \"REPL\""
+                },
+                { "tagType": "from", "version": "1.0.0" },
+                {
+                    "tagType": "example",
+                    "codeblock": [
+                        "khuluma(\"Current file directory is: \" + f_dir)!"
+                    ]
+                }
+            ],
+            "lineNumber": -1,
+            "value": "C:\\Windows\\System32\\jaiva"
+        }
+    ]
+}
