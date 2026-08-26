@@ -46,7 +46,8 @@ export type DependsOnDoc = {
 
 import { hasPropertyOf } from "./types";
 
-export function toMarkdown(doc: JDoc): string {
+export function toMarkdown(doc: JDoc | null): string {
+    if (doc == null) return "";
     if (hasPropertyOf<ParameterDoc>(doc, "var")) {
         return (
             " - **" +

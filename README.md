@@ -4,17 +4,20 @@ This extension provides basic language support and features for `.jiv`, `.jaiva`
 
 ## Features
 
--   **Syntax Highlighting:**  
-    Full support for Jaiva syntax with accurate grammar rules.
+- **Syntax Highlighting:**  
+  Full support for Jaiva syntax with da grammar rules.
 
--   **Code Snippets:**  
-    Provides useful snippets for variable declarations, function definitions, loops, conditionals, and more.
+- **Code Snippets:**  
+  Provides useful snippets for variable declarations, function definitions, loops, conditionals, and alot more.
 
--   **Autocomplete:**  
-    Intelligent suggestions for variables, functions, and keywords with context‑aware hints.
+- **Autocomplete:**  
+  Suggestions for variables, functions, and keywords with context‑aware hints.
 
--   **Run Command:**  
-    An integrated "Run" button and CLI command that executes the current file, with customizable arguments from the settings.
+- **Documentation:**
+  Hover documentation for built in files and current files (provided you use JDoc)
+
+- **Run Command:**  
+  An integrated "Run" button and CLI command that executes the current file, with customizable arguments from the settings.
 
 ## Requirements
 
@@ -22,15 +25,14 @@ You have to have the `jaiva` global command installed by following [Install.md](
 
 ## Usage
 
--   **Editing:**  
-    Open a Jaiva file (file extensions: `.jiv`, `.jaiva`, `.jva`) to see syntax highlighting and autocomplete features in action.
+- **Editing:**  
+  Open a Jaiva file (file extensions: `.jiv`, `.jaiva`, `.jva`) to see syntax highlighting and autocomplete features in action.
 
--   **Running Code:**  
-    Use the `"Run Jaiva"` button in the editor title or execute the command:
+- **Running Code:**  
+  Use the `"Run Jaiva"` button in the editor title or execute the command:
     ```sh
     jaiva <current filepath> (additional args)
     ```
-    Set additional arguments via the VS Code settings under `jaiva.runArgs`.
 
 ## Screenshots
 
@@ -42,33 +44,28 @@ You have to have the `jaiva` global command installed by following [Install.md](
 
 ![Hover info](./images/hover.png)
 
+![Hover info 2](./images/hover2.png)
+
 ### Autocomplete and Snippets
 
 ![Autocomplete](./images/autocomplete.png)
+
+![Autocomplete 2](./images/autocomplete2.png)
+
+### Docs
+
+![Documentation](./images/docs.png)
+
+### Tokenization Errors
+
+![No Exclamation Mark Error](./images/excl.png)
 
 ## Extension Settings
 
 This extension contributes the following settings:
 
--   `jaiva.enable`: Enable/disable this extension.
--   `jaiva.runArgs`: Additional arguments that will be passed to the Jaiva CLI when running a file.
+- `jaiva.enable`: Enable/disable this extension.
 
 ## Known Issues
 
-1. Arrays show the first element in hovers. why idk.
-
-## Release Notes
-
-(MAJOR version is dependant on the current MAJOR version of Jaiva)
-
-### 1.0.0
-
-Initial release of this extension.
-
-## 2.0.0
-
--   Add support for `tsea` keyword
--   Match new token types for Jaiva release 1.0.0
--   Fix some operators finally.
-
----
+1.

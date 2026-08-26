@@ -1,4 +1,4 @@
-import { JDoc, toMarkdown } from "./jdoc";
+import { JDoc, toMarkdown, ParameterDoc, GenericDoc } from "./jdoc";
 
 /**
  * The types that we care about the most
@@ -177,13 +177,63 @@ export function isTheTokensWeNeed(token: TokenDefault): boolean {
 export function docsToMarkdown(token: TokenDefault): string {
     const out: string[] = [];
 
-    if (hasPropertyOf<SymbolToken>(token, "toolTip")) {
-        if (typeof token.toolTip === "string") return token.toolTip as string;
+    if (
+        hasPropertyOf<SymbolToken>(token, "toolTip") ||
+        hasPropertyOf<SpecialToken>(token, "sortText")
+    ) {
+        let str;
+        if (hasPropertyOf<TFunction>(token, "args")) {
+            const args: string[] = [];
+            token.args.forEach((c, i) => {
+                args.push(c + (token.isArgOptional[i] ? "" : "?"));
+            });
+            str = token.name + "(" + args.join(", ") + ")";
+        } else if (
+            [
+                "TBooleanVar",
+                "TStringVar",
+                "TUnknownScalar",
+                "TNumberVar",
+                "TArrayVar",
+            ].includes(token.type) &&
+            !hasPropertyOf<SpecialToken>(token, "sortText")
+        ) {
+            str =
+                "maak " +
+                token.name +
+                " <-" +
+                (token.type === "TArrayVar" ? "| " : " ") +
+                "...";
+        } else if (hasPropertyOf<SpecialToken>(token, "sortText")) {
+            if (hasPropertyOf<FunctionArgument>(token, "argumentType")) {
+                str =
+                    "(parameter) " + token.argumentType + token.name + "(...)";
+            } else {
+                str = "(array var) " + token.name;
+            }
+        }
+        if (typeof token.toolTip === "string")
+            return ("```jaiva\n" + str + "\n```\n" + token.toolTip) as string;
 
         const doc = token.toolTip as JDoc[];
+        const param: ParameterDoc[] = [];
+        let generic: GenericDoc | null = null;
+        const docs: JDoc[] = [];
+        out.push("```jaiva\n" + str + "\n```\n");
         for (const d of doc) {
-            out.push(toMarkdown(d));
+            if (d.tagType === "parameter") {
+                param.push(d as ParameterDoc);
+            } else if (d.tagType === "GENERIC") {
+                generic = d as GenericDoc;
+            } else {
+                docs.push(d);
+            }
         }
+
+        out.push(toMarkdown(generic));
+        param.forEach((c) => out.push(toMarkdown(c)));
+        out.push("\n");
+        docs.forEach((c) => out.push(toMarkdown(c)));
     }
 
     return out.join("\n");
