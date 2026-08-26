@@ -58,19 +58,21 @@ export function toMarkdown(doc: JDoc): string {
             doc.description
         );
     } else if (hasPropertyOf<ExampleDoc>(doc, "codeblock")) {
-        return "```jaiva\n" + doc.codeblock.join("\n") + "\n```";
+        return "```jaiva\n" + doc.codeblock.join("\n") + "\n```\n\n";
     } else if (hasPropertyOf<DependsOnDoc>(doc, "symbols")) {
-        return "> This function depends on: " + doc.symbols.join(", ") + ".";
+        return (
+            "> This function depends on: " + doc.symbols.join(", ") + ".\n\n"
+        );
     } else if (doc.tagType === "devnote") {
         const devn = doc as DevNoteDoc;
-        return "> **_Developer Note_** : _" + devn.description + "_";
-    } else if (doc.tagType === "return") {
+        return "> **_Developer Note_** : _" + devn.description + "_\n\n";
+    } else if (doc.tagType === "returns") {
         const ret = doc as ReturnDoc;
-        return "**`Returns`** - " + ret.description;
+        return "**`Returns`** - " + ret.description + "\n\n";
     } else if (hasPropertyOf<FromDoc>(doc, "version")) {
-        return "**`" + doc.version + "`**";
+        return "**`" + doc.version + "`**\n\n";
     } else if (doc.tagType === "GENERIC") {
-        return (doc as GenericDoc).description;
+        return (doc as GenericDoc).description + "\n\n";
     }
     return "Jaiva Construct";
     // if (hasPropertyOf<GenericDoc>(doc, ""))

@@ -1,7 +1,18 @@
+import { Diagnostics } from "./vscodeWrapper";
+
 class Command {
     name: string;
-    callback: (...args: any[]) => void;
-    constructor(name: string, callback: (...args: any[]) => void) {
+    callback: (
+        context: import("vscode").ExtensionContext,
+        diagnostics: Diagnostics,
+    ) => void;
+    constructor(
+        name: string,
+        callback: (
+            context: import("vscode").ExtensionContext,
+            diagnostics: Diagnostics,
+        ) => void,
+    ) {
         this.name = name;
         this.callback = callback;
     }
@@ -10,7 +21,7 @@ class Command {
 export class CommandRegistry {
     private commands: Command[] = [];
     constructor(vscode: typeof import("vscode")) {
-        this.registerCommand("run", () => {
+        this.registerCommand("run", (c, d) => {
             const editor = vscode.window.activeTextEditor;
             if (!editor) {
                 vscode.window.showErrorMessage("No active file to run.");
@@ -24,7 +35,7 @@ export class CommandRegistry {
             terminal.show();
             terminal.sendText(`jaiva "${filePath}"`);
         });
-        this.registerCommand("runTokens", () => {
+        this.registerCommand("runTokens", (c, d) => {
             const editor = vscode.window.activeTextEditor;
             if (!editor) {
                 vscode.window.showErrorMessage("No active file to run.");
@@ -43,15 +54,24 @@ export class CommandRegistry {
     public subscribe(
         vscode: typeof import("vscode"),
         context: import("vscode").ExtensionContext,
+        diagnostics: Diagnostics,
     ) {
         this.commands.forEach((cmd) => {
             context.subscriptions.push(
-                vscode.commands.registerCommand(cmd.name, cmd.callback),
+                vscode.commands.registerCommand(cmd.name, () =>
+                    cmd.callback(context, diagnostics),
+                ),
             );
         });
     }
 
-    public registerCommand(name: string, callback: (...args: any[]) => void) {
+    public registerCommand(
+        name: string,
+        callback: (
+            context: import("vscode").ExtensionContext,
+            diagnostics: Diagnostics,
+        ) => void,
+    ) {
         const command = new Command("jaiva." + name, callback);
         this.commands.push(command);
     }

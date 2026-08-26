@@ -1,26 +1,41 @@
-import { exec, spawn } from "child_process";
-import { promisify } from "util";
+import { spawn } from "child_process";
 
 import * as Tokens from "./tokens/types";
 import * as JaivaLibraries from "./globals";
 import { MultiMap } from "../mmap";
-import { JDoc, ParameterDoc } from "./tokens/jdoc";
+import * as Docs from "./tokens/jdoc";
+import { Diagnostics } from "../vscodeWrapper";
+import * as vscode from "vscode";
 
-export { Tokens };
+export { Tokens, JaivaLibraries, Docs };
 
-type Error = {
+export type ExtensionError = {
     err: string;
     type: "OH_FUCK" | "JAIVA";
 };
 
-export class SharedValues {
+class Base {
+    private d: Diagnostics | null = null;
+
+    public uses(d: Diagnostics) {
+        this.d = d;
+    }
+
+    protected getDiagnostics(): Diagnostics | null {
+        return this.d;
+    }
+}
+
+export class SharedValues extends Base {
     private tokenList: Tokens.TokenDefault[] = [];
     private readCopy: Tokens.TokenDefault[] = [];
     private libraryMap: Map<string, JaivaLibraries.Library> = new Map();
-    private definitionsMap: MultiMap<string, Tokens.TokenDefault> =
+    public definitionsMap: MultiMap<string, Tokens.TokenDefault> =
         new MultiMap();
 
-    constructor() {}
+    constructor() {
+        super();
+    }
 
     public loadLibraries(
         vers: string,
@@ -34,6 +49,8 @@ export class SharedValues {
             "math/utils",
             "file",
             "arrays",
+            "time",
+            "time/zone",
         ];
 
         globals.forEach((lib) => {
@@ -56,12 +73,14 @@ export class SharedValues {
         });
     }
 
-    public write(str: string): void {
+    public write(doc: vscode.TextDocument, str: string): void {
         let any;
         try {
             any = JSON.parse(str);
-            if (Tokens.hasPropertyOf<Error>(any, "err")) {
-                console.log(any.err);
+            if (Tokens.hasPropertyOf<ExtensionError>(any, "err")) {
+                if (this.getDiagnostics()) {
+                    this.getDiagnostics()?.err(doc, any);
+                }
                 return;
             }
         } catch (error) {
@@ -72,15 +91,43 @@ export class SharedValues {
 
         const arr = any as any[];
         this.tokenList = this.add(-1, arr);
-        this.tokenList.push(...this.loadLibraryAt("globals", -1));
+        this.tokenList.push(...this.loadLibraryAt(null, "globals", -1));
         this.readCopy = [...this.tokenList];
     }
 
     private loadLibraryAt(
+        importTok: null | Tokens.ImportToken,
         name: string,
         range: Tokens.LineRange,
     ): Tokens.TokenDefault[] {
-        return this.add(range, this.libraryMap.get(name)?.tokens ?? []);
+        var tokens = this.libraryMap.get(name)?.tokens ?? [];
+        if (importTok !== null) {
+            const str = "\n\n_Imported from " + importTok.fileName + "_";
+            (tokens as Tokens.TokenDefault[]).forEach((t) => {
+                t = {
+                    ...t,
+                    importedFromLine: importTok.lineNumber,
+                } as Tokens.TokenDefault & Tokens.ImportedFrom;
+                if (typeof t.toolTip === "string") {
+                    if (!t.toolTip.includes(str)) t.toolTip += "\n" + str;
+                } else {
+                    const arr = t.toolTip;
+                    let doc = arr.find((c) => {
+                        if (c.tagType === "GENERIC") return c;
+                    });
+                    if (doc == undefined) {
+                        doc = {
+                            tagType: "GENERIC",
+                            description: str,
+                        } as Docs.GenericDoc;
+                    } else {
+                        if (!(doc as Docs.GenericDoc).description.includes(str))
+                            (doc as Docs.GenericDoc).description += "\n" + str;
+                    }
+                }
+            });
+        }
+        return this.add(range, tokens);
     }
 
     private add(
@@ -107,6 +154,7 @@ export class SharedValues {
                             if (token.isLib) {
                                 tokens.push(
                                     ...this.loadLibraryAt(
+                                        token,
                                         token.fileName,
                                         parentRange,
                                     ),
@@ -129,6 +177,13 @@ export class SharedValues {
                     ]);
                     tokens.push(...other);
                 }
+
+                this.definitionsMap.add(
+                    token.type === "TFunction"
+                        ? token.name.slice(2)
+                        : token.name,
+                    token,
+                );
             }
         }
         return tokens;
@@ -150,12 +205,12 @@ export class SharedValues {
                     tok.name +
                     "\n```\n";
                 tok.within = lineRange;
-                return [
-                    {
-                        ...tok,
-                        sortText: "1_",
-                    } as Tokens.SpecialToken,
-                ];
+                const special: Tokens.SpecialToken = {
+                    ...tok,
+                    sortText: "1_",
+                };
+                this.definitionsMap.add(special.name, special);
+                return [special];
             } else if (scoped.arrayVariable !== null) {
                 const tok = scoped.variable as Tokens.TokenDefault;
                 tok.toolTip =
@@ -165,10 +220,11 @@ export class SharedValues {
                     tok.name +
                     "\n```\n";
                 tok.within = lineRange;
-                const out = {
+                const out: Tokens.SpecialToken = {
                     ...tok,
                     sortText: "1_",
-                } as Tokens.SpecialToken;
+                };
+                this.definitionsMap.add(out.name, out);
                 return [out];
             }
         } else if (Tokens.hasPropertyOf<Tokens.TFunction>(scoped, "args")) {
@@ -187,15 +243,18 @@ export class SharedValues {
                     " on line " +
                     scoped.lineNumber;
                 if (typeof doc !== "string") {
-                    const jdoc = doc as JDoc[];
+                    const jdoc = doc as Docs.JDoc[];
                     // filter and find by arg name
                     const found = doc.find((d) => {
                         if (
-                            Tokens.hasPropertyOf<ParameterDoc>(d, "type") &&
+                            Tokens.hasPropertyOf<Docs.ParameterDoc>(
+                                d,
+                                "tagType",
+                            ) &&
                             d.var === name
                         )
                             return d;
-                    }) as ParameterDoc;
+                    }) as Docs.ParameterDoc;
                     if (found !== undefined) {
                         str =
                             "_(From `" +
@@ -205,7 +264,7 @@ export class SharedValues {
                     }
                 }
 
-                tokens.push({
+                const argument: Tokens.FunctionArgument = {
                     name,
                     lineNumber: scoped.lineNumber,
                     within: lineRange,
@@ -219,7 +278,9 @@ export class SharedValues {
                             ? ""
                             : "> This parameter is marked as optional. Meaning it may possibly hold a value " +
                               "of `idk`."),
-                } as Tokens.FunctionArgument);
+                };
+                this.definitionsMap.add(argument.name, argument);
+                tokens.push(argument);
             });
             return tokens;
         }
@@ -235,12 +296,13 @@ export class SharedValues {
     }
 }
 
-export class JaivaCLI {
+export class JaivaCLI extends Base {
     private child;
     private buffer = "";
     private pending: ((data: string) => void)[] = [];
 
     constructor() {
+        super();
         this.child = spawn("jaiva", ["--json-stream"], { shell: true });
 
         this.child.stdout.on("data", (chunk) => {

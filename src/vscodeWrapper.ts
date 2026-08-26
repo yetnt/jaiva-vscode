@@ -1,13 +1,15 @@
 import * as v from "vscode";
 import * as j from "./jaiva/jaiva";
-import * as t from "./jaiva/tokens/types";
+import { ImportedFrom, TokenDefault } from "./jaiva/tokens/types";
 
 export class AllHandler {
-    public diagnosticCollection: v.DiagnosticCollection;
     public shared: j.SharedValues;
     public cli: j.JaivaCLI;
     public completions: Completions = new Completions();
     private version: string;
+    private diagnostics: Diagnostics;
+    private identificationProvider: IdentificationProvider =
+        new IdentificationProvider();
 
     private debounceTimer?: NodeJS.Timeout;
 
@@ -15,26 +17,45 @@ export class AllHandler {
         version: string,
         shared: j.SharedValues,
         cli: j.JaivaCLI,
-        diagnosticCollection: v.DiagnosticCollection,
+        diagnostic: Diagnostics,
     ) {
         this.version = version;
-        this.diagnosticCollection = diagnosticCollection;
+        this.diagnostics = diagnostic;
+        shared.uses(this.diagnostics);
         this.shared = shared;
+        cli.uses(this.diagnostics);
         this.cli = cli;
     }
 
     public begin(vscode: typeof v, context: v.ExtensionContext) {
-        vscode.workspace.onDidOpenTextDocument(() => this.docParse);
+        vscode.workspace.onDidOpenTextDocument((d) => this.docParse(d));
         vscode.workspace.onDidChangeTextDocument((event) => {
             this.docParse(event.document);
         });
         const handler = this;
         vscode.languages.registerCompletionItemProvider("jaiva", {
             provideCompletionItems(document, pos) {
-                console.log("sd");
                 return handler.completions.provide(
                     handler.shared,
                     document,
+                    pos,
+                );
+            },
+        });
+        vscode.languages.registerHoverProvider("jaiva", {
+            provideHover(doc, pos) {
+                return handler.identificationProvider.provideDocs(
+                    handler.shared,
+                    doc,
+                    pos,
+                );
+            },
+        });
+        vscode.languages.registerDefinitionProvider("jaiva", {
+            provideDefinition(doc, pos) {
+                return handler.identificationProvider.provideDefintion(
+                    handler.shared,
+                    doc,
                     pos,
                 );
             },
@@ -43,8 +64,6 @@ export class AllHandler {
 
     private docParse(doc: v.TextDocument) {
         if (doc.languageId !== "jaiva") return;
-
-        console.log("son.");
 
         if (doc.isUntitled) {
             return;
@@ -55,14 +74,11 @@ export class AllHandler {
         }
 
         this.debounceTimer = setTimeout(() => {
-            const current = this.shared.read();
-
+            this.diagnostics.clear(doc);
             void (async () => {
                 const out = await this.cli.call([doc.uri.fsPath]);
 
-                this.shared.write(out);
-
-                console.log("parsed.");
+                this.shared.write(doc, out);
             })();
         }, 1000); // 1 second
     }
@@ -81,9 +97,8 @@ class Completions {
         const tokens = shared.read();
 
         tokens.forEach((token) => {
-            if (token.name === "roo") console.log("D");
             if (
-                token.type === "TFunction" ||
+                token.type === "TFunction" || // dumbass if, the TFunction could be in the array but whatever.
                 [
                     "TUnknownScalar",
                     "TBooleanVar",
@@ -96,14 +111,18 @@ class Completions {
 
                 if (token.within !== -1)
                     if (
-                        token.within[0] < lineNumber &&
-                        token.within[1] > lineNumber
+                        !(
+                            token.within[0] < lineNumber &&
+                            token.within[1] > lineNumber
+                        )
                     )
                         return;
+                if (token.lineNumber !== -1)
+                    if (lineNumber < token.lineNumber) return;
 
                 let completionItem: v.CompletionItem;
                 if (token.type === "TFunction") {
-                    const fn = token as t.TFunction;
+                    const fn = token as j.Tokens.TFunction;
                     const funcName = token.name.slice(2);
                     let args: string[] = [];
                     for (let i = 0; i < fn.args.length; i++) {
@@ -129,11 +148,12 @@ class Completions {
                         v.CompletionItemKind.Variable,
                     );
                     if (
-                        t.hasPropertyOf<t.FunctionArgument>(
+                        j.Tokens.hasPropertyOf<j.Tokens.FunctionArgument>(
                             token,
                             "argumentType",
                         )
                     ) {
+                        completionItem.sortText = token.sortText + token.name;
                         if (token.argumentType === "F~") {
                             completionItem.insertText = new v.SnippetString(
                                 token.name + "($0)",
@@ -142,7 +162,7 @@ class Completions {
                     }
                 }
                 completionItem.documentation = new v.MarkdownString(
-                    t.docsToMarkdown(token),
+                    j.Tokens.docsToMarkdown(token),
                 );
 
                 completions.push(completionItem);
@@ -153,4 +173,116 @@ class Completions {
     }
 }
 
-class Error {}
+export class Diagnostics {
+    private diagnostics: v.DiagnosticCollection;
+
+    constructor(collection: v.DiagnosticCollection) {
+        this.diagnostics = collection;
+    }
+
+    public clear(document: v.TextDocument): void {
+        this.diagnostics.set(document.uri, []);
+    }
+
+    public err(document: v.TextDocument, err: j.ExtensionError) {
+        let lineNumber: number = 0;
+        if (err.type === "JAIVA") {
+            const num = err.err.match(/(?<=\[line\s)\d*(?=\])/gm);
+            if (num) {
+                lineNumber = Number.parseInt(num[0]) - 1;
+            }
+        }
+        const firstCharPos = new v.Position(lineNumber, 0);
+        const lastCharPos = new v.Position(
+            lineNumber,
+            document.lineAt(lineNumber).range.end.character,
+        );
+        this.diagnostics.set(document.uri, [
+            new v.Diagnostic(
+                new v.Range(firstCharPos, lastCharPos),
+                err.err,
+                v.DiagnosticSeverity.Error,
+            ),
+        ]);
+    }
+}
+
+export class IdentificationProvider {
+    private findToken(
+        shared: j.SharedValues,
+        document: v.TextDocument,
+        pos: v.Position,
+    ): TokenDefault | null {
+        const range = document.getWordRangeAtPosition(pos);
+        const word = document.getText(range);
+
+        const line = pos.line;
+
+        const found = shared
+            .read()
+            .map((a) => {
+                if (a.type === "TFunction") {
+                    const nae = a.name.slice(2);
+                    const { name, ...others } = a;
+                    return { name: nae, ...others };
+                }
+                return a;
+            })
+            .filter((a) => {
+                return (
+                    a.name === word &&
+                    (a.within == -1 ||
+                        (a.within[0] < line && a.within[1] > line)) // filter out scopes it cant be
+                );
+            })
+            .sort((a, b) => {
+                if (a.within == -1 && b.within != -1) return -1;
+                if (a.within != -1 && b.within == -1) return 1;
+
+                const withinA = a.within as [number, number];
+                const withinB = b.within as [number, number];
+                const sum1 = line - withinA[0] + (withinA[1] - line);
+                const sum2 = line - withinB[0] + (withinB[1] - line);
+
+                if (sum1 < sum2) return -1;
+                else return 1;
+            });
+
+        if (found.length == 0) {
+            // try looking in the map instead. lowkey last hope.
+            const list = shared.definitionsMap.get(word);
+            if (list.length == 0) return null;
+            return { ...list[0] };
+        }
+
+        return found[0];
+    }
+
+    provideDocs(
+        shared: j.SharedValues,
+        document: v.TextDocument,
+        pos: v.Position,
+    ): v.ProviderResult<v.Hover> {
+        const found = this.findToken(shared, document, pos);
+
+        if (found == null) return;
+
+        return new v.Hover(j.Tokens.docsToMarkdown(found));
+    }
+
+    provideDefintion(
+        shared: j.SharedValues,
+        document: v.TextDocument,
+        pos: v.Position,
+    ): v.ProviderResult<v.Definition> {
+        const found = this.findToken(shared, document, pos);
+
+        if (found == null) return;
+
+        let lineNumber = found.lineNumber;
+        if (j.Tokens.hasPropertyOf<ImportedFrom>(found, "importedFromLine")) {
+            lineNumber = found.importedFromLine;
+        }
+        return new v.Location(document.uri, new v.Position(lineNumber - 1, 0));
+    }
+}

@@ -27,7 +27,7 @@
     "Colonize Block": {
         "prefix": "colonize",
         "body": [
-            "colonize ${1:i} <- ${2:value} | ${3:condition} | ${4:increment} ->",
+            "colonize ${1:i} <- (${2:value} | ${3:condition} | ${4:increment}) ->",
             "\t$0!",
             "<~"
         ],
@@ -35,7 +35,7 @@
     },
     "Colonize With Block": {
         "prefix": "colonziewith",
-        "body": ["colonize ${1:element} with ${2:array} ->", "\t$0!", "<~"],
+        "body": ["colonize (${1:element} with ${2:array}) ->", "\t$0!", "<~"],
         "description": "Colonize With block"
     },
     "Lambda": {
@@ -62,6 +62,11 @@
         "prefix": "maakarr",
         "body": ["maak ${1:variable} <-| $0!"],
         "description": "(Array) Variable Assignment"
+    },
+    "Ternary": {
+        "prefix": "ternary",
+        "body": ["${1:condition} => ${2:trueExpr} however ${3:falseExpr}$0"],
+        "description": "Ternary Statement"
     },
     "Length": {
         "prefix": "arrlength",

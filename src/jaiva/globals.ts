@@ -16,6 +16,7 @@ export function load(
     context: import("vscode").ExtensionContext,
 ): Library {
     if (file === "math/utils") file = "math-utils";
+    if (file === "time/zone") file = "time-zone";
     const f = path.join(context.extensionPath, "data", file + ".json");
 
     const content = fs.readFileSync(f, "utf-8");
