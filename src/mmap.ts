@@ -18,6 +18,9 @@
  * ```
  */
 export class MultiMap<K, V> {
+    forEach(arg0: (value: V[], key: K, map: Map<K, V[]>) => void) {
+        this.data.forEach(arg0);
+    }
     private data: Map<K, V[]> = new Map();
 
     /**
@@ -47,6 +50,10 @@ export class MultiMap<K, V> {
         this.data.set(key, values);
     }
 
+    public setKey(key: K, value: V[]): void {
+        this.data.set(key, value);
+    }
+
     /**
      * Replaces the first value associated with a given key that satisfies a predicate.
      * The replacement is done in-place within the value array. If no match is found,
@@ -65,11 +72,11 @@ export class MultiMap<K, V> {
     public replaceWhere(
         key: K,
         predicate: (value: V, index: number, array: V[]) => boolean,
-        newValue: V
+        newValue: V,
     ): void {
         const values = this.data.get(key) ?? [];
         const updatedValues = values.map((v, i, arr) =>
-            predicate(v, i, arr) ? newValue : v
+            predicate(v, i, arr) ? newValue : v,
         );
         this.data.set(key, updatedValues);
     }
@@ -195,7 +202,7 @@ export class MultiMap<K, V> {
      */
     static fromJson<K, V>(
         data: { [key: string]: string[] },
-        parseV: (hTokens: string[]) => V[]
+        parseV: (hTokens: string[]) => V[],
     ): MultiMap<K, V> {
         const m = new MultiMap<K, V>();
         for (const key in data) {

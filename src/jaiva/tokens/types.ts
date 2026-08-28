@@ -127,7 +127,7 @@ export type SpecialToken = {
  * A function argument token created by the extension
  */
 export type FunctionArgument = {
-    argumentType: "V~" | "F~";
+    argumentType: "V~" | "F~" | "<-";
 } & SpecialToken;
 
 /**
@@ -207,7 +207,14 @@ export function docsToMarkdown(token: TokenDefault): string {
         } else if (hasPropertyOf<SpecialToken>(token, "sortText")) {
             if (hasPropertyOf<FunctionArgument>(token, "argumentType")) {
                 str =
-                    "(parameter) " + token.argumentType + token.name + "(...)";
+                    "(parameter) " +
+                    (token.argumentType != "<-" ? token.argumentType : "") +
+                    token.name +
+                    (token.argumentType === "F~"
+                        ? "(...)"
+                        : " <-" +
+                          (token.argumentType === "<-" ? "|" : "") +
+                          " ...");
             } else {
                 str = "(array var) " + token.name;
             }

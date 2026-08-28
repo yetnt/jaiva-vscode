@@ -1,5 +1,5 @@
 {
-    "version": "5.0.3",
+    "version": "5.0.4",
     "tokens": [
         {
             "type": "TFunction",
@@ -183,7 +183,7 @@
                 { "tagType": "from", "version": "1.0.0-beta.0" }
             ],
             "lineNumber": -1,
-            "value": "5.0.2"
+            "value": "5.0.4"
         },
         {
             "type": "TArrayVar",
@@ -316,7 +316,7 @@
                 }
             ],
             "lineNumber": -1,
-            "value": ["jaiva/global", "-jog"]
+            "value": ["jaiva/globals", "-jog"]
         },
         {
             "type": "TFunction",
@@ -342,6 +342,46 @@
             "lineNumber": -1,
             "args": ["input"],
             "isArgOptional": [false],
+            "varArgs": false,
+            "body": null
+        },
+        {
+            "type": "TFunction",
+            "name": "F~typeOfNumber",
+            "exportSymbol": false,
+            "toolTip": [
+                {
+                    "tagType": "GENERIC",
+                    "description": "Returns the type of a given number input. which in Java terms is either an integer, double or long"
+                },
+                {
+                    "tagType": "returns",
+                    "description": "Returns the string form of the type, which could be \"integer\", \"double\", \"long\", or the primitive idk."
+                },
+                { "tagType": "from", "version": "5.0.4" },
+                {
+                    "tagType": "example",
+                    "codeblock": [
+                        "maak b <- 100!",
+                        "",
+                        "khuluma(typeOf(b))!                   @ \"integer\"",
+                        "khuluma(typeOf(0.34))!                @ \"double\"",
+                        "khuluma(typeOf(0.34d))!               @ \"double\"",
+                        "khuluma(typeOf())!                    @ idk",
+                        "khuluma(typeOf(82936741648236817L))!  @ \"long\""
+                    ]
+                },
+                {
+                    "tagType": "parameter",
+                    "description": "The input to check the type against",
+                    "var": "input",
+                    "type": "idk",
+                    "optional": true
+                }
+            ],
+            "lineNumber": -1,
+            "args": ["input"],
+            "isArgOptional": [true],
             "varArgs": false,
             "body": null
         },
@@ -526,7 +566,7 @@
                 },
                 {
                     "tagType": "returns",
-                    "description": "Returns the string form of the typ, which could be \"array\", \"string\", \"boolean\", \"number\", \"function\", or the primitive idk."
+                    "description": "Returns the string form of the typ, which could be \"array\", \"string\", \"boolean\", \"number\", \"function\", or the primitive idk.  If you require a more precise answer than number use typeOfNumber"
                 },
                 { "tagType": "from", "version": "3.0.0" },
                 {

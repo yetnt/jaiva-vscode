@@ -4,7 +4,7 @@ import * as wrapFr from "./vscodeWrapper";
 import { CommandRegistry } from "./commands";
 // import { MultiMap } from "./mmap";
 
-const VERSION = "5.0.3";
+const VERSION = "5.0.4";
 
 export function activate(context: vscode.ExtensionContext) {
     console.log("JAIVA VSCODE IS ACTIVE!!");
@@ -17,10 +17,15 @@ export function activate(context: vscode.ExtensionContext) {
     commandRegistry.subscribe(vscode, context, diagnostics);
 
     const values = new jaiva.SharedValues();
-    values.loadLibraries(VERSION, context);
     const cli = new jaiva.JaivaCLI();
 
     const handler = new wrapFr.AllHandler(VERSION, values, cli, diagnostics);
+    values.loadLibraries(vscode, VERSION, context);
 
     handler.begin(vscode, context);
+
+    if (vscode.window.activeTextEditor?.document) {
+        handler.docParse(vscode.window.activeTextEditor?.document);
+        handler.diagnostics.show(vscode.window.activeTextEditor?.document);
+    }
 }

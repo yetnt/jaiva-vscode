@@ -1,13 +1,14 @@
 import * as v from "vscode";
 import * as j from "./jaiva/jaiva";
 import { ImportedFrom, TokenDefault } from "./jaiva/tokens/types";
+import { MultiMap } from "./mmap";
 
 export class AllHandler {
     public shared: j.SharedValues;
     public cli: j.JaivaCLI;
     public completions: Completions = new Completions();
     private version: string;
-    private diagnostics: Diagnostics;
+    public diagnostics: Diagnostics;
     private identificationProvider: IdentificationProvider =
         new IdentificationProvider();
 
@@ -28,9 +29,18 @@ export class AllHandler {
     }
 
     public begin(vscode: typeof v, context: v.ExtensionContext) {
-        vscode.workspace.onDidOpenTextDocument((d) => this.docParse(d));
+        vscode.workspace.onDidOpenTextDocument((d) => {
+            this.docParse(d);
+            this.diagnostics.show(d);
+        });
         vscode.workspace.onDidChangeTextDocument((event) => {
-            this.docParse(event.document);
+            // this.docParse(event.document);
+            this.diagnostics.show(event.document);
+        });
+        vscode.workspace.onDidSaveTextDocument((event) => {
+            this.diagnostics.clear(event);
+            this.docParse(event);
+            this.diagnostics.show(event);
         });
         const handler = this;
         vscode.languages.registerCompletionItemProvider("jaiva", {
@@ -62,7 +72,7 @@ export class AllHandler {
         });
     }
 
-    private docParse(doc: v.TextDocument) {
+    public docParse(doc: v.TextDocument) {
         if (doc.languageId !== "jaiva") return;
 
         if (doc.isUntitled) {
@@ -74,7 +84,6 @@ export class AllHandler {
         }
 
         this.debounceTimer = setTimeout(() => {
-            this.diagnostics.clear(doc);
             void (async () => {
                 const out = await this.cli.call([doc.uri.fsPath]);
 
@@ -175,6 +184,7 @@ class Completions {
 
 export class Diagnostics {
     private diagnostics: v.DiagnosticCollection;
+    private list: MultiMap<v.TextDocument, v.Diagnostic> = new MultiMap();
 
     constructor(collection: v.DiagnosticCollection) {
         this.diagnostics = collection;
@@ -182,6 +192,34 @@ export class Diagnostics {
 
     public clear(document: v.TextDocument): void {
         this.diagnostics.set(document.uri, []);
+        this.list.setKey(document, []);
+    }
+
+    public show(document: v.TextDocument) {
+        this.diagnostics.clear();
+        this.list.forEach((k, v) => {
+            this.diagnostics.set(v.uri, k);
+        });
+    }
+
+    public newErr(
+        lineNumber: number,
+        document: v.TextDocument,
+        err: string,
+    ): v.Diagnostic {
+        const firstCharPos = new v.Position(lineNumber, 0);
+        const lastCharPos = new v.Position(
+            lineNumber,
+            document.lineAt(lineNumber).range.end.character,
+        );
+
+        let d = new v.Diagnostic(
+            new v.Range(firstCharPos, lastCharPos),
+            err,
+            v.DiagnosticSeverity.Error,
+        );
+        this.list.add(document, d);
+        return d;
     }
 
     public err(document: v.TextDocument, err: j.ExtensionError) {
@@ -197,13 +235,14 @@ export class Diagnostics {
             lineNumber,
             document.lineAt(lineNumber).range.end.character,
         );
-        this.diagnostics.set(document.uri, [
+        this.list.add(
+            document,
             new v.Diagnostic(
                 new v.Range(firstCharPos, lastCharPos),
                 err.err,
                 v.DiagnosticSeverity.Error,
             ),
-        ]);
+        );
     }
 }
 

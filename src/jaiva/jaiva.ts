@@ -38,6 +38,7 @@ export class SharedValues extends Base {
     }
 
     public loadLibraries(
+        vscode: typeof import("vscode"),
         vers: string,
         context: import("vscode").ExtensionContext,
     ): void {
@@ -58,14 +59,14 @@ export class SharedValues extends Base {
             console.log("Loaded " + lib);
 
             if (load.version !== vers) {
-                console.log(
+                const str =
                     "Expected " +
-                        lib +
-                        " to be of version " +
-                        vers +
-                        ". Instead got " +
-                        load.version,
-                );
+                    lib +
+                    " to be of version " +
+                    vers +
+                    ". Instead got " +
+                    load.version;
+                vscode.window.showInformationMessage(str + ".");
                 return;
             }
 
@@ -269,7 +270,11 @@ export class SharedValues extends Base {
                     lineNumber: scoped.lineNumber,
                     within: lineRange,
                     sortText: "0_",
-                    argumentType: isFunction ? "F~" : "V~",
+                    argumentType: isFunction
+                        ? "F~"
+                        : scoped.varArgs
+                          ? "<-"
+                          : "V~",
                     type: "TUnknownScalar",
                     toolTip:
                         str +
@@ -328,6 +333,20 @@ export class JaivaCLI extends Base {
 
         this.child.on("close", (code) => {
             console.log(`Jaiva exited with code ${code}`);
+            if (code != 0) {
+                vscode.window
+                    .showErrorMessage(
+                        "Jaiva crashed! Please reload your window",
+                        "Reload",
+                    )
+                    .then((sel) => {
+                        if ((sel = "Reload")) {
+                            vscode.commands.executeCommand(
+                                "workbench.action.reloadWindow",
+                            );
+                        }
+                    });
+            }
         });
     }
 

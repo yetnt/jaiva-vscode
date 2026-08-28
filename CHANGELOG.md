@@ -31,3 +31,8 @@ All notable changes to the "jaiva" extension will be documented in this file.
 - Fix multiple extension freezing problems (by having a single CLI isntance)
 - Fix stupid types in da typescript
 - Bump alot of versions in da package.json
+
+## 5.0.4
+
+- Add missing snippets
+- Fix (SOME) of errors

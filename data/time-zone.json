@@ -1,5 +1,5 @@
 {
-    "version": "5.0.3",
+    "version": "5.0.4",
     "tokens": [
         {
             "type": "TStringVar",
@@ -2301,7 +2301,7 @@
         },
         {
             "type": "TArrayVar",
-            "name": "tz_all",
+            "name": "tz_getAll",
             "exportSymbol": false,
             "toolTip": [
                 {
@@ -2315,7 +2315,7 @@
                         "tsea \"jaiva/timezone\"!",
                         "",
                         "@ Get all timezone constants",
-                        "maak list <- tz_all!",
+                        "maak list <- tz_getAll!",
                         "@ Print everything with Etc prefix",
                         "colonize item with list ->",
                         "    if (item ? \"Etc\") ->",

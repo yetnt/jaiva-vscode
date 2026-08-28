@@ -1,181 +1,189 @@
 {
-  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
-  "name": "Jaiva!",
-  "patterns": [
-    {
-      "include": "#keywords"
-    },
-    {
-      "include": "#imports"
-    },
-    {
-      "include": "#strings"
-    },
-    {
-      "include": "#variables"
-    },
-    {
-      "include": "#comments"
-    },
-    {
-      "include": "#comparisonOperators"
-    },
-    {
-      "include": "#functions"
-    },
-    {
-      "include": "#symbols"
-    },
-    {
-      "include": "#numbers"
-    },
-    {
-      "include": "#punctuation"
-    }
-  ],
-  "repository": {
-    "comments": {
-      "patterns": [
+    "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+    "name": "Jaiva!",
+    "patterns": [
         {
-          "match": "@.*",
-          "name": "comment.line.jaiva"
+            "include": "#keywords"
         },
         {
-          "begin": "{",
-          "end": "}",
-          "name": "comment.block.jaiva",
-          "patterns": [
-            {
-              "match": "(?<={)[\\s\\S]+(?=})",
-              "name": "comment.block.documentation.jaiva"
-            }
-          ]
+            "include": "#imports"
+        },
+        {
+            "include": "#strings"
+        },
+        {
+            "include": "#variables"
+        },
+        {
+            "include": "#comments"
+        },
+        {
+            "include": "#comparisonOperators"
+        },
+        {
+            "include": "#functions"
+        },
+        {
+            "include": "#symbols"
+        },
+        {
+            "include": "#numbers"
+        },
+        {
+            "include": "#punctuation"
         }
-      ]
-    },
-    "functions": {
-      "patterns": [
-        {
-          "match": "\\b([a-zA-Z_][a-zA-Z0-9_]*)\\b(?=\\()",
-          "name": "entity.name.function.jaiva"
+    ],
+    "repository": {
+        "comments": {
+            "patterns": [
+                {
+                    "match": "@.*",
+                    "name": "comment.line.jaiva"
+                },
+                {
+                    "begin": "{",
+                    "end": "}",
+                    "name": "comment.block.jaiva",
+                    "patterns": [
+                        {
+                            "match": "(?<={)[\\s\\S]+(?=})",
+                            "name": "comment.block.documentation.jaiva"
+                        }
+                    ]
+                }
+            ]
+        },
+        "functions": {
+            "patterns": [
+                {
+                    "match": "\\b([a-zA-Z_][a-zA-Z0-9_]*)\\b(?=\\()",
+                    "name": "entity.name.function.jaiva"
+                }
+            ]
+        },
+        "imports": {
+            "patterns": [
+                {
+                    "match": "(?<=tsea)\\s*\"[^\"]*\"",
+                    "name": "entity.name.type.jaiva"
+                }
+            ]
+        },
+        "keywords": {
+            "patterns": [
+                {
+                    "match": "\\b(however|tsea|maak|if|mara|zama zama|kwenza|cima|colonize|chaai|khutla|with|nikhil|idk)\\b",
+                    "name": "keyword.other"
+                },
+                {
+                    "match": "\\b(voetsek|nevermind)\\b",
+                    "name": "keyword.control.jaiva"
+                },
+                {
+                    "match": "\\btrue|yebo\\b",
+                    "name": "constant.language.jaiva"
+                },
+                {
+                    "match": "\\bfalse|aowa\\b",
+                    "name": "constant.language.jaiva"
+                },
+                {
+                    "match": "f~|F~|V~|:(?![::])",
+                    "name": "entity.name.type.jaiva"
+                }
+            ]
+        },
+        "numbers": {
+            "patterns": [
+                {
+                    "match": "\\b-?\\d+(\\.\\d+)?d\\b",
+                    "name": "constant.numeric.double.jaiva"
+                },
+                {
+                    "match": "\\b-?\\d+(\\.\\d+)?L\\b",
+                    "name": "constant.numeric.long.jaiva"
+                },
+                {
+                    "match": "\\b-?0x[0-9a-fA-F]+\\b",
+                    "name": "constant.numeric.hex.jaiva"
+                },
+                {
+                    "match": "\\b-?0b[01]+\\b",
+                    "name": "constant.numeric.binary.jaiva"
+                },
+                {
+                    "match": "\\b-?0c[0-9]+\\b",
+                    "name": "constant.numeric.octal.jaiva"
+                },
+                {
+                    "match": "\\b-?\\d+(\\.\\d+)?(e-?\\d+)?\\b",
+                    "name": "constant.numeric.jaiva"
+                }
+            ]
+        },
+        "punctuation": {
+            "patterns": [
+                {
+                    "match": "[()\\[\\],]",
+                    "name": "punctuation.jaiva"
+                },
+                {
+                    "match": "!(?=[ \\t]*\\r?[\\n@])",
+                    "name": "punctuation.jaiva"
+                },
+                {
+                    "match": "->|<~",
+                    "name": "punctuation.jaiva"
+                }
+            ]
+        },
+        "strings": {
+            "begin": "\"",
+            "end": "\"",
+            "name": "string.quoted.double.jaiva",
+            "patterns": [
+                {
+                    "match": "\\$.",
+                    "name": "constant.character.escape.jaiva"
+                }
+            ]
+        },
+        "symbols": {
+            "patterns": [
+                {
+                    "match": "\\||\\*|\\.",
+                    "name": "keyword.operator.jaiva"
+                },
+                {
+                    "match": "=|!=|<=|>=|(?<!-)>|<(?![~-])|<-|<==|<-|\\|",
+                    "name": "keyword.operator.jaiva"
+                },
+                {
+                    "match": "\\?",
+                    "name": "keyword.operator.end.jaiva"
+                },
+                {
+                    "match": ":::",
+                    "name": "keyword.operator.end.jaiva"
+                },
+                {
+                    "match": "(?<![fFV<])~",
+                    "name": "keyword.operator.end.jaiva"
+                }
+            ]
+        },
+        "variables": {
+            "patterns": [
+                {
+                    "match": "(?<!<~|!|\\n\\([a-zA-Z_][a-zA-Z0-9_]*\\))(?<=(\\s*|\\(|<-|^|\\s|\\+|\\[)\\s*)\\b(?!chaai\\b)[a-zA-Z_][a-zA-Z0-9_]*\\b(?=\\)|!|\\[|,|=|!=|<=|>=|<|\\]|>|\\s|$)\\b",
+                    "name": "variable.other.jaiva"
+                },
+                {
+                    "match": "\b(?<=kwenza.*[\\w_]*\\(.*)\\w*|(?<=,\\s*)\\w*(?=.*\\).*->)\b",
+                    "name": "variable.parameter"
+                }
+            ]
         }
-      ]
     },
-    "imports": {
-      "patterns": [
-        {
-          "match": "(?<=tsea)\\s*\"[^\"]*\"",
-          "name": "entity.name.type.jaiva"
-        }
-      ]
-    },
-    "keywords": {
-      "patterns": [
-        {
-          "match": "\\b(however|tsea|maak|if|mara|zama zama|kwenza|cima|colonize|chaai|khutla|with|nikhil|idk)\\b",
-          "name": "keyword.other"
-        },
-        {
-          "match": "\\b(voetsek|nevermind)\\b",
-          "name": "keyword.control.jaiva"
-        },
-        {
-          "match": "\\btrue|yebo\\b",
-          "name": "constant.language.jaiva"
-        },
-        {
-          "match": "\\bfalse|aowa\\b",
-          "name": "constant.language.jaiva"
-        },
-        {
-          "match": "f~|F~|V~|:(?![::])",
-          "name": "entity.name.type.jaiva"
-        }
-      ]
-    },
-    "numbers": {
-      "patterns": [
-        {
-          "match": "\\b-?0x[0-9a-fA-F]+\\b",
-          "name": "constant.numeric.hex.jaiva"
-        },
-        {
-          "match": "\\b-?0b[01]+\\b",
-          "name": "constant.numeric.binary.jaiva"
-        },
-        {
-          "match": "\\b-?0c[0-9]+\\b",
-          "name": "constant.numeric.octal.jaiva"
-        },
-        {
-          "match": "\\b-?\\d+(\\.\\d+)?(e-?\\d+)?\\b",
-          "name": "constant.numeric.jaiva"
-        }
-      ]
-    },
-    "punctuation": {
-      "patterns": [
-        {
-          "match": "[()\\[\\],]",
-          "name": "punctuation.jaiva"
-        },
-        {
-          "match": "!(?=[ \\t]*\\r?[\\n@])",
-          "name": "punctuation.jaiva"
-        },
-        {
-          "match": "->|<~",
-          "name": "punctuation.jaiva"
-        }
-      ]
-    },
-    "strings": {
-      "begin": "\"",
-      "end": "\"",
-      "name": "string.quoted.double.jaiva",
-      "patterns": [
-        {
-          "match": "\\$.",
-          "name": "constant.character.escape.jaiva"
-        }
-      ]
-    },
-    "symbols": {
-      "patterns": [
-        {
-          "match": "\\||\\*|\\.",
-          "name": "keyword.operator.jaiva"
-        },
-        {
-          "match": "=|!=|<=|>=|(?<!-)>|<(?![~-])|<-|<==|<-|\\|",
-          "name": "keyword.operator.jaiva"
-        },
-        {
-          "match": "\\?",
-          "name": "keyword.operator.end.jaiva"
-        },
-        {
-          "match": ":::",
-          "name": "keyword.operator.end.jaiva"
-        },
-        {
-          "match": "(?<![fFV<])~",
-          "name": "keyword.operator.end.jaiva"
-        }
-      ]
-    },
-    "variables": {
-      "patterns": [
-        {
-          "match": "(?<!<~|!|\\n\\([a-zA-Z_][a-zA-Z0-9_]*\\))(?<=(\\s*|\\(|<-|^|\\s|\\+|\\[)\\s*)\\b(?!chaai\\b)[a-zA-Z_][a-zA-Z0-9_]*\\b(?=\\)|!|\\[|,|=|!=|<=|>=|<|\\]|>|\\s|$)\\b",
-          "name": "variable.other.jaiva"
-        },
-        {
-          "match": "\b(?<=kwenza.*[\\w_]*\\(.*)\\w*|(?<=,\\s*)\\w*(?=.*\\).*->)\b",
-          "name": "variable.parameter"
-        }
-      ]
-    }
-  },
-  "scopeName": "source.jaiva"
+    "scopeName": "source.jaiva"
 }

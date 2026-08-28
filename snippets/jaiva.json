@@ -19,6 +19,11 @@
         "body": ["kwenza ${1:functionName}(${2:parameter}) ->", "\t$0!", "<~"],
         "description": "Function"
     },
+    "Zama Zama block": {
+        "prefix": "zama",
+        "body": ["zama zama ->", "\t$0!", "<~ chaai ->", "\t!", "<~"],
+        "description": "Zama Zama Block"
+    },
     "Nikhil Block": {
         "prefix": "nikhil",
         "body": ["nikhil (${1:condition}) ->", "\t$0!", "<~"],
@@ -53,6 +58,46 @@
         "body": ["tsea \"$0\"!"],
         "description": "Tsea From"
     },
+    "Import Arrays": {
+        "prefix": "tseaarrays",
+        "body": ["tsea \"jaiva/arrays\"!", "$0"],
+        "description": "Tsea Arrays"
+    },
+    "Import File": {
+        "prefix": "tseafile",
+        "body": ["tsea \"jaiva/file\"!", "$0"],
+        "description": "Tsea File"
+    },
+    "Import Debug": {
+        "prefix": "tseadebug",
+        "body": ["tsea \"jaiva/debug\"!", "$0"],
+        "description": "Tsea Debug"
+    },
+    "Import Math": {
+        "prefix": "tseamath",
+        "body": ["tsea \"jaiva/math\"!", "$0"],
+        "description": "Tsea Math"
+    },
+    "Import Math Utils": {
+        "prefix": "tseamathutils",
+        "body": ["tsea \"jaiva/math/utils\"!", "$0"],
+        "description": "Tsea Math Utilities"
+    },
+    "Import Types": {
+        "prefix": "tseatypes",
+        "body": ["tsea \"jaiva/types\"!", "$0"],
+        "description": "Tsea Types"
+    },
+    "Import Time": {
+        "prefix": "tseatime",
+        "body": ["tsea \"jaiva/time\"!", "$0"],
+        "description": "Tsea Time"
+    },
+    "Import Timezone": {
+        "prefix": "tseatimezone",
+        "body": ["tsea \"jaiva/time/zone\"!", "$0"],
+        "description": "Tsea Timezone"
+    },
     "Maak": {
         "prefix": "maak",
         "body": ["maak ${1:variable} <- $0!"],
@@ -67,6 +112,11 @@
         "prefix": "ternary",
         "body": ["${1:condition} => ${2:trueExpr} however ${3:falseExpr}$0"],
         "description": "Ternary Statement"
+    },
+    "Cima Statement": {
+        "prefix": "cima",
+        "body": ["cima <== $0!"],
+        "description": "Cima Statement"
     },
     "Length": {
         "prefix": "arrlength",
