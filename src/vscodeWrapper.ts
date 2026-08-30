@@ -1,6 +1,10 @@
 import * as v from "vscode";
 import * as j from "./jaiva/jaiva";
-import { ImportedFrom, TokenDefault } from "./jaiva/tokens/types";
+import {
+    hasPropertyOf,
+    ImportedFrom,
+    TokenDefault,
+} from "./jaiva/tokens/types";
 import { MultiMap } from "./mmap";
 
 export class AllHandler {
@@ -31,16 +35,13 @@ export class AllHandler {
     public begin(vscode: typeof v, context: v.ExtensionContext) {
         vscode.workspace.onDidOpenTextDocument((d) => {
             this.docParse(d);
-            this.diagnostics.show(d);
         });
         vscode.workspace.onDidChangeTextDocument((event) => {
             // this.docParse(event.document);
-            this.diagnostics.show(event.document);
+            this.diagnostics.clear(event.document);
         });
         vscode.workspace.onDidSaveTextDocument((event) => {
-            this.diagnostics.clear(event);
             this.docParse(event);
-            this.diagnostics.show(event);
         });
         const handler = this;
         vscode.languages.registerCompletionItemProvider("jaiva", {
@@ -83,11 +84,18 @@ export class AllHandler {
             clearTimeout(this.debounceTimer);
         }
 
+        const t = this;
         this.debounceTimer = setTimeout(() => {
             void (async () => {
-                const out = await this.cli.call([doc.uri.fsPath]);
+                const out = await t.cli.call([doc.uri.fsPath]);
 
-                this.shared.write(doc, out);
+                t.shared.write(doc, out);
+
+                const out2 = await t.cli.call([doc.uri.fsPath + "#INTERP"]);
+
+                t.shared.err(doc, out2);
+
+                t.diagnostics.show(doc);
             })();
         }, 1000); // 1 second
     }
@@ -123,6 +131,10 @@ class Completions {
                         !(
                             token.within[0] < lineNumber &&
                             token.within[1] > lineNumber
+                        ) &&
+                        !(
+                            token.within[0] === token.within[1] &&
+                            token.within[0] === token.lineNumber
                         )
                     )
                         return;
@@ -196,7 +208,6 @@ export class Diagnostics {
     }
 
     public show(document: v.TextDocument) {
-        this.diagnostics.clear();
         this.list.forEach((k, v) => {
             this.diagnostics.set(v.uri, k);
         });
@@ -222,12 +233,33 @@ export class Diagnostics {
         return d;
     }
 
-    public err(document: v.TextDocument, err: j.ExtensionError) {
+    public err(document: v.TextDocument, err: j.StreamerOutput) {
         let lineNumber: number = 0;
-        if (err.type === "JAIVA") {
-            const num = err.err.match(/(?<=\[line\s)\d*(?=\])/gm);
-            if (num) {
-                lineNumber = Number.parseInt(num[0]) - 1;
+
+        if (hasPropertyOf<j.InterpreterOutput>(err, "scope")) {
+            err.warnings.forEach((warning) => {
+                const line = warning.lineNumber - 1;
+                const firstCharPos = new v.Position(line, 0);
+                const lastCharPos = new v.Position(
+                    line,
+                    document.lineAt(line).range.end.character,
+                );
+
+                this.list.add(
+                    document,
+                    new v.Diagnostic(
+                        new v.Range(firstCharPos, lastCharPos),
+                        warning.message,
+                        v.DiagnosticSeverity.Warning,
+                    ),
+                );
+            });
+        }
+
+        if (err.type === "INTERP_SUCCESS") return;
+        if (err.type !== "ERR_STREAMER") {
+            if (err.lineNumber != -1) {
+                lineNumber = err.lineNumber - 1;
             }
         }
         const firstCharPos = new v.Position(lineNumber, 0);
@@ -239,7 +271,7 @@ export class Diagnostics {
             document,
             new v.Diagnostic(
                 new v.Range(firstCharPos, lastCharPos),
-                err.err,
+                err.message,
                 v.DiagnosticSeverity.Error,
             ),
         );

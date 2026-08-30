@@ -1,4 +1,4 @@
-import { spawn } from "child_process";
+import { spawn, spawnSync } from "child_process";
 
 import * as Tokens from "./tokens/types";
 import * as JaivaLibraries from "./globals";
@@ -6,13 +6,29 @@ import { MultiMap } from "../mmap";
 import * as Docs from "./tokens/jdoc";
 import { Diagnostics } from "../vscodeWrapper";
 import * as vscode from "vscode";
+import * as path from "path";
 
 export { Tokens, JaivaLibraries, Docs };
 
-export type ExtensionError = {
-    err: string;
-    type: "OH_FUCK" | "JAIVA";
+export type InterprterStr = "ERR_INTERP" | "ERR_INTERP_DIED" | "INTERP_SUCCESS";
+
+export type StreamerOutput = {
+    streamer: true;
+    message: string;
+    lineNumber: number;
+    type: "ERR_STREAMER" | "ERR_TOKENS" | InterprterStr;
 };
+
+export type Warning = {
+    message: string;
+    lineNumber: number;
+};
+
+export type InterpreterOutput = {
+    warnings: Warning[];
+    scope: string;
+    type: InterprterStr;
+} & StreamerOutput;
 
 class Base {
     private d: Diagnostics | null = null;
@@ -24,12 +40,20 @@ class Base {
     protected getDiagnostics(): Diagnostics | null {
         return this.d;
     }
+
+    public release(): void {}
+}
+
+export enum Context {
+    NORMAL,
+    IMPORT,
 }
 
 export class SharedValues extends Base {
     private tokenList: Tokens.TokenDefault[] = [];
     private readCopy: Tokens.TokenDefault[] = [];
     private libraryMap: Map<string, JaivaLibraries.Library> = new Map();
+    private externalFileCLI: JaivaCLI = new JaivaCLI();
     public definitionsMap: MultiMap<string, Tokens.TokenDefault> =
         new MultiMap();
 
@@ -74,11 +98,10 @@ export class SharedValues extends Base {
         });
     }
 
-    public write(doc: vscode.TextDocument, str: string): void {
-        let any;
+    public err(doc: vscode.TextDocument, str: string): void {
         try {
-            any = JSON.parse(str);
-            if (Tokens.hasPropertyOf<ExtensionError>(any, "err")) {
+            let any = JSON.parse(str);
+            if (Tokens.hasPropertyOf<StreamerOutput>(any, "streamer")) {
                 if (this.getDiagnostics()) {
                     this.getDiagnostics()?.err(doc, any);
                 }
@@ -88,27 +111,71 @@ export class SharedValues extends Base {
             console.log(error);
             return;
         }
-        if (!str.startsWith("[")) return;
+    }
 
-        const arr = any as any[];
-        this.tokenList = this.add(-1, arr);
-        this.tokenList.push(...this.loadLibraryAt(null, "globals", -1));
+    public write(doc: vscode.TextDocument, str: string): void {
+        const arr = this.parse(str, Context.NORMAL, doc);
+        if (arr == null) return;
+        this.tokenList = arr;
+        const globals = this.loadLibraryAt(null, "globals", -1, doc);
+        this.tokenList.push(...globals);
         this.readCopy = [...this.tokenList];
     }
 
+    public parse(str: string, context: Context, doc: vscode.TextDocument) {
+        let any;
+        try {
+            any = JSON.parse(str);
+            if (Tokens.hasPropertyOf<StreamerOutput>(any, "streamer")) {
+                // if (this.getDiagnostics()) {
+                //     this.getDiagnostics()?.err(doc, any);
+                // }
+                return null;
+            }
+        } catch (error) {
+            console.log(error);
+            return null;
+        }
+        if (!str.startsWith("[")) return null;
+
+        const arr = any as any[];
+        return this.add(-1, arr, context, doc);
+    }
+
+    private normalize(doc: vscode.TextDocument, str: string): string {
+        return path.resolve(path.dirname(doc.uri.fsPath), str);
+    }
     private loadLibraryAt(
         importTok: null | Tokens.ImportToken,
         name: string,
         range: Tokens.LineRange,
+        doc: vscode.TextDocument,
     ): Tokens.TokenDefault[] {
-        var tokens = this.libraryMap.get(name)?.tokens ?? [];
+        const fromLib = importTok?.isLib || importTok == null;
+        var tokens = fromLib
+            ? (this.libraryMap.get(name)?.tokens ?? [])
+            : (this.parse(
+                  this.externalFileCLI.callSync(
+                      this.normalize(doc, importTok?.filePath),
+                  ),
+                  Context.IMPORT,
+                  doc,
+              ) ?? []);
+        var newTokens: any[] = [];
         if (importTok !== null) {
             const str = "\n\n_Imported from " + importTok.fileName + "_";
             (tokens as Tokens.TokenDefault[]).forEach((t) => {
+                const n = t.name.startsWith("F~") ? t.name.slice(2) : t.name;
                 t = {
                     ...t,
                     importedFromLine: importTok.lineNumber,
                 } as Tokens.TokenDefault & Tokens.ImportedFrom;
+                if (importTok.symbols.length > 0) {
+                    if (!importTok.symbols.includes(n)) {
+                        t.within = [importTok.lineNumber, importTok.lineNumber];
+                    }
+                }
+                t.lineNumber = -1;
                 if (typeof t.toolTip === "string") {
                     if (!t.toolTip.includes(str)) t.toolTip += "\n" + str;
                 } else {
@@ -126,23 +193,49 @@ export class SharedValues extends Base {
                             (doc as Docs.GenericDoc).description += "\n" + str;
                     }
                 }
+
+                newTokens.push(t);
             });
         }
-        return this.add(range, tokens);
+        return this.add(
+            range,
+            newTokens,
+            fromLib ? Context.NORMAL : Context.IMPORT,
+            doc,
+        );
     }
 
     private add(
         parentRange: Tokens.LineRange,
         arr: any[],
+        context: Context = Context.NORMAL,
+        doc: vscode.TextDocument,
     ): Tokens.TokenDefault[] {
         const tokens: Tokens.TokenDefault[] = [];
-        for (const token of arr) {
+        for (let token of arr) {
             if (Tokens.hasPropertyOf<Tokens.TokenDefault>(token, "type")) {
                 const out = Tokens.toScopedToken(token);
                 if (out === null) {
                     // normal token. cast and add.
                     if (Tokens.isTheTokensWeNeed(token)) {
-                        token.within = parentRange;
+                        if (context === Context.IMPORT) {
+                            if (
+                                Tokens.hasPropertyOf<Tokens.SymbolToken>(
+                                    token,
+                                    "exportSymbol",
+                                )
+                            ) {
+                                if (!token.exportSymbol) continue;
+                            } else {
+                                continue;
+                            }
+                        }
+                        if (!("within" in token))
+                            token = {
+                                ...(token as Tokens.TokenDefault),
+                                within: parentRange,
+                            } as Tokens.TokenDefault;
+                        // else token.within = parentRange;
                         tokens.push(token);
 
                         if (
@@ -151,32 +244,51 @@ export class SharedValues extends Base {
                                 "isLib",
                             )
                         ) {
+                            const a = this.loadLibraryAt(
+                                token,
+                                token.fileName,
+                                parentRange,
+                                doc,
+                            );
                             // check if is a isLib is true
-                            if (token.isLib) {
-                                tokens.push(
-                                    ...this.loadLibraryAt(
-                                        token,
-                                        token.fileName,
-                                        parentRange,
-                                    ),
-                                );
-                            }
+                            // if (token.isLib) {
+                            tokens.push(...a);
+                            // } else {
+                            //     // if this runs, the lib basically exists.
+                            //     tokens.push;
+                            // }
                         }
                     }
                 } else {
                     const [scoped, otherTokens] = out;
+                    if (context === Context.IMPORT) {
+                        if (
+                            Tokens.hasPropertyOf<Tokens.TFunction>(
+                                token,
+                                "exportSymbol",
+                            )
+                        ) {
+                            if (!token.exportSymbol) continue;
+                        } else {
+                            continue;
+                        }
+                    }
                     scoped.within = parentRange;
                     tokens.push(scoped);
-                    const arr2 = this.add(
-                        [scoped.lineNumber, scoped.lineEnd],
-                        otherTokens,
-                    );
-                    tokens.push(...arr2);
-                    const other = this.others(scoped, [
-                        scoped.lineNumber,
-                        scoped.lineEnd,
-                    ]);
-                    tokens.push(...other);
+                    if (context !== Context.IMPORT) {
+                        const arr2 = this.add(
+                            [scoped.lineNumber, scoped.lineEnd],
+                            otherTokens,
+                            Context.NORMAL,
+                            doc,
+                        );
+                        tokens.push(...arr2);
+                        const other = this.others(scoped, [
+                            scoped.lineNumber,
+                            scoped.lineEnd,
+                        ]);
+                        tokens.push(...other);
+                    }
                 }
 
                 this.definitionsMap.add(
@@ -296,6 +408,10 @@ export class SharedValues extends Base {
         return this.readCopy;
     }
 
+    public release(): void {
+        this.externalFileCLI.release();
+    }
+
     public getLibrary(name: string): JaivaLibraries.Library | undefined {
         return this.libraryMap.get(name);
     }
@@ -348,6 +464,26 @@ export class JaivaCLI extends Base {
                     });
             }
         });
+    }
+
+    public release(): void {
+        if (this.child.killed) return;
+
+        this.child.stdin.end();
+        this.child.kill();
+    }
+
+    public callSync(path: string): string {
+        const result = spawnSync("jaiva", ["-js", "-e", path], {
+            shell: true,
+            encoding: "utf8",
+        });
+
+        if (result.error) {
+            throw result.error;
+        }
+
+        return result.stdout;
     }
 
     async call(args: string[]): Promise<string> {
