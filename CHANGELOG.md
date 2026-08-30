@@ -36,3 +36,14 @@ All notable changes to the "jaiva" extension will be documented in this file.
 
 - Add missing snippets
 - Fix (SOME) of errors
+
+## 5.1.0
+
+- Add 5.1.0 Jaiva Changes which include
+    - `#` and `;` as oeprators
+    - Updated libraries
+- Allow for tokens to be imported form different files and shown in autocmpelte and all the other stuff
+- Fully interpret all files now and show all interpreter errors and warnings.
+- Selective Imports now work
+- Proper scope handling
+- Fix some docs not having some stuff

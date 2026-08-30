@@ -1,11 +1,61 @@
 {
-    "version": "5.0.4",
+    "version": "5.1.0",
     "tokens": [
+        {
+            "type": "TFunction",
+            "name": "F~a_forEach",
+            "exportSymbol": true,
+            "lineNumber": 378,
+            "toolTip": [
+                {
+                    "tagType": "GENERIC",
+                    "description": " Applies the given function to each element in the array"
+                },
+                {
+                    "tagType": "parameter",
+                    "description": "The original array to go over.",
+                    "var": "arr",
+                    "type": "[]",
+                    "optional": false
+                },
+                {
+                    "tagType": "parameter",
+                    "description": "A function that takes one element and shouldn't return really.",
+                    "var": "function",
+                    "type": "F~any",
+                    "optional": false
+                },
+                {
+                    "tagType": "returns",
+                    "description": "idk"
+                },
+                {
+                    "tagType": "from",
+                    "version": "5.1.0"
+                },
+                {
+                    "tagType": "devnote",
+                    "description": "The function must take in 1 parameter (the element). Throws if the first argument is not an array or if the second argument is not a function."
+                },
+                {
+                    "tagType": "example",
+                    "codeblock": [
+                        "maak arr <-| 1, 2, 3, 4!",
+                        "maak square <- f~(num) : khuluma(num * num)! @ A lambda function to print the square a number",
+                        "a_forEach(arr, square)! @ Will print the squares."
+                    ]
+                }
+            ],
+            "args": ["arr", "F~function"],
+            "isArgOptional": [false, false],
+            "varArgs": false,
+            "body": null
+        },
         {
             "type": "TFunction",
             "name": "F~a_reverse",
             "exportSymbol": true,
-            "lineNumber": 258,
+            "lineNumber": 247,
             "toolTip": [
                 {
                     "tagType": "GENERIC",
@@ -26,7 +76,10 @@
                     "tagType": "devnote",
                     "description": "This uses a colonize loop to iterate through the array backwards and constructs a new array with the elements in reverse order. Throws if the input is not an array."
                 },
-                { "tagType": "from", "version": "3.0.0" },
+                {
+                    "tagType": "from",
+                    "version": "3.0.0"
+                },
                 {
                     "tagType": "example",
                     "codeblock": [
@@ -44,7 +97,7 @@
             "type": "TFunction",
             "name": "F~a_reduce",
             "exportSymbol": true,
-            "lineNumber": 286,
+            "lineNumber": 274,
             "toolTip": [
                 {
                     "tagType": "GENERIC",
@@ -79,7 +132,10 @@
                     "tagType": "devnote",
                     "description": "The reducer function must take in 2 parameters, the accumulator and the current element, and return the new value of the accumulator. If no initial value is provided, the first element of the array is used as the initial value and the reduction starts from the second element Throws if the first argument is not an array or if the second argument is not a function."
                 },
-                { "tagType": "from", "version": "3.0.0" },
+                {
+                    "tagType": "from",
+                    "version": "3.0.0"
+                },
                 {
                     "tagType": "example",
                     "codeblock": [
@@ -99,7 +155,7 @@
             "type": "TFunction",
             "name": "F~a_push",
             "exportSymbol": true,
-            "lineNumber": 60,
+            "lineNumber": 61,
             "toolTip": [
                 {
                     "tagType": "GENERIC",
@@ -123,7 +179,10 @@
                     "tagType": "returns",
                     "description": "A new array with the element appended at the end of the array."
                 },
-                { "tagType": "from", "version": "1.0.0-beta.3" },
+                {
+                    "tagType": "from",
+                    "version": "1.0.0-beta.3"
+                },
                 {
                     "tagType": "devnote",
                     "description": "Throws if the first argument is not an array."
@@ -145,7 +204,7 @@
             "type": "TFunction",
             "name": "F~a_unshift",
             "exportSymbol": true,
-            "lineNumber": 98,
+            "lineNumber": 97,
             "toolTip": [
                 {
                     "tagType": "GENERIC",
@@ -169,7 +228,10 @@
                     "tagType": "returns",
                     "description": "A new array with the element appended at the start of the array."
                 },
-                { "tagType": "from", "version": "1.0.0-beta.3" },
+                {
+                    "tagType": "from",
+                    "version": "1.0.0-beta.3"
+                },
                 {
                     "tagType": "devnote",
                     "description": "Throws if the first argument is not an array."
@@ -191,7 +253,7 @@
             "type": "TFunction",
             "name": "F~a_filter",
             "exportSymbol": true,
-            "lineNumber": 147,
+            "lineNumber": 144,
             "toolTip": [
                 {
                     "tagType": "GENERIC",
@@ -219,7 +281,10 @@
                     "tagType": "devnote",
                     "description": "The predicate function must take in 1 parameter, the element and return a boolean. Throws if the first argument is not an array or if the second argument is not a function."
                 },
-                { "tagType": "from", "version": "1.0.0-beta.3" },
+                {
+                    "tagType": "from",
+                    "version": "1.0.0-beta.3"
+                },
                 {
                     "tagType": "example",
                     "codeblock": [
@@ -238,7 +303,7 @@
             "type": "TFunction",
             "name": "F~a_delete",
             "exportSymbol": true,
-            "lineNumber": 205,
+            "lineNumber": 197,
             "toolTip": [
                 {
                     "tagType": "GENERIC",
@@ -266,7 +331,10 @@
                     "tagType": "devnote",
                     "description": "Throws if the first argument is not an array or if the index is out of bounds. Not to be confused with a_remove() which removes elements from the end of an array"
                 },
-                { "tagType": "from", "version": "3.0.0" },
+                {
+                    "tagType": "from",
+                    "version": "3.0.0"
+                },
                 {
                     "tagType": "example",
                     "codeblock": [
@@ -284,7 +352,7 @@
             "type": "TFunction",
             "name": "F~a_pushAll",
             "exportSymbol": true,
-            "lineNumber": 77,
+            "lineNumber": 76,
             "toolTip": [
                 {
                     "tagType": "GENERIC",
@@ -301,7 +369,10 @@
                     "tagType": "returns",
                     "description": "A new array with the elements appended at the end of the array."
                 },
-                { "tagType": "from", "version": "5.0.0" },
+                {
+                    "tagType": "from",
+                    "version": "5.0.0"
+                },
                 {
                     "tagType": "devnote",
                     "description": "Throws if the first argument is not an array."
@@ -323,7 +394,7 @@
             "type": "TFunction",
             "name": "F~a_replace",
             "exportSymbol": true,
-            "lineNumber": 173,
+            "lineNumber": 169,
             "toolTip": [
                 {
                     "tagType": "GENERIC",
@@ -358,7 +429,10 @@
                     "tagType": "devnote",
                     "description": "Throws if the first argument is not an array or if the index is out of bounds."
                 },
-                { "tagType": "from", "version": "3.0.0" },
+                {
+                    "tagType": "from",
+                    "version": "3.0.0"
+                },
                 {
                     "tagType": "example",
                     "codeblock": [
@@ -376,7 +450,7 @@
             "type": "TFunction",
             "name": "F~a_remove",
             "exportSymbol": true,
-            "lineNumber": 19,
+            "lineNumber": 22,
             "toolTip": [
                 {
                     "tagType": "GENERIC",
@@ -400,7 +474,10 @@
                     "tagType": "returns",
                     "description": "An array which contains the original array with n amount of elements removed from the end."
                 },
-                { "tagType": "from", "version": "1.0.0-beta.3" },
+                {
+                    "tagType": "from",
+                    "version": "1.0.0-beta.3"
+                },
                 {
                     "tagType": "devnote",
                     "description": "Throws if the first argument is not an array or if the second argument is not a non-negative number. Not to be confused with a_delete() which removes elements from a specific index in an array."
@@ -424,7 +501,7 @@
             "type": "TFunction",
             "name": "F~a_pop",
             "exportSymbol": true,
-            "lineNumber": 44,
+            "lineNumber": 45,
             "toolTip": [
                 {
                     "tagType": "GENERIC",
@@ -441,12 +518,18 @@
                     "tagType": "devnote",
                     "description": "This is just a wrapper for the _a_remove()_ function, it doesn't matter which one you use Throws if the argument is not an array."
                 },
-                { "tagType": "depends", "symbols": ["a_remove"] },
+                {
+                    "tagType": "depends",
+                    "symbols": ["a_remove"]
+                },
                 {
                     "tagType": "returns",
                     "description": "A new array without the last element of the original array."
                 },
-                { "tagType": "from", "version": "1.0.0-beta.3" },
+                {
+                    "tagType": "from",
+                    "version": "1.0.0-beta.3"
+                },
                 {
                     "tagType": "example",
                     "codeblock": [
@@ -462,9 +545,59 @@
         },
         {
             "type": "TFunction",
+            "name": "F~a_apply",
+            "exportSymbol": true,
+            "lineNumber": 411,
+            "toolTip": [
+                {
+                    "tagType": "GENERIC",
+                    "description": " Applies the supplied function(s) to a given input array. In this case, the first element is the input array  and every other subsequent element is expected to be a function reference. If the supplied function returns  an array then the a_apply function will relace the original with that returned array, otherwise it gets  treated as side-effects."
+                },
+                {
+                    "tagType": "parameter",
+                    "description": "Var args parameter. Input any amount of parameters, however the first parameter must be an array and everything else a function.",
+                    "var": "params",
+                    "type": "[]",
+                    "optional": false
+                },
+                {
+                    "tagType": "returns",
+                    "description": "The transformed array, or the original array if no functions were given or no functions returned any arrays"
+                },
+                {
+                    "tagType": "from",
+                    "version": "5.1.0"
+                },
+                {
+                    "tagType": "example",
+                    "codeblock": [
+                        "maak arr <-| 1, 2, 3, 4!",
+                        "@",
+                        "a_apply(arr)!",
+                        "@ Returns [1, 2, 3, 4]",
+                        "a_apply(arr, f~(a) : a_map(a, f~(num) : num * 3))",
+                        "@ Returns [3, 6, 9, 12]",
+                        "a_apply(arr, a_reverse, f~(a) : a_map(a, f~(num) : num * 3))",
+                        "@ Returns [12, 9, 6, 3]",
+                        "a_apply(arr, khuluma)",
+                        "@ Returns [1, 2, 3, 4] (khuluma returns idk)"
+                    ]
+                },
+                {
+                    "tagType": "devnote",
+                    "description": "Just like normal function, it can take a function reference or lambda, which is itself technically a function reference"
+                }
+            ],
+            "args": ["params"],
+            "isArgOptional": [true],
+            "varArgs": true,
+            "body": null
+        },
+        {
+            "type": "TFunction",
             "name": "F~a_from",
             "exportSymbol": true,
-            "lineNumber": 338,
+            "lineNumber": 325,
             "toolTip": [
                 {
                     "tagType": "GENERIC",
@@ -488,10 +621,13 @@
                     "tagType": "returns",
                     "description": "An array created from the input string, split by the specified delimiter or index."
                 },
-                { "tagType": "from", "version": "5.0.0" },
+                {
+                    "tagType": "from",
+                    "version": "5.0.0"
+                },
                 {
                     "tagType": "devnote",
-                    "description": "Throws if the input is not a string. Also, this function imports jaiva/types for type conversions. A perfomance hit may be observed the first time this function is called."
+                    "description": "Throws if the input is not a string. Also, this function imports jaiva/types for type conversions. A performance hit may be observed the first time this function is called."
                 },
                 {
                     "tagType": "example",
@@ -511,7 +647,7 @@
             "type": "TFunction",
             "name": "F~a_shift",
             "exportSymbol": true,
-            "lineNumber": 119,
+            "lineNumber": 117,
             "toolTip": [
                 {
                     "tagType": "GENERIC",
@@ -539,7 +675,10 @@
                     "tagType": "devnote",
                     "description": "This uses a colonize loop to iterate through the array and skip the first n elements. It may not be the most efficient way to do this, but it works. Throws if the first argument is not an array or if the second argument is not a non-negative number."
                 },
-                { "tagType": "from", "version": "1.0.0-beta.3" },
+                {
+                    "tagType": "from",
+                    "version": "1.0.0-beta.3"
+                },
                 {
                     "tagType": "example",
                     "codeblock": [
@@ -559,7 +698,7 @@
             "type": "TFunction",
             "name": "F~a_indexOf",
             "exportSymbol": true,
-            "lineNumber": 237,
+            "lineNumber": 226,
             "toolTip": [
                 {
                     "tagType": "GENERIC",
@@ -587,7 +726,10 @@
                     "tagType": "devnote",
                     "description": "This uses the search first approach, it may not be the most efficient way to do this, but it works. Throws if the input is not an array."
                 },
-                { "tagType": "from", "version": "3.0.0" },
+                {
+                    "tagType": "from",
+                    "version": "3.0.0"
+                },
                 {
                     "tagType": "example",
                     "codeblock": [
@@ -607,7 +749,7 @@
             "type": "TFunction",
             "name": "F~a_map",
             "exportSymbol": true,
-            "lineNumber": 314,
+            "lineNumber": 302,
             "toolTip": [
                 {
                     "tagType": "GENERIC",
@@ -631,7 +773,10 @@
                     "tagType": "returns",
                     "description": "A new array populated with the results of calling the mapperFunction on every element."
                 },
-                { "tagType": "from", "version": "4.1.1" },
+                {
+                    "tagType": "from",
+                    "version": "4.1.1"
+                },
                 {
                     "tagType": "devnote",
                     "description": "The mapperFunction must take in 1 parameter (the element). Throws if the first argument is not an array or if the second argument is not a function."

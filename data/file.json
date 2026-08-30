@@ -1,5 +1,5 @@
 {
-    "version": "5.0.4",
+    "version": "5.1.0",
     "tokens": [
         {
             "type": "TFunction",
@@ -25,7 +25,10 @@
                     "tagType": "devnote",
                     "description": "Unlike other functions, this one may require a bit of functional thinking. It returns a function that you can call to get specific permissions or all permissions at once."
                 },
-                { "tagType": "from", "version": "5.0.0" },
+                {
+                    "tagType": "from",
+                    "version": "5.0.0"
+                },
                 {
                     "tagType": "example",
                     "codeblock": [
@@ -64,7 +67,10 @@
                     "tagType": "returns",
                     "description": "The directory path of the file as a string."
                 },
-                { "tagType": "from", "version": "5.0.0" },
+                {
+                    "tagType": "from",
+                    "version": "5.0.0"
+                },
                 {
                     "tagType": "example",
                     "codeblock": [
@@ -91,7 +97,10 @@
                     "tagType": "deprecated",
                     "description": "As of (one of the versions), the jaiva-cli sh and windows command no longer exist. (This was only used to locate where the /lib/ folder was, however now the lib folder lives within jaiva.jar itself, deprecating the need for locating jaiva.jar)"
                 },
-                { "tagType": "from", "version": "1.0.0" },
+                {
+                    "tagType": "from",
+                    "version": "1.0.0"
+                },
                 {
                     "tagType": "example",
                     "codeblock": [
@@ -116,7 +125,10 @@
                     "tagType": "devnote",
                     "description": "If you call this within the REPL, or somehow the filePath is null, it holds \"REPL\""
                 },
-                { "tagType": "from", "version": "1.0.0" },
+                {
+                    "tagType": "from",
+                    "version": "1.0.0"
+                },
                 {
                     "tagType": "example",
                     "codeblock": [
@@ -146,7 +158,10 @@
                     "tagType": "devnote",
                     "description": "Once again, if we are inside the REPL, we just return static content. (Does not represent the REPL)"
                 },
-                { "tagType": "from", "version": "1.0.1" },
+                {
+                    "tagType": "from",
+                    "version": "1.0.1"
+                },
                 {
                     "tagType": "example",
                     "codeblock": [
@@ -180,7 +195,10 @@
                     "tagType": "returns",
                     "description": "The content of the file as an array of strings."
                 },
-                { "tagType": "from", "version": "5.0.0" },
+                {
+                    "tagType": "from",
+                    "version": "5.0.0"
+                },
                 {
                     "tagType": "example",
                     "codeblock": [
@@ -222,7 +240,10 @@
                         "khuluma(\"File directory: \" + file[1])!"
                     ]
                 },
-                { "tagType": "from", "version": "1.0.1" }
+                {
+                    "tagType": "from",
+                    "version": "1.0.1"
+                }
             ],
             "lineNumber": -1,
             "args": ["path"],
@@ -289,7 +310,10 @@
                         "<~"
                     ]
                 },
-                { "tagType": "from", "version": "2.0.1" }
+                {
+                    "tagType": "from",
+                    "version": "2.0.1"
+                }
             ],
             "lineNumber": -1,
             "args": ["path", "content", "canRead", "canWrite", "canExecute"],
@@ -317,7 +341,10 @@
                     "tagType": "returns",
                     "description": "The name of the file as a string."
                 },
-                { "tagType": "from", "version": "5.0.0" },
+                {
+                    "tagType": "from",
+                    "version": "5.0.0"
+                },
                 {
                     "tagType": "example",
                     "codeblock": [
@@ -344,7 +371,10 @@
                     "tagType": "devnote",
                     "description": "If you call this within the REPL, or somehow the filePath is null, it holds \"REPL\""
                 },
-                { "tagType": "from", "version": "1.0.0" },
+                {
+                    "tagType": "from",
+                    "version": "1.0.0"
+                },
                 {
                     "tagType": "example",
                     "codeblock": [
@@ -353,7 +383,7 @@
                 }
             ],
             "lineNumber": -1,
-            "value": "C:\\Windows\\System32\\jaiva"
+            "value": "C:\\Users\\ACER\\Documents\\code\\jaiva-vscode\\data\\jaiva"
         }
     ]
 }

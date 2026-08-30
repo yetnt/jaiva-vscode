@@ -1,5 +1,5 @@
 {
-    "version": "5.0.4",
+    "version": "5.1.0",
     "tokens": [
         {
             "type": "TFunction",
@@ -28,7 +28,10 @@
                         "khuluma(m_lcm(7, 3, 14))! @ Outputs: 42"
                     ]
                 },
-                { "tagType": "from", "version": "5.0.0" }
+                {
+                    "tagType": "from",
+                    "version": "5.0.0"
+                }
             ],
             "lineNumber": -1,
             "args": ["nums"],
@@ -63,7 +66,10 @@
                         "khuluma(m_gcd(54, 24, 36))! @ Outputs: 6"
                     ]
                 },
-                { "tagType": "from", "version": "5.0.0" }
+                {
+                    "tagType": "from",
+                    "version": "5.0.0"
+                }
             ],
             "lineNumber": -1,
             "args": ["nums"],

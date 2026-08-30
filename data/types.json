@@ -1,5 +1,5 @@
 {
-    "version": "5.0.4",
+    "version": "5.1.0",
     "tokens": [
         {
             "type": "TFunction",
@@ -41,7 +41,10 @@
                         "khuluma(t_num(\"0x1A\"))! @ prints 26"
                     ]
                 },
-                { "tagType": "from", "version": "2.0.0-beta.3" }
+                {
+                    "tagType": "from",
+                    "version": "2.0.0-beta.3"
+                }
             ],
             "lineNumber": -1,
             "args": ["string", "radix"],
@@ -89,7 +92,10 @@
                         "khuluma(t_str(10, 2))! @ prints \"0b1010\""
                     ]
                 },
-                { "tagType": "from", "version": "2.0.0-beta.3" }
+                {
+                    "tagType": "from",
+                    "version": "2.0.0-beta.3"
+                }
             ],
             "lineNumber": -1,
             "args": ["input", "radix"],

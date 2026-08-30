@@ -1,3 +1,6 @@
+# converter
+/data/*.js
+
 # Release vers
 /jaiva-cli
 /src/test/java/com/jaiva/playground.java

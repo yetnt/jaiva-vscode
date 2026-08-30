@@ -1,5 +1,5 @@
 {
-    "version": "5.0.4",
+    "version": "5.1.0",
     "tokens": [
         {
             "type": "TFunction",
@@ -18,7 +18,10 @@
                     "tagType": "devnote",
                     "description": "If you aren't familiar with Java, the language Jaiva is developed in. This will essentially forcefully stop the execution of the interpreter, with the intent for said error to be caught and dealt with by another Java class. This serves 0 purpose if  you're just running a Jaiva file."
                 },
-                { "tagType": "from", "version": "1.0.2" },
+                {
+                    "tagType": "from",
+                    "version": "1.0.2"
+                },
                 {
                     "tagType": "parameter",
                     "description": "The array of values to pass to the exception",
@@ -42,7 +45,10 @@
                     "tagType": "GENERIC",
                     "description": "Returns the current context's vfs."
                 },
-                { "tagType": "from", "version": "4.1.0" },
+                {
+                    "tagType": "from",
+                    "version": "4.1.0"
+                },
                 {
                     "tagType": "returns",
                     "description": "A 2d array, first array containing the keys, second array the values."
@@ -67,8 +73,14 @@
                     "tagType": "GENERIC",
                     "description": "Links the MapValue instance of 'a' into 'b' such that they hold the same value and if one is edited the other will also have that edit."
                 },
-                { "tagType": "from", "version": "5.0.4" },
-                { "tagType": "returns", "description": "idk" },
+                {
+                    "tagType": "from",
+                    "version": "5.0.4"
+                },
+                {
+                    "tagType": "returns",
+                    "description": "idk"
+                },
                 {
                     "tagType": "devnote",
                     "description": "A usual (b <- a) syntax would suffice if you'd like to copy the value of a into b.\nHowever when a is changed, b will stay the value you set earlier. This function fixes that where it will\nlink the exact MapValue from a into b, discarding b's old MapValue. such that editing any one of the symbols\nvia the reassignment syntax will update the linked variable.\n\nIn the case that the \"b\" parameter does not actually exist in the symbol table, d_link will try to make it, itself.\n"
@@ -118,12 +130,22 @@
             "name": "F~d_getScope",
             "exportSymbol": false,
             "toolTip": [
-                { "tagType": "from", "version": "5.0.4" },
+                {
+                    "tagType": "from",
+                    "version": "5.0.4"
+                },
                 {
                     "tagType": "GENERIC",
                     "description": "gets the scope. wahtd you expect"
                 },
-                { "tagType": "returns", "description": "the scope string" }
+                {
+                    "tagType": "returns",
+                    "description": "the scope string"
+                },
+                {
+                    "tagType": "devnote",
+                    "description": "This is the exact same scope string that an error outputs"
+                }
             ],
             "lineNumber": -1,
             "args": [],

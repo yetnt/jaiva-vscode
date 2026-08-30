@@ -1,5 +1,5 @@
 {
-    "version": "5.0.4",
+    "version": "5.1.0",
     "tokens": [
         {
             "type": "TFunction",
@@ -29,7 +29,10 @@
                         "khuluma(deg) @ Output: 90.0002104591497"
                     ]
                 },
-                { "tagType": "from", "version": "1.0.2" }
+                {
+                    "tagType": "from",
+                    "version": "1.0.2"
+                }
             ],
             "lineNumber": -1,
             "args": ["radians"],
@@ -57,7 +60,10 @@
                     "tagType": "returns",
                     "description": "The arcsine of the given value in radians."
                 },
-                { "tagType": "from", "version": "1.0.2" }
+                {
+                    "tagType": "from",
+                    "version": "1.0.2"
+                }
             ],
             "lineNumber": -1,
             "args": ["value"],
@@ -81,14 +87,20 @@
                     "type": "number",
                     "optional": false
                 },
-                { "tagType": "returns", "description": "An integer value" },
+                {
+                    "tagType": "returns",
+                    "description": "An integer value"
+                },
                 {
                     "tagType": "example",
                     "codeblock": [
                         "khuluma(\"Rounded value of 4.6 is: \" + m_round(4.6))!"
                     ]
                 },
-                { "tagType": "from", "version": "1.0.0" }
+                {
+                    "tagType": "from",
+                    "version": "1.0.0"
+                }
             ],
             "lineNumber": -1,
             "args": ["value"],
@@ -122,7 +134,10 @@
                         "khuluma(\"The square root of 16 is: \" + m_sqrt(16))!"
                     ]
                 },
-                { "tagType": "from", "version": "1.0.2" }
+                {
+                    "tagType": "from",
+                    "version": "1.0.2"
+                }
             ],
             "lineNumber": -1,
             "args": ["value"],
@@ -150,7 +165,10 @@
                     "tagType": "returns",
                     "description": "The tangent of the given value in radians."
                 },
-                { "tagType": "from", "version": "1.0.2" }
+                {
+                    "tagType": "from",
+                    "version": "1.0.2"
+                }
             ],
             "lineNumber": -1,
             "args": ["value"],
@@ -178,7 +196,10 @@
                     "tagType": "returns",
                     "description": "The largest integer less than or equal to the given value."
                 },
-                { "tagType": "from", "version": "1.0.2" }
+                {
+                    "tagType": "from",
+                    "version": "1.0.2"
+                }
             ],
             "lineNumber": -1,
             "args": ["value"],
@@ -206,7 +227,10 @@
                     "tagType": "returns",
                     "description": "The sine of the given value in radians."
                 },
-                { "tagType": "from", "version": "1.0.2" }
+                {
+                    "tagType": "from",
+                    "version": "1.0.2"
+                }
             ],
             "lineNumber": -1,
             "args": ["value"],
@@ -230,14 +254,20 @@
                     "type": "number",
                     "optional": false
                 },
-                { "tagType": "returns", "description": "A positive value." },
+                {
+                    "tagType": "returns",
+                    "description": "A positive value."
+                },
                 {
                     "tagType": "example",
                     "codeblock": [
                         "khuluma(\"The absolute value of -5 is: \" + m_abs(-5))!"
                     ]
                 },
-                { "tagType": "from", "version": "1.0.2" }
+                {
+                    "tagType": "from",
+                    "version": "1.0.2"
+                }
             ],
             "lineNumber": -1,
             "args": ["value"],
@@ -265,7 +295,10 @@
                     "tagType": "returns",
                     "description": "The arccosine of the given value in radians."
                 },
-                { "tagType": "from", "version": "1.0.2" }
+                {
+                    "tagType": "from",
+                    "version": "1.0.2"
+                }
             ],
             "lineNumber": -1,
             "args": ["value"],
@@ -301,7 +334,10 @@
                         "khuluma(rad) @ Output: 1.5707963267948966"
                     ]
                 },
-                { "tagType": "from", "version": "1.0.2" }
+                {
+                    "tagType": "from",
+                    "version": "1.0.2"
+                }
             ],
             "lineNumber": -1,
             "args": ["degrees"],
@@ -350,7 +386,10 @@
                         "khuluma(\"Long side of the golden rectangle: \" + longSide)! @ approximately 16.18033988749895"
                     ]
                 },
-                { "tagType": "devnote", "description": "No note here." }
+                {
+                    "tagType": "devnote",
+                    "description": "No note here."
+                }
             ],
             "lineNumber": -1,
             "value": 1.618033988749895
@@ -382,7 +421,10 @@
                     "tagType": "devnote",
                     "description": "Unlike other functions, if you provide no arguments, this function returns a double between 0 and 1. If you provide only one argument, it is treated as the upper bound, with the lower bound being 0."
                 },
-                { "tagType": "returns", "description": "A random number." },
+                {
+                    "tagType": "returns",
+                    "description": "A random number."
+                },
                 {
                     "tagType": "example",
                     "codeblock": [
@@ -391,7 +433,10 @@
                         "khuluma(\"Random number between 0 and 1: \" + m_random())!"
                     ]
                 },
-                { "tagType": "from", "version": "1.0.0" }
+                {
+                    "tagType": "from",
+                    "version": "1.0.0"
+                }
             ],
             "lineNumber": -1,
             "args": ["a", "b"],
@@ -436,7 +481,10 @@
                     "tagType": "returns",
                     "description": "The cosine of the given value in radians."
                 },
-                { "tagType": "from", "version": "1.0.2" }
+                {
+                    "tagType": "from",
+                    "version": "1.0.2"
+                }
             ],
             "lineNumber": -1,
             "args": ["value"],
@@ -490,7 +538,10 @@
                     "tagType": "returns",
                     "description": "The arctangent of the given value in radians."
                 },
-                { "tagType": "from", "version": "1.0.2" }
+                {
+                    "tagType": "from",
+                    "version": "1.0.2"
+                }
             ],
             "lineNumber": -1,
             "args": ["value"],
@@ -518,7 +569,10 @@
                     "tagType": "returns",
                     "description": "The smallest integer greater than or equal to the given value."
                 },
-                { "tagType": "from", "version": "1.0.2" }
+                {
+                    "tagType": "from",
+                    "version": "1.0.2"
+                }
             ],
             "lineNumber": -1,
             "args": ["value"],
@@ -560,7 +614,10 @@
                         "khuluma(\"Log base 2 of 1024 is: \" + m_log(1024, 2))!"
                     ]
                 },
-                { "tagType": "from", "version": "5.0.0" }
+                {
+                    "tagType": "from",
+                    "version": "5.0.0"
+                }
             ],
             "lineNumber": -1,
             "args": ["value", "base"],

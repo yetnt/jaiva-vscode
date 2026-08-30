@@ -1,5 +1,5 @@
 {
-    "version": "5.0.4",
+    "version": "5.1.0",
     "tokens": [
         {
             "type": "TFunction",
@@ -48,7 +48,10 @@
                         "khuluma(ms)! @ Outputs the milliseconds since epoch for the given date in the specified timezone."
                     ]
                 },
-                { "tagType": "from", "version": "5.0.0" }
+                {
+                    "tagType": "from",
+                    "version": "5.0.0"
+                }
             ],
             "lineNumber": -1,
             "args": ["dateString", "format", "timezone"],
@@ -69,7 +72,10 @@
                     "tagType": "returns",
                     "description": "A number representing the current time in milliseconds."
                 },
-                { "tagType": "from", "version": "5.0.0" }
+                {
+                    "tagType": "from",
+                    "version": "5.0.0"
+                }
             ],
             "lineNumber": -1,
             "args": [],
@@ -97,7 +103,10 @@
                     "tagType": "returns",
                     "description": "A number representing the converted seconds."
                 },
-                { "tagType": "from", "version": "5.0.0" }
+                {
+                    "tagType": "from",
+                    "version": "5.0.0"
+                }
             ],
             "lineNumber": -1,
             "args": ["milliseconds"],

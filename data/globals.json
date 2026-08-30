@@ -1,5 +1,5 @@
 {
-    "version": "5.0.4",
+    "version": "5.1.0",
     "tokens": [
         {
             "type": "TFunction",
@@ -24,8 +24,14 @@
                     "type": "boolean",
                     "optional": true
                 },
-                { "tagType": "returns", "description": "idk" },
-                { "tagType": "from", "version": "1.0.0-beta.2" },
+                {
+                    "tagType": "returns",
+                    "description": "idk"
+                },
+                {
+                    "tagType": "from",
+                    "version": "1.0.0-beta.2"
+                },
                 {
                     "tagType": "devnote",
                     "description": "For the nerds. This is just System.out.println as default, then if removeNewLn is true, System.out.print. Lol"
@@ -52,13 +58,22 @@
             "name": "F~clear",
             "exportSymbol": false,
             "toolTip": [
-                { "tagType": "GENERIC", "description": "Clears the console." },
-                { "tagType": "returns", "description": "idk" },
+                {
+                    "tagType": "GENERIC",
+                    "description": "Clears the console."
+                },
+                {
+                    "tagType": "returns",
+                    "description": "idk"
+                },
                 {
                     "tagType": "devnote",
                     "description": "The effectiveness of this function depends on the terminal's support for ANSI escape codes."
                 },
-                { "tagType": "from", "version": "1.0.0" },
+                {
+                    "tagType": "from",
+                    "version": "1.0.0"
+                },
                 {
                     "tagType": "example",
                     "codeblock": ["clear()! @ Clears the console output."]
@@ -90,7 +105,10 @@
                     "tagType": "returns",
                     "description": "The .toString() class representation of the given variable's token"
                 },
-                { "tagType": "from", "version": "1.0.0-beta.0" },
+                {
+                    "tagType": "from",
+                    "version": "1.0.0-beta.0"
+                },
                 {
                     "tagType": "example",
                     "codeblock": [
@@ -123,7 +141,10 @@
                     "tagType": "devnote",
                     "description": "GithubBlockQuote: This will pause all execution until input is given."
                 },
-                { "tagType": "from", "version": "1.0.0-beta.3" },
+                {
+                    "tagType": "from",
+                    "version": "1.0.0-beta.3"
+                },
                 {
                     "tagType": "example",
                     "codeblock": [
@@ -152,7 +173,10 @@
                     "tagType": "returns",
                     "description": "An array of strings, representing the sanitized command-line arguments."
                 },
-                { "tagType": "from", "version": "1.0.2" },
+                {
+                    "tagType": "from",
+                    "version": "1.0.2"
+                },
                 {
                     "tagType": "example",
                     "codeblock": [
@@ -180,17 +204,23 @@
                         "khuluma(version)! @ Prints 5.0.0 (at the time of writing)"
                     ]
                 },
-                { "tagType": "from", "version": "1.0.0-beta.0" }
+                {
+                    "tagType": "from",
+                    "version": "1.0.0-beta.0"
+                }
             ],
             "lineNumber": -1,
-            "value": "5.0.4"
+            "value": "5.1.0"
         },
         {
             "type": "TArrayVar",
             "name": "reservedKeywords",
             "exportSymbol": false,
             "toolTip": [
-                { "tagType": "from", "version": "1.0.0-beta.0" },
+                {
+                    "tagType": "from",
+                    "version": "1.0.0-beta.0"
+                },
                 {
                     "tagType": "example",
                     "codeblock": [
@@ -220,7 +250,7 @@
                 "nevermind",
                 "idk",
                 "tsea",
-                "tšea",
+                "t�ea",
                 "with",
                 "however",
                 "true",
@@ -247,7 +277,10 @@
                     "tagType": "devnote",
                     "description": "(Keep in mind this function still has to take your value and turn it into a Java primitive and other things, so the delay might not be exact. If you're looking for accuracy maybe remove x amount of ms till it's accurate.)"
                 },
-                { "tagType": "from", "version": "1.0.0" },
+                {
+                    "tagType": "from",
+                    "version": "1.0.0"
+                },
                 {
                     "tagType": "example",
                     "codeblock": [
@@ -272,8 +305,14 @@
                     "tagType": "GENERIC",
                     "description": "Returns the caller value provided to this file if this file was run by another java program."
                 },
-                { "tagType": "returns", "description": "The caller value" },
-                { "tagType": "from", "version": "5.0.2" },
+                {
+                    "tagType": "returns",
+                    "description": "The caller value"
+                },
+                {
+                    "tagType": "from",
+                    "version": "5.0.2"
+                },
                 {
                     "tagType": "example",
                     "codeblock": [
@@ -302,7 +341,10 @@
                     "tagType": "returns",
                     "description": "An array of strings, where each string is a command-line argument."
                 },
-                { "tagType": "from", "version": "1.0.2" },
+                {
+                    "tagType": "from",
+                    "version": "1.0.2"
+                },
                 {
                     "tagType": "devnote",
                     "description": "This is the raw arguments given from Main.args[], including Jaiva-specific arguments."
@@ -358,7 +400,10 @@
                     "tagType": "returns",
                     "description": "Returns the string form of the type, which could be \"integer\", \"double\", \"long\", or the primitive idk."
                 },
-                { "tagType": "from", "version": "5.0.4" },
+                {
+                    "tagType": "from",
+                    "version": "5.0.4"
+                },
                 {
                     "tagType": "example",
                     "codeblock": [
@@ -405,7 +450,10 @@
                     "tagType": "devnote",
                     "description": "If there are any type mismatches in array1, it will be ignored and the same check is done to array2 and so on. Therefore this function will **always** return an array, whether or not it was successful."
                 },
-                { "tagType": "from", "version": "1.0.0-beta.2" },
+                {
+                    "tagType": "from",
+                    "version": "1.0.0-beta.2"
+                },
                 {
                     "tagType": "example",
                     "codeblock": [
@@ -442,7 +490,10 @@
                     "tagType": "returns",
                     "description": "The input given, as an array"
                 },
-                { "tagType": "from", "version": "3.0.0" },
+                {
+                    "tagType": "from",
+                    "version": "3.0.0"
+                },
                 {
                     "tagType": "example",
                     "codeblock": [
@@ -466,7 +517,10 @@
             "name": "F~scope",
             "exportSymbol": false,
             "toolTip": [
-                { "tagType": "from", "version": "4.1.1" },
+                {
+                    "tagType": "from",
+                    "version": "4.1.1"
+                },
                 {
                     "tagType": "GENERIC",
                     "description": "Configures the current scope to whichever settings provided."
@@ -478,7 +532,10 @@
                     "type": "[]",
                     "optional": true
                 },
-                { "tagType": "returns", "description": "idk" },
+                {
+                    "tagType": "returns",
+                    "description": "idk"
+                },
                 {
                     "tagType": "devnote",
                     "description": "The following are accepted strings: \n    \"sw\" to suppress all warnings. \n    \"ew\" to elevate all warnings. \n    \"constant\" to make all symbols given constant. and \n    \"strict\" which toggles \"ew\" and \"constant\"\n"
@@ -529,7 +586,10 @@
                     "tagType": "returns",
                     "description": "The user's input as a string."
                 },
-                { "tagType": "from", "version": "1.0.0" },
+                {
+                    "tagType": "from",
+                    "version": "1.0.0"
+                },
                 {
                     "tagType": "example",
                     "codeblock": [
@@ -568,7 +628,10 @@
                     "tagType": "returns",
                     "description": "Returns the string form of the typ, which could be \"array\", \"string\", \"boolean\", \"number\", \"function\", or the primitive idk.  If you require a more precise answer than number use typeOfNumber"
                 },
-                { "tagType": "from", "version": "3.0.0" },
+                {
+                    "tagType": "from",
+                    "version": "3.0.0"
+                },
                 {
                     "tagType": "example",
                     "codeblock": [
