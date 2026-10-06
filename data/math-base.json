@@ -1,0 +1,390 @@
+{
+    "version": "6.0.0",
+    "tokens": [
+        {
+            "type": "TFunction",
+            "name": "F~m_random",
+            "exportSymbol": false,
+            "toolTip": [
+                {
+                    "tagType": "GENERIC",
+                    "description": "Returns a random number in the range of `a` and `b`, If both are omitted, returns a random (double) between 0 and 1."
+                },
+                {
+                    "tagType": "devnote",
+                    "description": "Unlike other functions, if you provide no arguments, this function returns a double between 0 and 1. If you provide only one argument, it is treated as the upper bound, with the lower bound being 0. If you're coming from a normal programming lang, don't worry both ints are inclusive"
+                },
+                {
+                    "tagType": "returns",
+                    "description": "A random number."
+                },
+                {
+                    "tagType": "example",
+                    "codeblock": [
+                        "khuluma(\"Random number between 1 and 10: \" + m_random(1, 10))!",
+                        "khuluma(\"Random number between 0 and 5: \" + m_random(5))!",
+                        "khuluma(\"Random number between 0 and 1: \" + m_random())!"
+                    ]
+                },
+                {
+                    "tagType": "from",
+                    "version": "1.0.0"
+                },
+                {
+                    "tagType": "parameter",
+                    "description": "The highest number possible between `a` and 0, otherwise the lwoest between `a` and `b` (inclusive)",
+                    "var": "a",
+                    "type": "number",
+                    "optional": true
+                },
+                {
+                    "tagType": "parameter",
+                    "description": "The highest number possible between a and b (inclusive)",
+                    "var": "b",
+                    "type": "number",
+                    "optional": true
+                }
+            ],
+            "lineNumber": -1,
+            "args": [
+                "a",
+                "b"
+            ],
+            "isArgOptional": [
+                true,
+                true
+            ],
+            "varArgs": false,
+            "body": null
+        },
+        {
+            "type": "TFunction",
+            "name": "F~m_round",
+            "exportSymbol": false,
+            "toolTip": [
+                {
+                    "tagType": "GENERIC",
+                    "description": "Rounds the given real number to an integer."
+                },
+                {
+                    "tagType": "returns",
+                    "description": "An integer value, or a long if the input was already a long"
+                },
+                {
+                    "tagType": "example",
+                    "codeblock": [
+                        "khuluma(\"Rounded value of 4.6 is: \" + m_round(4.6))!"
+                    ]
+                },
+                {
+                    "tagType": "from",
+                    "version": "1.0.0"
+                },
+                {
+                    "tagType": "parameter",
+                    "description": "The input to round",
+                    "var": "value",
+                    "type": "number",
+                    "optional": false
+                }
+            ],
+            "lineNumber": -1,
+            "args": [
+                "value"
+            ],
+            "isArgOptional": [
+                false
+            ],
+            "varArgs": false,
+            "body": null
+        },
+        {
+            "type": "TFunction",
+            "name": "F~m_abs",
+            "exportSymbol": false,
+            "toolTip": [
+                {
+                    "tagType": "GENERIC",
+                    "description": "Returns the absolute value of a number."
+                },
+                {
+                    "tagType": "returns",
+                    "description": "A positive value."
+                },
+                {
+                    "tagType": "example",
+                    "codeblock": [
+                        "khuluma(\"The absolute value of -5 is: \" + m_abs(-5))!"
+                    ]
+                },
+                {
+                    "tagType": "from",
+                    "version": "1.0.2"
+                },
+                {
+                    "tagType": "parameter",
+                    "description": "The value to return the value of.",
+                    "var": "value",
+                    "type": "number",
+                    "optional": false
+                }
+            ],
+            "lineNumber": -1,
+            "args": [
+                "value"
+            ],
+            "isArgOptional": [
+                false
+            ],
+            "varArgs": false,
+            "body": null
+        },
+        {
+            "type": "TFunction",
+            "name": "F~m_sqrt",
+            "exportSymbol": false,
+            "toolTip": [
+                {
+                    "tagType": "GENERIC",
+                    "description": "Calculates the (positive) square root of the input value."
+                },
+                {
+                    "tagType": "returns",
+                    "description": "The suare root, or idk if the returned value is NaN"
+                },
+                {
+                    "tagType": "example",
+                    "codeblock": [
+                        "khuluma(\"The square root of 16 is: \" + m_sqrt(16))!",
+                        "m_sqrt(-1)! @ Returns idk"
+                    ]
+                },
+                {
+                    "tagType": "from",
+                    "version": "1.0.2"
+                },
+                {
+                    "tagType": "parameter",
+                    "description": "The input to sqrt",
+                    "var": "value",
+                    "type": "number",
+                    "optional": false
+                }
+            ],
+            "lineNumber": -1,
+            "args": [
+                "value"
+            ],
+            "isArgOptional": [
+                false
+            ],
+            "varArgs": false,
+            "body": null
+        },
+        {
+            "type": "TFunction",
+            "name": "F~m_floor",
+            "exportSymbol": false,
+            "toolTip": [
+                {
+                    "tagType": "GENERIC",
+                    "description": "Returns the largest integer less than or equal to the given value."
+                },
+                {
+                    "tagType": "returns",
+                    "description": "The largest integer less than or equal to the given value."
+                },
+                {
+                    "tagType": "from",
+                    "version": "1.0.2"
+                },
+                {
+                    "tagType": "parameter",
+                    "description": "The input to round",
+                    "var": "value",
+                    "type": "number",
+                    "optional": false
+                }
+            ],
+            "lineNumber": -1,
+            "args": [
+                "value"
+            ],
+            "isArgOptional": [
+                false
+            ],
+            "varArgs": false,
+            "body": null
+        },
+        {
+            "type": "TFunction",
+            "name": "F~m_ceil",
+            "exportSymbol": false,
+            "toolTip": [
+                {
+                    "tagType": "GENERIC",
+                    "description": "Returns the smallest integer greater than or equal to the given value."
+                },
+                {
+                    "tagType": "returns",
+                    "description": "The smallest integer greater than or equal to the given value."
+                },
+                {
+                    "tagType": "from",
+                    "version": "1.0.2"
+                },
+                {
+                    "tagType": "parameter",
+                    "description": "The input to ceil",
+                    "var": "value",
+                    "type": "number",
+                    "optional": false
+                }
+            ],
+            "lineNumber": -1,
+            "args": [
+                "value"
+            ],
+            "isArgOptional": [
+                false
+            ],
+            "varArgs": false,
+            "body": null
+        },
+        {
+            "type": "TFunction",
+            "name": "F~m_log",
+            "exportSymbol": false,
+            "toolTip": [
+                {
+                    "tagType": "GENERIC",
+                    "description": "Calculates the logarithm of a value with the specified base."
+                },
+                {
+                    "tagType": "returns",
+                    "description": "The logarithm of the value with the specified base."
+                },
+                {
+                    "tagType": "example",
+                    "codeblock": [
+                        "khuluma(\"Log base 10 of 1000 is: \" + m_log(1000))!",
+                        "khuluma(\"Log base 2 of 1024 is: \" + m_log(1024, 2))!"
+                    ]
+                },
+                {
+                    "tagType": "from",
+                    "version": "5.0.0"
+                },
+                {
+                    "tagType": "parameter",
+                    "description": "The value to calculate the logarithm of.",
+                    "var": "value",
+                    "type": "number",
+                    "optional": false
+                },
+                {
+                    "tagType": "parameter",
+                    "description": "The base of the logarithm, otherwise 10 is used",
+                    "var": "base",
+                    "type": "number",
+                    "optional": true
+                }
+            ],
+            "lineNumber": -1,
+            "args": [
+                "value",
+                "base"
+            ],
+            "isArgOptional": [
+                false,
+                true
+            ],
+            "varArgs": false,
+            "body": null
+        },
+        {
+            "type": "TFunction",
+            "name": "F~m_gcd",
+            "exportSymbol": false,
+            "toolTip": [
+                {
+                    "tagType": "GENERIC",
+                    "description": "Calculates the greatest common divisor (GCD) of a list of numbers."
+                },
+                {
+                    "tagType": "returns",
+                    "description": "The greatest common divisor of the provided numbers."
+                },
+                {
+                    "tagType": "example",
+                    "codeblock": [
+                        "khuluma(m_gcd(10, 20, 42, 20))! @ Outputs: 2",
+                        "khuluma(m_gcd(54, 24, 36))! @ Outputs: 6"
+                    ]
+                },
+                {
+                    "tagType": "from",
+                    "version": "5.0.0"
+                },
+                {
+                    "tagType": "parameter",
+                    "description": "Variable amount of numbers to calculate the greatest common divisor of",
+                    "var": "nums",
+                    "type": "[]",
+                    "optional": true
+                }
+            ],
+            "lineNumber": -1,
+            "args": [
+                "nums?"
+            ],
+            "isArgOptional": [
+                true
+            ],
+            "varArgs": true,
+            "body": null
+        },
+        {
+            "type": "TFunction",
+            "name": "F~m_lcm",
+            "exportSymbol": false,
+            "toolTip": [
+                {
+                    "tagType": "GENERIC",
+                    "description": "Calculates the lowest common multiple (LCM) of a list of numbers."
+                },
+                {
+                    "tagType": "returns",
+                    "description": "The lowest common multiple of the provided numbers."
+                },
+                {
+                    "tagType": "example",
+                    "codeblock": [
+                        "khuluma(m_lcm(4, 5, 6))! @ Outputs: 60",
+                        "khuluma(m_lcm(7, 3, 14))! @ Outputs: 42"
+                    ]
+                },
+                {
+                    "tagType": "from",
+                    "version": "5.0.0"
+                },
+                {
+                    "tagType": "parameter",
+                    "description": "Variable amount of numbers to calculate the lowest common multiple of",
+                    "var": "nums",
+                    "type": "[]",
+                    "optional": true
+                }
+            ],
+            "lineNumber": -1,
+            "args": [
+                "nums?"
+            ],
+            "isArgOptional": [
+                true
+            ],
+            "varArgs": true,
+            "body": null
+        }
+    ]
+}

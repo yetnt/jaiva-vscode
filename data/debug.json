@@ -1,5 +1,5 @@
 {
-    "version": "5.1.0",
+    "version": "6.0.0",
     "tokens": [
         {
             "type": "TFunction",
@@ -31,8 +31,12 @@
                 }
             ],
             "lineNumber": -1,
-            "args": ["arr?"],
-            "isArgOptional": [true],
+            "args": [
+                "arr?"
+            ],
+            "isArgOptional": [
+                true
+            ],
             "varArgs": true,
             "body": null
         },
@@ -120,8 +124,14 @@
                 }
             ],
             "lineNumber": -1,
-            "args": ["a", "b"],
-            "isArgOptional": [false, false],
+            "args": [
+                "a",
+                "b"
+            ],
+            "isArgOptional": [
+                false,
+                false
+            ],
             "varArgs": false,
             "body": null
         },

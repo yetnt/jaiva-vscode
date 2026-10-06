@@ -32,7 +32,7 @@
     "Colonize Block": {
         "prefix": "colonize",
         "body": [
-            "colonize ${1:i} <- (${2:value} | ${3:condition} | ${4:increment}) ->",
+            "colonize ${1:i} <- (${2:value} <| ${3:condition} <| ${4:increment}) ->",
             "\t$0!",
             "<~"
         ],
@@ -78,11 +78,6 @@
         "body": ["tsea \"jaiva/math\"!", "$0"],
         "description": "Tsea Math"
     },
-    "Import Math Utils": {
-        "prefix": "tseamathutils",
-        "body": ["tsea \"jaiva/math/utils\"!", "$0"],
-        "description": "Tsea Math Utilities"
-    },
     "Import Types": {
         "prefix": "tseatypes",
         "body": ["tsea \"jaiva/types\"!", "$0"],
@@ -92,11 +87,6 @@
         "prefix": "tseatime",
         "body": ["tsea \"jaiva/time\"!", "$0"],
         "description": "Tsea Time"
-    },
-    "Import Timezone": {
-        "prefix": "tseatimezone",
-        "body": ["tsea \"jaiva/time/zone\"!", "$0"],
-        "description": "Tsea Timezone"
     },
     "Maak": {
         "prefix": "maak",

@@ -1,0 +1,349 @@
+{
+    "version": "6.0.0",
+    "tokens": [
+        {
+            "type": "TFunction",
+            "name": "F~m_sin",
+            "exportSymbol": false,
+            "toolTip": [
+                {
+                    "tagType": "GENERIC",
+                    "description": "Returns the sine of a number in radians."
+                },
+                {
+                    "tagType": "returns",
+                    "description": "The sine of the given value in radians."
+                },
+                {
+                    "tagType": "from",
+                    "version": "1.0.2"
+                },
+                {
+                    "tagType": "parameter",
+                    "description": "The value in radians",
+                    "var": "value",
+                    "type": "number",
+                    "optional": false
+                }
+            ],
+            "lineNumber": -1,
+            "args": [
+                "value"
+            ],
+            "isArgOptional": [
+                false
+            ],
+            "varArgs": false,
+            "body": null
+        },
+        {
+            "type": "TFunction",
+            "name": "F~m_cos",
+            "exportSymbol": false,
+            "toolTip": [
+                {
+                    "tagType": "GENERIC",
+                    "description": "Returns the cosine of a number in radians."
+                },
+                {
+                    "tagType": "returns",
+                    "description": "The cosine of the given value in radians."
+                },
+                {
+                    "tagType": "from",
+                    "version": "1.0.2"
+                },
+                {
+                    "tagType": "parameter",
+                    "description": "The value in radians",
+                    "var": "value",
+                    "type": "number",
+                    "optional": false
+                }
+            ],
+            "lineNumber": -1,
+            "args": [
+                "value"
+            ],
+            "isArgOptional": [
+                false
+            ],
+            "varArgs": false,
+            "body": null
+        },
+        {
+            "type": "TFunction",
+            "name": "F~m_tan",
+            "exportSymbol": false,
+            "toolTip": [
+                {
+                    "tagType": "GENERIC",
+                    "description": "Returns the trig tangent of a number in radians."
+                },
+                {
+                    "tagType": "returns",
+                    "description": "The trig tangent of the given value in radians."
+                },
+                {
+                    "tagType": "from",
+                    "version": "1.0.2"
+                },
+                {
+                    "tagType": "parameter",
+                    "description": "The value in radians",
+                    "var": "value",
+                    "type": "number",
+                    "optional": false
+                }
+            ],
+            "lineNumber": -1,
+            "args": [
+                "value"
+            ],
+            "isArgOptional": [
+                false
+            ],
+            "varArgs": false,
+            "body": null
+        },
+        {
+            "type": "TFunction",
+            "name": "F~m_asin",
+            "exportSymbol": false,
+            "toolTip": [
+                {
+                    "tagType": "GENERIC",
+                    "description": "Returns the arc sine of a number in radians."
+                },
+                {
+                    "tagType": "returns",
+                    "description": "The arc sine of the given value in radians, or idk if the argument's absolute value is greater than 1"
+                },
+                {
+                    "tagType": "from",
+                    "version": "1.0.2"
+                },
+                {
+                    "tagType": "parameter",
+                    "description": "The value in radians",
+                    "var": "value",
+                    "type": "number",
+                    "optional": false
+                }
+            ],
+            "lineNumber": -1,
+            "args": [
+                "value"
+            ],
+            "isArgOptional": [
+                false
+            ],
+            "varArgs": false,
+            "body": null
+        },
+        {
+            "type": "TFunction",
+            "name": "F~m_acos",
+            "exportSymbol": false,
+            "toolTip": [
+                {
+                    "tagType": "GENERIC",
+                    "description": "Returns the arc cosine of a number in radians."
+                },
+                {
+                    "tagType": "returns",
+                    "description": "The arc cosine of the given value in radians, or idk if the argument's absolute value is greater than 1"
+                },
+                {
+                    "tagType": "from",
+                    "version": "1.0.2"
+                },
+                {
+                    "tagType": "parameter",
+                    "description": "The value in radians",
+                    "var": "value",
+                    "type": "number",
+                    "optional": false
+                }
+            ],
+            "lineNumber": -1,
+            "args": [
+                "value"
+            ],
+            "isArgOptional": [
+                false
+            ],
+            "varArgs": false,
+            "body": null
+        },
+        {
+            "type": "TFunction",
+            "name": "F~m_atan",
+            "exportSymbol": false,
+            "toolTip": [
+                {
+                    "tagType": "GENERIC",
+                    "description": "Returns the arc tangent of a number in radians."
+                },
+                {
+                    "tagType": "returns",
+                    "description": "The arc tangent of the given value in radians."
+                },
+                {
+                    "tagType": "from",
+                    "version": "1.0.2"
+                },
+                {
+                    "tagType": "parameter",
+                    "description": "The value in radians",
+                    "var": "value",
+                    "type": "number",
+                    "optional": false
+                }
+            ],
+            "lineNumber": -1,
+            "args": [
+                "value"
+            ],
+            "isArgOptional": [
+                false
+            ],
+            "varArgs": false,
+            "body": null
+        },
+        {
+            "type": "TFunction",
+            "name": "F~m_toRad",
+            "exportSymbol": false,
+            "toolTip": [
+                {
+                    "tagType": "GENERIC",
+                    "description": "Converts degrees to radians."
+                },
+                {
+                    "tagType": "returns",
+                    "description": "The value in radians."
+                },
+                {
+                    "tagType": "example",
+                    "codeblock": [
+                        "maak deg <- 90!",
+                        "maak rad <- m_toRad(deg)!",
+                        "khuluma(rad) @ Output: 1.5707963267948966"
+                    ]
+                },
+                {
+                    "tagType": "from",
+                    "version": "1.0.2"
+                },
+                {
+                    "tagType": "parameter",
+                    "description": "The value in degrees",
+                    "var": "degrees",
+                    "type": "number",
+                    "optional": false
+                }
+            ],
+            "lineNumber": -1,
+            "args": [
+                "degrees"
+            ],
+            "isArgOptional": [
+                false
+            ],
+            "varArgs": false,
+            "body": null
+        },
+        {
+            "type": "TFunction",
+            "name": "F~m_toDeg",
+            "exportSymbol": false,
+            "toolTip": [
+                {
+                    "tagType": "GENERIC",
+                    "description": "Converts radians to degrees."
+                },
+                {
+                    "tagType": "returns",
+                    "description": "The value in degrees."
+                },
+                {
+                    "tagType": "example",
+                    "codeblock": [
+                        "maak rad <- 1.5708!",
+                        "maak deg <- m_toDeg(rad)!",
+                        "khuluma(deg) @ Output: 90.0002104591497"
+                    ]
+                },
+                {
+                    "tagType": "from",
+                    "version": "1.0.2"
+                },
+                {
+                    "tagType": "parameter",
+                    "description": "The value in radians",
+                    "var": "radians",
+                    "type": "number",
+                    "optional": false
+                }
+            ],
+            "lineNumber": -1,
+            "args": [
+                "radians"
+            ],
+            "isArgOptional": [
+                false
+            ],
+            "varArgs": false,
+            "body": null
+        },
+        {
+            "type": "TFunction",
+            "name": "F~m_atan2",
+            "exportSymbol": false,
+            "toolTip": [
+                {
+                    "tagType": "GENERIC",
+                    "description": "Returns the angle in radians between the positive x-axis and the point (x, y)."
+                },
+                {
+                    "tagType": "returns",
+                    "description": "The angle in radians from the positive x-axis to the point (x, y)."
+                },
+                {
+                    "tagType": "devnote",
+                    "description": "honestly, if you're using this function you should probably not be using Jaiva to do whatever the hell you're doing..."
+                },
+                {
+                    "tagType": "from",
+                    "version": "6.0.0-alpha.3"
+                },
+                {
+                    "tagType": "parameter",
+                    "description": "The y-coordinate",
+                    "var": "y",
+                    "type": "number",
+                    "optional": false
+                },
+                {
+                    "tagType": "parameter",
+                    "description": "The x-coordinate",
+                    "var": "x",
+                    "type": "number",
+                    "optional": false
+                }
+            ],
+            "lineNumber": -1,
+            "args": [
+                "y",
+                "x"
+            ],
+            "isArgOptional": [
+                false,
+                false
+            ],
+            "varArgs": false,
+            "body": null
+        }
+    ]
+}

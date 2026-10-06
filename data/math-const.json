@@ -1,0 +1,97 @@
+{
+    "version": "6.0.0",
+    "tokens": [
+        {
+            "type": "TNumberVar",
+            "name": "m_e",
+            "exportSymbol": false,
+            "toolTip": [
+                {
+                    "tagType": "GENERIC",
+                    "description": "The mathematical constant e (Euler's number)"
+                },
+                {
+                    "tagType": "devnote",
+                    "description": "Just java.lang.Math.E"
+                },
+                {
+                    "tagType": "example",
+                    "codeblock": [
+                        "khuluma(2 ^ m_e)! @ approximately 7.38905609893065"
+                    ]
+                }
+            ],
+            "lineNumber": -1,
+            "value": 2.718281828459045
+        },
+        {
+            "type": "TNumberVar",
+            "name": "m_pi",
+            "exportSymbol": false,
+            "toolTip": [
+                {
+                    "tagType": "GENERIC",
+                    "description": "The mathematical constant ? (pi)"
+                },
+                {
+                    "tagType": "devnote",
+                    "description": "It's just java.lang.Math.PI"
+                }
+            ],
+            "lineNumber": -1,
+            "value": 3.141592653589793
+        },
+        {
+            "type": "TNumberVar",
+            "name": "m_tau",
+            "exportSymbol": false,
+            "toolTip": [
+                {
+                    "tagType": "GENERIC",
+                    "description": "The mathematical constant ? (tau), which is equal to 2?"
+                },
+                {
+                    "tagType": "devnote",
+                    "description": "Just java.lang.Math.TAU"
+                },
+                {
+                    "tagType": "example",
+                    "codeblock": [
+                        "@ Using tau to calculate the circumference of a circle with radius 5",
+                        "maak radius <- 5!",
+                        "maak circumference <- m_tau * radius!",
+                        "khuluma(circumference)! @ approximately 31.41592653589793"
+                    ]
+                }
+            ],
+            "lineNumber": -1,
+            "value": 6.283185307179586
+        },
+        {
+            "type": "TNumberVar",
+            "name": "m_phi",
+            "exportSymbol": false,
+            "toolTip": [
+                {
+                    "tagType": "GENERIC",
+                    "description": "The golden ratio ? (phi)"
+                },
+                {
+                    "tagType": "example",
+                    "codeblock": [
+                        "@ Calculating the golden rectangle dimensions",
+                        "maak shortSide <- 10!",
+                        "maak longSide <- shortSide * m_phi!",
+                        "khuluma(\"Long side of the golden rectangle: \" + longSide)! @ approximately 16.18033988749895"
+                    ]
+                },
+                {
+                    "tagType": "devnote",
+                    "description": "No note here."
+                }
+            ],
+            "lineNumber": -1,
+            "value": 1.618033988749895
+        }
+    ]
+}

@@ -1,90 +1,6 @@
 {
-    "version": "5.1.0",
+    "version": "6.0.0",
     "tokens": [
-        {
-            "type": "TFunction",
-            "name": "F~khuluma",
-            "exportSymbol": false,
-            "toolTip": [
-                {
-                    "tagType": "GENERIC",
-                    "description": "Prints any given input to the console."
-                },
-                {
-                    "tagType": "parameter",
-                    "description": "The message to print.",
-                    "var": "msg",
-                    "type": "idk",
-                    "optional": true
-                },
-                {
-                    "tagType": "parameter",
-                    "description": "If true, no new line is printed after the message. Defaults to false.",
-                    "var": "removeNewLn",
-                    "type": "boolean",
-                    "optional": true
-                },
-                {
-                    "tagType": "returns",
-                    "description": "idk"
-                },
-                {
-                    "tagType": "from",
-                    "version": "1.0.0-beta.2"
-                },
-                {
-                    "tagType": "devnote",
-                    "description": "For the nerds. This is just System.out.println as default, then if removeNewLn is true, System.out.print. Lol"
-                },
-                {
-                    "tagType": "example",
-                    "codeblock": [
-                        "khuluma(\"Hello, World!\")! @ Prints \"Hello, World!\" to the console with a new line.",
-                        "@ Then the following prints \"Hello\" then \"World!\" on the same line.",
-                        "khuluma(\"Hello, \", true)!",
-                        "khuluma(\"World!\")!",
-                        "khuluma()! @ Prints just a new line."
-                    ]
-                }
-            ],
-            "lineNumber": -1,
-            "args": ["msg", "removeNewLn"],
-            "isArgOptional": [true, true],
-            "varArgs": false,
-            "body": null
-        },
-        {
-            "type": "TFunction",
-            "name": "F~clear",
-            "exportSymbol": false,
-            "toolTip": [
-                {
-                    "tagType": "GENERIC",
-                    "description": "Clears the console."
-                },
-                {
-                    "tagType": "returns",
-                    "description": "idk"
-                },
-                {
-                    "tagType": "devnote",
-                    "description": "The effectiveness of this function depends on the terminal's support for ANSI escape codes."
-                },
-                {
-                    "tagType": "from",
-                    "version": "1.0.0"
-                },
-                {
-                    "tagType": "example",
-                    "codeblock": ["clear()! @ Clears the console output."]
-                }
-            ],
-            "lineNumber": -1,
-            "args": [],
-            "isArgOptional": [],
-            "varArgs": false,
-            "body": null
-        },
         {
             "type": "TFunction",
             "name": "F~getVarClass",
@@ -93,13 +9,6 @@
                 {
                     "tagType": "GENERIC",
                     "description": "Attempts to return the symbol's corresponding Java class in string form. If you're using this then you def don't know what you're doing."
-                },
-                {
-                    "tagType": "parameter",
-                    "description": "The value to return it's token symbol for",
-                    "var": "var",
-                    "type": "idk",
-                    "optional": false
                 },
                 {
                     "tagType": "returns",
@@ -116,101 +25,24 @@
                         "khuluma(getVarClass(name))! @ Prints com.jaiva.tokenizer.tokens.Token$TStringVar@(hashcode)",
                         "khuluma(getVarClass(reservedKeywords))! @ Prints com.jaiva.tokenizer.tokens.Token$TArrayVar@(hashcode)"
                     ]
+                },
+                {
+                    "tagType": "parameter",
+                    "description": "The value to return it's token symbol for",
+                    "var": "var",
+                    "type": "idk",
+                    "optional": false
                 }
             ],
             "lineNumber": -1,
-            "args": ["var"],
-            "isArgOptional": [false],
+            "args": [
+                "var"
+            ],
+            "isArgOptional": [
+                false
+            ],
             "varArgs": false,
             "body": null
-        },
-        {
-            "type": "TFunction",
-            "name": "F~mamela",
-            "exportSymbol": false,
-            "toolTip": [
-                {
-                    "tagType": "GENERIC",
-                    "description": "Listens for input from the console."
-                },
-                {
-                    "tagType": "returns",
-                    "description": "The input given from the console as a string"
-                },
-                {
-                    "tagType": "devnote",
-                    "description": "GithubBlockQuote: This will pause all execution until input is given."
-                },
-                {
-                    "tagType": "from",
-                    "version": "1.0.0-beta.3"
-                },
-                {
-                    "tagType": "example",
-                    "codeblock": [
-                        "khuluma(\"What is your name?\")!",
-                        "maak name <- mamela()! @ Reads input from the user and stores it in the variable name.",
-                        "khuluma(\"Hello, \" + name + \"!\")!"
-                    ]
-                }
-            ],
-            "lineNumber": -1,
-            "args": [],
-            "isArgOptional": [],
-            "varArgs": false,
-            "body": null
-        },
-        {
-            "type": "TArrayVar",
-            "name": "uargs",
-            "exportSymbol": false,
-            "toolTip": [
-                {
-                    "tagType": "GENERIC",
-                    "description": "The command-line arguments without Jaiva-specific arguments."
-                },
-                {
-                    "tagType": "returns",
-                    "description": "An array of strings, representing the sanitized command-line arguments."
-                },
-                {
-                    "tagType": "from",
-                    "version": "1.0.2"
-                },
-                {
-                    "tagType": "example",
-                    "codeblock": [
-                        "khuluma(uargs[0])! @ Prints any other argument given after the Jaiva specific ones.",
-                        "khuluma(uargs[1])! @ Prints the second user argument if provided.",
-                        "khuluma(uargs[2])! @ And so on..."
-                    ]
-                }
-            ],
-            "lineNumber": -1,
-            "value": []
-        },
-        {
-            "type": "TStringVar",
-            "name": "version",
-            "exportSymbol": false,
-            "toolTip": [
-                {
-                    "tagType": "GENERIC",
-                    "description": "What do you think this returns."
-                },
-                {
-                    "tagType": "example",
-                    "codeblock": [
-                        "khuluma(version)! @ Prints 5.0.0 (at the time of writing)"
-                    ]
-                },
-                {
-                    "tagType": "from",
-                    "version": "1.0.0-beta.0"
-                }
-            ],
-            "lineNumber": -1,
-            "value": "5.1.0"
         },
         {
             "type": "TArrayVar",
@@ -258,6 +90,73 @@
             ]
         },
         {
+            "type": "TStringVar",
+            "name": "version",
+            "exportSymbol": false,
+            "toolTip": [
+                {
+                    "tagType": "GENERIC",
+                    "description": "What do you think this returns."
+                },
+                {
+                    "tagType": "example",
+                    "codeblock": [
+                        "khuluma(version)! @ Prints 5.0.0 (at the time of writing)"
+                    ]
+                },
+                {
+                    "tagType": "from",
+                    "version": "1.0.0-beta.0"
+                }
+            ],
+            "lineNumber": -1,
+            "value": "6.0.0"
+        },
+        {
+            "type": "TFunction",
+            "name": "F~flat",
+            "exportSymbol": false,
+            "toolTip": [
+                {
+                    "tagType": "GENERIC",
+                    "description": "Attempts to flatten (at the top level) the given arrays array1 and array2 into 1 single array."
+                },
+                {
+                    "tagType": "devnote",
+                    "description": "If there are any type mismatches in array1, it will be ignored and the same check is done to array2 and so on. Therefore this function will **always** return an array, whether or not it was successful."
+                },
+                {
+                    "tagType": "from",
+                    "version": "1.0.0-beta.2"
+                },
+                {
+                    "tagType": "example",
+                    "codeblock": [
+                        "maak array1 <-| 1, 2, 3!",
+                        "maak array2 <-| 4, 5, 6!",
+                        "maak array3 <- flat(array1, array2)! @ Flattens the two arrays into a new one.",
+                        "khuluma(array3)! @ Prints [1, 2, 3, 4, 5, 6]"
+                    ]
+                },
+                {
+                    "tagType": "parameter",
+                    "description": "Variable amount of arrays to input",
+                    "var": "arrays",
+                    "type": "[]",
+                    "optional": true
+                }
+            ],
+            "lineNumber": -1,
+            "args": [
+                "arrays?"
+            ],
+            "isArgOptional": [
+                true
+            ],
+            "varArgs": true,
+            "body": null
+        },
+        {
             "type": "TFunction",
             "name": "F~sleep",
             "exportSymbol": false,
@@ -265,13 +164,6 @@
                 {
                     "tagType": "GENERIC",
                     "description": "Pause execution of the interpreter for n amount of milliseconds."
-                },
-                {
-                    "tagType": "parameter",
-                    "description": "The amount of milliseconds to sleep for",
-                    "var": "milliseconds",
-                    "type": "number",
-                    "optional": false
                 },
                 {
                     "tagType": "devnote",
@@ -288,102 +180,71 @@
                         "sleep(1000)! @ pause for 1 second.",
                         "khuluma(\"yo.. again\")!"
                     ]
-                }
-            ],
-            "lineNumber": -1,
-            "args": ["milliseconds"],
-            "isArgOptional": [false],
-            "varArgs": false,
-            "body": null
-        },
-        {
-            "type": "TFunction",
-            "name": "F~getCallerValue",
-            "exportSymbol": false,
-            "toolTip": [
-                {
-                    "tagType": "GENERIC",
-                    "description": "Returns the caller value provided to this file if this file was run by another java program."
-                },
-                {
-                    "tagType": "returns",
-                    "description": "The caller value"
-                },
-                {
-                    "tagType": "from",
-                    "version": "5.0.2"
-                },
-                {
-                    "tagType": "example",
-                    "codeblock": [
-                        "@ Say we are in J3Engine command",
-                        "maak value <- getCallerValue()!",
-                        "@ use it"
-                    ]
-                }
-            ],
-            "lineNumber": -1,
-            "args": [],
-            "isArgOptional": [],
-            "varArgs": false,
-            "body": null
-        },
-        {
-            "type": "TArrayVar",
-            "name": "args",
-            "exportSymbol": false,
-            "toolTip": [
-                {
-                    "tagType": "GENERIC",
-                    "description": "The command-line arguments passed to the Jaiva command."
-                },
-                {
-                    "tagType": "returns",
-                    "description": "An array of strings, where each string is a command-line argument."
-                },
-                {
-                    "tagType": "from",
-                    "version": "1.0.2"
-                },
-                {
-                    "tagType": "devnote",
-                    "description": "This is the raw arguments given from Main.args[], including Jaiva-specific arguments."
-                },
-                {
-                    "tagType": "example",
-                    "codeblock": [
-                        "khuluma(args[0])! @ Prints \"jaiva\" if the command was 'jaiva myscript.jv'",
-                        "khuluma(args[1])! @ Prints \"myscript.jv\" if the command was 'jaiva myscript.jv'"
-                    ]
-                }
-            ],
-            "lineNumber": -1,
-            "value": ["jaiva/globals", "-jog"]
-        },
-        {
-            "type": "TFunction",
-            "name": "F~neg",
-            "exportSymbol": false,
-            "toolTip": [
-                {
-                    "tagType": "GENERIC",
-                    "description": "Negates the given number. This is because my unary minus shit isnt working so i had to make this."
                 },
                 {
                     "tagType": "parameter",
-                    "description": "The input to negate",
-                    "var": "input",
+                    "description": "The amount of milliseconds to sleep for",
+                    "var": "milliseconds",
                     "type": "number",
                     "optional": false
-                },
-                {
-                    "tagType": "deprecated",
-                    "description": "Unary minus works now. Use it or multiply by -1"
                 }
             ],
             "lineNumber": -1,
-            "args": ["input"],
-            "isArgOptional": [false],
+            "args": [
+                "milliseconds"
+            ],
+            "isArgOptional": [
+                false
+            ],
+            "varArgs": false,
+            "body": null
+        },
+        {
+            "type": "TFunction",
+            "name": "F~typeOf",
+            "exportSymbol": false,
+            "toolTip": [
+                {
+                    "tagType": "GENERIC",
+                    "description": "Returns the type of any given input."
+                },
+                {
+                    "tagType": "returns",
+                    "description": "Returns the string form of the typ, which could be \"array\", \"string\", \"boolean\", \"number\", \"function\", or the primitive idk.  If you require a more precise answer than number use typeOfNumber"
+                },
+                {
+                    "tagType": "from",
+                    "version": "3.0.0"
+                },
+                {
+                    "tagType": "example",
+                    "codeblock": [
+                        "maak b <- 100!",
+                        "",
+                        "khuluma(typeOf(b))!                   @ \"number\"",
+                        "khuluma(typeOf(typeOf))!                @ \"function\"",
+                        "khuluma(typeOf())!                    @ idk",
+                        "khuluma(typeOf(aowa))!                @ \"boolean\"",
+                        "khuluma(typeOf(\"what the f\"))!        @ \"string\"",
+                        "khuluma(typeOf(reservedKeywords))!    @ \"array\"",
+                        "khuluma(typeOf(idk))!                 @ idk"
+                    ]
+                },
+                {
+                    "tagType": "parameter",
+                    "description": "The input to check the type against",
+                    "var": "input",
+                    "type": "idk",
+                    "optional": true
+                }
+            ],
+            "lineNumber": -1,
+            "args": [
+                "input"
+            ],
+            "isArgOptional": [
+                true
+            ],
             "varArgs": false,
             "body": null
         },
@@ -425,49 +286,13 @@
                 }
             ],
             "lineNumber": -1,
-            "args": ["input"],
-            "isArgOptional": [true],
-            "varArgs": false,
-            "body": null
-        },
-        {
-            "type": "TFunction",
-            "name": "F~flat",
-            "exportSymbol": false,
-            "toolTip": [
-                {
-                    "tagType": "GENERIC",
-                    "description": "Attempts to flatten (at the top level) the given arrays array1 and array2 into 1 single array."
-                },
-                {
-                    "tagType": "parameter",
-                    "description": "Variable amount of arrays to input",
-                    "var": "arrays",
-                    "type": "[]",
-                    "optional": true
-                },
-                {
-                    "tagType": "devnote",
-                    "description": "If there are any type mismatches in array1, it will be ignored and the same check is done to array2 and so on. Therefore this function will **always** return an array, whether or not it was successful."
-                },
-                {
-                    "tagType": "from",
-                    "version": "1.0.0-beta.2"
-                },
-                {
-                    "tagType": "example",
-                    "codeblock": [
-                        "maak array1 <-| 1, 2, 3!",
-                        "maak array2 <-| 4, 5, 6!",
-                        "maak array3 <- flat(array1, array2)! @ Flattens the two arrays into a new one.",
-                        "khuluma(array3)! @ Prints [1, 2, 3, 4, 5, 6]"
-                    ]
-                }
+            "args": [
+                "input"
             ],
-            "lineNumber": -1,
-            "args": ["arrays"],
-            "isArgOptional": [true],
-            "varArgs": true,
+            "isArgOptional": [
+                true
+            ],
+            "varArgs": false,
             "body": null
         },
         {
@@ -478,13 +303,6 @@
                 {
                     "tagType": "GENERIC",
                     "description": "Creates an array literal from the given elements. This is useful if you want to createFunction an array without declaring it to a variable. For example, `arrLit(1, 2, 3)` will return `[1, 2, 3]`. This is needed as Jaiva doesnt have square bracket syntax"
-                },
-                {
-                    "tagType": "parameter",
-                    "description": "Variable amount of elements to take in and turn into a single array.",
-                    "var": "elements",
-                    "type": "[]",
-                    "optional": true
                 },
                 {
                     "tagType": "returns",
@@ -504,11 +322,22 @@
                         "khuluma(array3)! @ Prints []",
                         "khuluma(array1 = array2)! @ Prints aowa (false) (I am not implementing array equality via `=` operator anytime soon. It is the exact same array though.)"
                     ]
+                },
+                {
+                    "tagType": "parameter",
+                    "description": "Variable amount of elements to take in and turn into a single array.",
+                    "var": "elements",
+                    "type": "[]",
+                    "optional": true
                 }
             ],
             "lineNumber": -1,
-            "args": ["elements"],
-            "isArgOptional": [true],
+            "args": [
+                "elements?"
+            ],
+            "isArgOptional": [
+                true
+            ],
             "varArgs": true,
             "body": null
         },
@@ -517,21 +346,6 @@
             "name": "F~scope",
             "exportSymbol": false,
             "toolTip": [
-                {
-                    "tagType": "from",
-                    "version": "4.1.1"
-                },
-                {
-                    "tagType": "GENERIC",
-                    "description": "Configures the current scope to whichever settings provided."
-                },
-                {
-                    "tagType": "parameter",
-                    "description": "variable amount of strings to input.",
-                    "var": "strings",
-                    "type": "[]",
-                    "optional": true
-                },
                 {
                     "tagType": "returns",
                     "description": "idk"
@@ -558,33 +372,167 @@
                         "<~",
                         "af()! @ Errors as the usual deprecation warning is now a fatal error. (Crashes the interpreter)"
                     ]
+                },
+                {
+                    "tagType": "from",
+                    "version": "4.1.1"
+                },
+                {
+                    "tagType": "parameter",
+                    "description": "variable amount of strings to input.",
+                    "var": "string",
+                    "type": "[]",
+                    "optional": true
                 }
             ],
             "lineNumber": -1,
-            "args": ["strings"],
-            "isArgOptional": [true],
+            "args": [
+                "string?"
+            ],
+            "isArgOptional": [
+                true
+            ],
             "varArgs": true,
             "body": null
         },
         {
             "type": "TFunction",
-            "name": "F~ask",
+            "name": "F~getCallerValue",
             "exportSymbol": false,
             "toolTip": [
                 {
                     "tagType": "GENERIC",
-                    "description": "Prompts the user for input via a UI dialog."
-                },
-                {
-                    "tagType": "parameter",
-                    "description": "The message to display in the dialog.",
-                    "var": "message",
-                    "type": "string",
-                    "optional": false
+                    "description": "Returns the caller value provided to this file if this file was run by another java program."
                 },
                 {
                     "tagType": "returns",
-                    "description": "The user's input as a string."
+                    "description": "The caller value"
+                },
+                {
+                    "tagType": "from",
+                    "version": "5.0.2"
+                },
+                {
+                    "tagType": "example",
+                    "codeblock": [
+                        "@ Say we are in J3Engine command",
+                        "maak value <- getCallerValue()!",
+                        "@ use it"
+                    ]
+                }
+            ],
+            "lineNumber": -1,
+            "args": [],
+            "isArgOptional": [],
+            "varArgs": false,
+            "body": null
+        },
+        {
+            "type": "TFunction",
+            "name": "F~khuluma",
+            "exportSymbol": false,
+            "toolTip": [
+                {
+                    "tagType": "GENERIC",
+                    "description": "Prints any given input to the console."
+                },
+                {
+                    "tagType": "returns",
+                    "description": "idk"
+                },
+                {
+                    "tagType": "from",
+                    "version": "1.0.0-beta.2"
+                },
+                {
+                    "tagType": "example",
+                    "codeblock": [
+                        "khuluma(\"Hello, World!\")! @ Prints \"Hello, World!\" to the console with a new line.",
+                        "@ Then the following prints \"Hello\" then \"World!\" on the same line.",
+                        "khuluma(\"Hello, \", true)!",
+                        "khuluma(\"World!\")!",
+                        "khuluma()! @ Prints just a new line."
+                    ]
+                },
+                {
+                    "tagType": "parameter",
+                    "description": "The message to print.",
+                    "var": "msg",
+                    "type": "idk",
+                    "optional": true
+                },
+                {
+                    "tagType": "parameter",
+                    "description": "If true, no new line is printed after the message. Defaults to false.",
+                    "var": "removenewLn",
+                    "type": "boolean",
+                    "optional": true
+                }
+            ],
+            "lineNumber": -1,
+            "args": [
+                "msg",
+                "removenewLn"
+            ],
+            "isArgOptional": [
+                true,
+                true
+            ],
+            "varArgs": false,
+            "body": null
+        },
+        {
+            "type": "TFunction",
+            "name": "F~mamela",
+            "exportSymbol": false,
+            "toolTip": [
+                {
+                    "tagType": "GENERIC",
+                    "description": "Listens for input from the console."
+                },
+                {
+                    "tagType": "returns",
+                    "description": "The input given from the console as a string"
+                },
+                {
+                    "tagType": "devnote",
+                    "description": "GithubBlockQuote: This will pause all execution until input is given."
+                },
+                {
+                    "tagType": "from",
+                    "version": "1.0.0-beta.3"
+                },
+                {
+                    "tagType": "example",
+                    "codeblock": [
+                        "khuluma(\"What is your name?\")!",
+                        "maak name <- mamela()! @ Reads input from the user and stores it in the variable name.",
+                        "khuluma(\"Hello, \" + name + \"!\")!"
+                    ]
+                }
+            ],
+            "lineNumber": -1,
+            "args": [],
+            "isArgOptional": [],
+            "varArgs": false,
+            "body": null
+        },
+        {
+            "type": "TFunction",
+            "name": "F~clear",
+            "exportSymbol": false,
+            "toolTip": [
+                {
+                    "tagType": "GENERIC",
+                    "description": "Clears the console."
+                },
+                {
+                    "tagType": "returns",
+                    "description": "idk"
+                },
+                {
+                    "tagType": "devnote",
+                    "description": "The effectiveness of this function depends on the terminal's support for ANSI escape codes."
                 },
                 {
                     "tagType": "from",
@@ -593,65 +541,79 @@
                 {
                     "tagType": "example",
                     "codeblock": [
-                        "maak name <- ask(\"what's ur name cuh?\")! @ Reads input from the user and stores it in the variable name.",
-                        "khuluma(\"Hello, \" + name + \"!\")!"
+                        "clear()! @ Clears the console output."
                     ]
-                },
-                {
-                    "tagType": "deprecated",
-                    "description": "This function serves no real purpose. (it doesn't work in most environments)"
                 }
             ],
             "lineNumber": -1,
-            "args": ["message"],
-            "isArgOptional": [false],
+            "args": [],
+            "isArgOptional": [],
             "varArgs": false,
             "body": null
         },
         {
-            "type": "TFunction",
-            "name": "F~typeOf",
+            "type": "TArrayVar",
+            "name": "args",
             "exportSymbol": false,
             "toolTip": [
                 {
                     "tagType": "GENERIC",
-                    "description": "Returns the type of any given input."
-                },
-                {
-                    "tagType": "parameter",
-                    "description": "The input to check the type against",
-                    "var": "input",
-                    "type": "idk",
-                    "optional": true
+                    "description": "The command-line arguments passed to the Jaiva command."
                 },
                 {
                     "tagType": "returns",
-                    "description": "Returns the string form of the typ, which could be \"array\", \"string\", \"boolean\", \"number\", \"function\", or the primitive idk.  If you require a more precise answer than number use typeOfNumber"
+                    "description": "An array of strings, where each string is a command-line argument."
                 },
                 {
                     "tagType": "from",
-                    "version": "3.0.0"
+                    "version": "1.0.2"
+                },
+                {
+                    "tagType": "devnote",
+                    "description": "This is the raw arguments given from Main.args[], including Jaiva-specific arguments."
                 },
                 {
                     "tagType": "example",
                     "codeblock": [
-                        "maak b <- 100!",
-                        "",
-                        "khuluma(typeOf(b))!                   @ \"number\"",
-                        "khuluma(typeOf(typeOf))!                @ \"function\"",
-                        "khuluma(typeOf())!                    @ idk",
-                        "khuluma(typeOf(aowa))!                @ \"boolean\"",
-                        "khuluma(typeOf(\"what the f\"))!        @ \"string\"",
-                        "khuluma(typeOf(reservedKeywords))!    @ \"array\"",
-                        "khuluma(typeOf(idk))!                 @ idk"
+                        "khuluma(args[0])! @ Prints \"jaiva\" if the command was 'jaiva myscript.jv'",
+                        "khuluma(args[1])! @ Prints \"myscript.jv\" if the command was 'jaiva myscript.jv'"
                     ]
                 }
             ],
             "lineNumber": -1,
-            "args": ["input"],
-            "isArgOptional": [true],
-            "varArgs": false,
-            "body": null
+            "value": [
+                "jaiva/globals",
+                "-jog"
+            ]
+        },
+        {
+            "type": "TArrayVar",
+            "name": "uArgs",
+            "exportSymbol": false,
+            "toolTip": [
+                {
+                    "tagType": "GENERIC",
+                    "description": "The command-line arguments without Jaiva-specific arguments."
+                },
+                {
+                    "tagType": "returns",
+                    "description": "An array of strings, representing the sanitized command-line arguments."
+                },
+                {
+                    "tagType": "from",
+                    "version": "1.0.2"
+                },
+                {
+                    "tagType": "example",
+                    "codeblock": [
+                        "khuluma(uargs[0])! @ Prints any other argument given after the Jaiva specific ones.",
+                        "khuluma(uargs[1])! @ Prints the second user argument if provided.",
+                        "khuluma(uargs[2])! @ And so on..."
+                    ]
+                }
+            ],
+            "lineNumber": -1,
+            "value": []
         }
     ]
 }
