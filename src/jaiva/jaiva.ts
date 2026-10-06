@@ -7,6 +7,9 @@ import * as Docs from "./tokens/jdoc";
 import { Diagnostics } from "../vscodeWrapper";
 import * as vscode from "vscode";
 import * as path from "path";
+import { BetterPath } from "../BetterPath";
+import { RepoLib } from "../repos/repos";
+import { FilesAndShii } from "../repos/config";
 
 export { Tokens, JaivaLibraries, Docs };
 
@@ -61,6 +64,33 @@ export class SharedValues extends Base {
         super();
     }
 
+    public loadLibrariesExternal(
+        vscode: typeof import("vscode"),
+        vers: string,
+        repoBasePath: BetterPath,
+        ...libFiles: RepoLib[]
+    ): void {
+        libFiles.forEach((lib) => {
+            const load = JaivaLibraries.loadFrom(repoBasePath, lib);
+            let libTitle = lib.path;
+            console.log("Loaded " + libTitle);
+
+            if (load.version !== vers) {
+                const str =
+                    "Expected " +
+                    libTitle +
+                    " to be of version " +
+                    vers +
+                    ". Instead got " +
+                    load.version;
+                vscode.window.showInformationMessage(str + ".");
+                return;
+            }
+
+            this.libraryMap.set(libTitle, load);
+        });
+    }
+
     public loadLibraries(
         vscode: typeof import("vscode"),
         vers: string,
@@ -71,10 +101,16 @@ export class SharedValues extends Base {
             "debug",
             "math",
             "types",
-            "math/utils",
+            "types/numbers",
+            "math/base",
+            "math/const",
+            "math/trig",
             "file",
+            "file/api",
+            "file/query",
             "arrays",
             "time",
+            "time/api",
             "time/zone",
         ];
 

@@ -51,11 +51,15 @@
         "commands": [
             {
                 "command": "jaiva.run",
-                "title": "Run Jaiva File"
+                "title": "Jaiva: Run File"
             },
             {
                 "command": "jaiva.runTokens",
-                "title": "Export Jaiva Tokens"
+                "title": "Jaiva: Export Tokens"
+            },
+            {
+                "command": "jaiva.addRepository",
+                "title": "Jaiva: Add Repository"
             }
         ],
         "menus": {
@@ -75,8 +79,8 @@
     },
     "main": "./dist/extension.js",
     "devDependencies": {
-        "@types/node": "^26.4.0",
-        "@types/vscode": "^1.134.0",
+        "@types/node": "^26.6.4",
+        "@types/vscode": "^1.140.0",
         "typescript": "^7.0.2",
         "vscode": "^1.1.37"
     }

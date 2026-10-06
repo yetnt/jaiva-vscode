@@ -5,6 +5,7 @@ import {
     GenericDoc,
     DeprecatedDoc,
 } from "./jdoc";
+import { JSONObject } from "../../JSONObject";
 
 /**
  * The types that we care about the most
@@ -91,11 +92,6 @@ export type ScopedToken = {
 export type SymbolToken = {
     exportSymbol: boolean;
 } & TokenDefault;
-
-/**
- * Generic JSON obejct
- */
-type JSONObject = Record<string, unknown>;
 
 /**
  * A function.

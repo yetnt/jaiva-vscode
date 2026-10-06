@@ -1,3 +1,5 @@
+import { FilesAndShii } from "./repos/config";
+import { Repositories } from "./repos/repos";
 import { Diagnostics } from "./vscodeWrapper";
 
 class Command {
@@ -5,13 +7,13 @@ class Command {
     callback: (
         context: import("vscode").ExtensionContext,
         diagnostics: Diagnostics,
-    ) => void;
+    ) => void | Promise<void>;
     constructor(
         name: string,
         callback: (
             context: import("vscode").ExtensionContext,
             diagnostics: Diagnostics,
-        ) => void,
+        ) => void | Promise<void>,
     ) {
         this.name = name;
         this.callback = callback;
@@ -20,7 +22,13 @@ class Command {
 
 export class CommandRegistry {
     private commands: Command[] = [];
-    constructor(vscode: typeof import("vscode")) {
+    constructor(
+        vscode: typeof import("vscode"),
+        files: FilesAndShii,
+        repos: Repositories,
+        context: import("vscode").ExtensionContext,
+    ) {
+        console.log(context.globalStorageUri.fsPath);
         this.registerCommand("run", (c, d) => {
             const editor = vscode.window.activeTextEditor;
             if (!editor) {
@@ -35,6 +43,7 @@ export class CommandRegistry {
             terminal.show();
             terminal.sendText(`jaiva "${filePath}"`);
         });
+
         this.registerCommand("runTokens", (c, d) => {
             const editor = vscode.window.activeTextEditor;
             if (!editor) {
@@ -48,6 +57,19 @@ export class CommandRegistry {
                 vscode.window.activeTerminal || vscode.window.createTerminal();
             terminal.show();
             terminal.sendText(`jaiva "${filePath}" --json`);
+        });
+
+        this.registerCommand("addRepository", async (c, d) => {
+            const url = await vscode.window.showInputBox({
+                prompt: "GitHub repository URL",
+                placeHolder: "https://github.com/user/repository",
+            });
+
+            if (!url) {
+                return;
+            }
+
+            await repos.add(url, files);
         });
     }
 
