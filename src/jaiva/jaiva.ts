@@ -199,7 +199,7 @@ export class SharedValues extends Base {
         }
         return this.add(
             range,
-            newTokens,
+            newTokens.length == 0 ? tokens : newTokens,
             fromLib ? Context.NORMAL : Context.IMPORT,
             doc,
         );
@@ -275,19 +275,22 @@ export class SharedValues extends Base {
                     }
                     scoped.within = parentRange;
                     tokens.push(scoped);
+                    const other = this.others(scoped, [
+                        scoped.lineNumber,
+                        scoped.lineEnd,
+                    ]);
+                    tokens.push(...other);
                     if (context !== Context.IMPORT) {
-                        const arr2 = this.add(
-                            [scoped.lineNumber, scoped.lineEnd],
-                            otherTokens,
-                            Context.NORMAL,
-                            doc,
-                        );
-                        tokens.push(...arr2);
-                        const other = this.others(scoped, [
-                            scoped.lineNumber,
-                            scoped.lineEnd,
-                        ]);
-                        tokens.push(...other);
+                        otherTokens.forEach((t) => {
+                            // blocks
+                            const arr2 = this.add(
+                                t[0],
+                                t[1],
+                                Context.NORMAL,
+                                doc,
+                            );
+                            tokens.push(...arr2);
+                        });
                     }
                 }
 
@@ -340,6 +343,45 @@ export class SharedValues extends Base {
                 this.definitionsMap.add(out.name, out);
                 return [out];
             }
+        } else if (
+            Tokens.hasPropertyOf<Tokens.TTryCatchStatement>(
+                scoped,
+                "catchProperties",
+            )
+        ) {
+            const all = this.readCopy.filter((t) => {
+                if (t.type === "TFunction") return false;
+
+                if (t.name.includes("error")) return true;
+                return false;
+            });
+            const catchProperties = scoped.catchProperties;
+            const name = "error" + (all.length == 0 ? "" : all.length);
+            const allFromDef = this.definitionsMap.get(name);
+
+            if (
+                all.find(
+                    (t) =>
+                        // t.name.includes(name) ||
+                        t.name === name && t.within === catchProperties,
+                ) != undefined
+            )
+                return [];
+
+            const tok: Tokens.SpecialToken = {
+                type: "TUnknownScalar",
+                lineNumber: catchProperties[0],
+                toolTip:
+                    "Chaai Block Error Variable (This could be inaccurate) - Line " +
+                    catchProperties[0],
+                name:
+                    "error" + (allFromDef.length == 0 ? "" : allFromDef.length),
+                within: catchProperties,
+                sortText: "1_",
+            };
+
+            this.definitionsMap.add(tok.name, tok);
+            return [tok];
         } else if (Tokens.hasPropertyOf<Tokens.TFunction>(scoped, "args")) {
             const tokens: Tokens.TokenDefault[] = [];
             // try to find the arg docs in JDoc

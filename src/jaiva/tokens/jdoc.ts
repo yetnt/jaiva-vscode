@@ -34,6 +34,11 @@ export type DevNoteDoc = {
 } & JDoc &
     HasDescription;
 
+export type DeprecatedDoc = {
+    tagType: "deprecated";
+} & JDoc &
+    HasDescription;
+
 export type ExampleDoc = {
     tagType: "example";
     codeblock: string[];
@@ -58,6 +63,9 @@ export function toMarkdown(doc: JDoc | null): string {
             "_ : " +
             doc.description
         );
+    } else if (doc.tagType === "deprecated") {
+        const dep = doc as DeprecatedDoc;
+        return '<html><p style="color:red">' + dep.description + "</p></html>";
     } else if (hasPropertyOf<ExampleDoc>(doc, "codeblock")) {
         return "```jaiva\n" + doc.codeblock.join("\n") + "\n```\n\n";
     } else if (hasPropertyOf<DependsOnDoc>(doc, "symbols")) {

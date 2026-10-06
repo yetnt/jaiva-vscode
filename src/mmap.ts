@@ -162,6 +162,16 @@ export class MultiMap<K, V> {
         return this.data.entries();
     }
 
+    public getAllWhere(predicate: (key: K, values: V[]) => boolean): K[] {
+        const result: K[] = [];
+        for (const [key, values] of this.entries()) {
+            if (predicate(key, values)) {
+                result.push(key);
+            }
+        }
+        return result;
+    }
+
     /**
      * Converts the map data into a JSON string representation.
      *

@@ -1,4 +1,10 @@
-import { JDoc, toMarkdown, ParameterDoc, GenericDoc } from "./jdoc";
+import {
+    JDoc,
+    toMarkdown,
+    ParameterDoc,
+    GenericDoc,
+    DeprecatedDoc,
+} from "./jdoc";
 
 /**
  * The types that we care about the most
@@ -30,7 +36,9 @@ const needed = [
  * This is usually a direct copy of the parent scope's lineNumebr and lineEnd into one argument
  * that goes with the token itself
  */
-export type LineRange = [number, number] | -1;
+export type LineRange = NonGlobalLineRange | -1;
+
+export type NonGlobalLineRange = [number, number];
 
 /**
  * Base token. All tokens have these properties
@@ -42,6 +50,20 @@ export type TokenDefault = {
     toolTip: string | JDoc[];
     within: LineRange;
 };
+
+export type TTryCatchStatement = {
+    type: "TTryCatch";
+    try: JSONObject; // TCodeblock
+    catch: JSONObject; // TCodeblock
+    catchProperties: NonGlobalLineRange; // So subsequent code can add the "error" variables
+} & TokenDefault;
+
+export type TIfStatement = {
+    type: "TIfStatement";
+    body: JSONObject; // TCodeblock
+    elseIfs: TIfStatement[] | null; // Nested TIfStatements. No subsequent have nests
+    elseBody: JSONObject | null; // TCodeblock
+} & TokenDefault;
 
 /**
  * Import token. Used so we can either import jaiva internals or other files (one day. rn dont give 2 shits)
@@ -216,14 +238,20 @@ export function docsToMarkdown(token: TokenDefault): string {
                           (token.argumentType === "<-" ? "|" : "") +
                           " ...");
             } else {
-                str = "(array var) " + token.name;
+                str =
+                    (typeof token.toolTip === "string" &&
+                    token.toolTip.startsWith("Chaai")
+                        ? "(caught error) "
+                        : "(array var) ") + token.name;
             }
         }
+
         if (typeof token.toolTip === "string")
             return ("```jaiva\n" + str + "\n```\n" + token.toolTip) as string;
 
         const doc = token.toolTip as JDoc[];
         const param: ParameterDoc[] = [];
+        let deprecated: DeprecatedDoc | null = null;
         let generic: GenericDoc | null = null;
         const docs: JDoc[] = [];
         out.push("```jaiva\n" + str + "\n```\n");
@@ -232,11 +260,14 @@ export function docsToMarkdown(token: TokenDefault): string {
                 param.push(d as ParameterDoc);
             } else if (d.tagType === "GENERIC") {
                 generic = d as GenericDoc;
+            } else if (d.tagType === "deprecated") {
+                deprecated = d as DeprecatedDoc;
             } else {
                 docs.push(d);
             }
         }
 
+        if (deprecated != null) out.push(toMarkdown(deprecated));
         out.push(toMarkdown(generic));
         param.forEach((c) => out.push(toMarkdown(c)));
         out.push("\n");
@@ -244,6 +275,44 @@ export function docsToMarkdown(token: TokenDefault): string {
     }
 
     return out.join("\n");
+}
+
+/**
+ *
+ */
+function extractScopedToken(
+    value: unknown,
+    isCodeblock = false,
+): [LineRange, JSONObject[]] | null {
+    let body: unknown;
+    if (!isCodeblock) {
+        if (typeof value !== "object" || value === null || !("body" in value)) {
+            return null;
+        }
+
+        body = value.body;
+    }
+
+    body = value;
+
+    if (typeof body !== "object" || body === null || !("lines" in body)) {
+        return null;
+    }
+
+    // at this poinr it definitely has the rest.
+
+    type Body = {
+        lines: JSONObject[];
+        lineNumber: number;
+        lineEnd: number;
+    };
+
+    const b = body as Body;
+
+    // if it has body it absolutely has lines
+    // if it doesnt. life.
+
+    return [[b.lineNumber, b.lineEnd], b.lines];
 }
 
 /**
@@ -255,8 +324,30 @@ export function docsToMarkdown(token: TokenDefault): string {
  */
 export function toScopedToken(
     value: unknown,
-): [ScopedToken, JSONObject[]] | null {
+): [ScopedToken, [LineRange, JSONObject[]][]] | null {
     if (typeof value !== "object" || value === null || !("body" in value)) {
+        if (hasPropertyOf<TTryCatchStatement>(value, "catch")) {
+            // special handling since try catch decided to be special
+            const lines: [LineRange, JSONObject[]][] = [];
+            const catchBlock = value.catch;
+            const tryBlock = value.try;
+            const catchBlockProps = extractScopedToken(catchBlock, true)!;
+            const tryBlockProps = extractScopedToken(tryBlock, true)!;
+            const tryBlockEnd = tryBlockProps[0] as [number, number];
+
+            lines.push(catchBlockProps);
+            lines.push(tryBlockProps);
+            return [
+                {
+                    ...({
+                        ...value,
+                        catchProperties: catchBlockProps[0],
+                    } as TTryCatchStatement),
+                    lineEnd: tryBlockEnd[1],
+                } as ScopedToken,
+                lines,
+            ];
+        }
         return null;
     }
 
@@ -278,11 +369,30 @@ export function toScopedToken(
     // if it has body it absolutely has lines
     // if it doesnt. life.
 
-    return [
-        {
-            ...simplified,
-            lineEnd: b.lineEnd,
-        } as ScopedToken,
-        b.lines,
-    ];
+    const token = {
+        ...simplified,
+        lineEnd: b.lineEnd,
+    } as ScopedToken;
+
+    const lines: [LineRange, JSONObject[]][] = [];
+
+    lines.push([[token.lineNumber, token.lineEnd], b.lines]);
+
+    if (hasPropertyOf<TIfStatement>(value, "elseBody")) {
+        const elseBlock = extractScopedToken(value.elseBody, true);
+        const chainedIfs = value.elseIfs;
+
+        if (chainedIfs) {
+            chainedIfs.forEach((i) => {
+                const ifBlock = extractScopedToken(i.body, true);
+                lines.push(ifBlock!);
+            });
+        }
+
+        if (elseBlock) {
+            lines.push(elseBlock);
+        }
+    }
+
+    return [token, lines];
 }
