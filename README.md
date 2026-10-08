@@ -68,4 +68,5 @@ This extension contributes the following settings:
 
 ## Known Issues
 
-1. Nahhhh basically error free fr fr trust.
+1. Lambdas dont show their arguments as tooltips
+2. Chaai blocks error scoping is broken as hell
