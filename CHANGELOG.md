@@ -47,3 +47,4 @@ All notable changes to the "jaiva" extension will be documented in this file.
 - Selective Imports now work
 - Proper scope handling
 - Fix some docs not having some stuff
+- Importing of external libraries is possible now.
